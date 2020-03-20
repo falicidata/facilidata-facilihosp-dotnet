@@ -6,14 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace FaciliHosp.Infra.Data.Repositorios
 {
     public abstract class Repositorio<T> : IRepositorio<T> where T : Entidade
     {
-        private readonly ContextSQLServer _context;
-        private readonly DbSet<T> _dbset;
+        protected readonly ContextSQLServer _context;
+        protected readonly DbSet<T> _dbset;
 
         protected Repositorio(ContextSQLServer context)
         {
@@ -21,40 +20,38 @@ namespace FaciliHosp.Infra.Data.Repositorios
             _dbset = _context.Set<T>();
         }
 
-        public void Atualizar(Guid id, T entidade)
+        public virtual void Atualizar(Guid id, T entidade)
         {
-            var entidadeFind = _dbset.Find(id);
-            if (entidadeFind == null) return;
-
-            _context.Attach(entidade);
-           _context.Entry(entidadeFind).State = EntityState.Modified;
-
+            var entidadeFind = _dbset.AsNoTracking().FirstOrDefault(e => e.Id == id);
+            var entidadeExist = entidadeFind != null;
+            if (!entidadeExist) return;
+            _dbset.Update(entidade);
         }
 
-        public void Deletar(Guid id)
+        public virtual void Deletar(Guid id)
         {
-            var entidade = _dbset.Find(id);
+            var entidade = _dbset.AsNoTracking().FirstOrDefault(e => e.Id == id);
             if (entidade == null) return;
             entidade.Deletado = true;
             _dbset.Update(entidade);
         }
 
-        public void Inserir(T entidade)
+        public virtual void Inserir(T entidade)
         {
             _dbset.Add(entidade);
         }
 
-        public List<T> Pesquisar(Expression<Func<T, bool>> expression)
+        public virtual List<T> Pesquisar(Expression<Func<T, bool>> expression)
         {
             return _dbset.Where(e => e.Deletado == false).Where(expression).ToList();
         }
 
-        public T TrazerPorId(Guid id)
+        public virtual T TrazerPorId(Guid id)
         {
             return _dbset.Find(id);
         }
 
-        public List<T> TrazerTodos()
+        public virtual List<T> TrazerTodos()
         {
             return _dbset.Where(e => e.Deletado == false).ToList();
         }

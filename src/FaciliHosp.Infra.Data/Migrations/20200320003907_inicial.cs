@@ -8,7 +8,7 @@ namespace FaciliHosp.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Hospitais",
+                name: "Exameis",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -28,7 +28,7 @@ namespace FaciliHosp.Infra.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hospitais", x => x.Id);
+                    table.PrimaryKey("PK_Exameis", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,9 +55,9 @@ namespace FaciliHosp.Infra.Data.Migrations
                 {
                     table.PrimaryKey("PK_Atendimentos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Atendimentos_Hospitais_HospitalId",
+                        name: "FK_Atendimentos_Exameis_HospitalId",
                         column: x => x.HospitalId,
-                        principalTable: "Hospitais",
+                        principalTable: "Exameis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -92,9 +92,9 @@ namespace FaciliHosp.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Exames_Hospitais_HospitalId",
+                        name: "FK_Exames_Exameis_HospitalId",
                         column: x => x.HospitalId,
-                        principalTable: "Hospitais",
+                        principalTable: "Exameis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -124,7 +124,7 @@ namespace FaciliHosp.Infra.Data.Migrations
                 name: "Atendimentos");
 
             migrationBuilder.DropTable(
-                name: "Hospitais");
+                name: "Exameis");
         }
     }
 }

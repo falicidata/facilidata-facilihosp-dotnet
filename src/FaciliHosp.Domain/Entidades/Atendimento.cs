@@ -6,6 +6,7 @@ namespace FaciliHosp.Domain.Entidades
 {
     public class Atendimento : Entidade
     {
+        protected Atendimento() { }
         public Atendimento(DateTime? dataHora, string status, string codigo, string avaliacao, Guid pacienteId, Guid hospitalId, Guid pacientePlanoId)
         {
             DataHora = dataHora;

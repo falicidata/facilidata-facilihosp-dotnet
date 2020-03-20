@@ -4,6 +4,7 @@ namespace FaciliHosp.Domain.Entidades
 {
     public class Exame : Entidade
     {
+        protected Exame() { }
         public Exame(Guid? atendimentoId, Guid userId, Guid hospitalId, string tipo, string resultado, string url, string anexo)
         {
             AtendimentoId = atendimentoId;
@@ -15,13 +16,13 @@ namespace FaciliHosp.Domain.Entidades
             Anexo = anexo;
         }
 
-        public Guid? AtendimentoId  { get; private set; }
-        public Guid UserId { get; private set; }
-        public Guid HospitalId { get; private set; }
-        public string Tipo { get; private set; }
-        public string Resultado { get; private set; }
-        public string Url { get; private set; }
-        public string Anexo { get; private set; }
+        public Guid? AtendimentoId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid HospitalId { get; set; }
+        public string Tipo { get; set; }
+        public string Resultado { get; set; }
+        public string Url { get; set; }
+        public string Anexo { get; set; }
 
         // Entity Framework
         public Hospital Hospital { get; set; }

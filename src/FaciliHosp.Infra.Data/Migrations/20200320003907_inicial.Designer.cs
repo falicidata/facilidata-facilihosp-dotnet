@@ -180,7 +180,7 @@ namespace FaciliHosp.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hospitais");
+                    b.ToTable("Exameis");
                 });
 
             modelBuilder.Entity("FaciliHosp.Domain.Entidades.Atendimento", b =>
