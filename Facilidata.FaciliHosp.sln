@@ -3,23 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaciliHosp.Domain", "src\FaciliHosp.Domain\FaciliHosp.Domain.csproj", "{074728AC-F9E1-4C98-83C6-BEFA906CD12F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Domain", "1 - Domain", "{58C9688B-4A05-46AB-B996-81C126BBFFE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaciliHosp.Infra.Data", "src\FaciliHosp.Infra.Data\FaciliHosp.Infra.Data.csproj", "{1D531359-77FF-4D2B-8F92-0C30CC52661A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Infra", "2 - Infra", "{6BC8379C-C3D5-408B-85F5-5E31C797DEF6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Domain", "1 - Domain", "{620E443D-311F-4554-B1CF-34ACFBAE96A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilidata.FaciloHosp.Infra.Data", "src\Facilidata.FaciloHosp.Infra.Data\Facilidata.FaciloHosp.Infra.Data.csproj", "{523DECCD-6451-4B6E-98A3-2FB72A4B155D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Infra", "2 - Infra", "{1FC8E712-0062-4BB8-A036-9E3524044581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.FaciliHosp.Domain", "src\Facilidata.FaciliHosp.Domain\Facilidata.FaciliHosp.Domain.csproj", "{4447D1C7-3650-4D40-9823-7511B28254A2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Application", "3 - Application", "{E5387791-9E36-4AFE-AAA8-5A0C7FC7ADB0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Services", "4 - Services", "{86959B5B-D7DE-4B6A-8114-8591D8E421E6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Services", "4 - Services", "{BD75E7D2-4892-4915-86AA-ACED371888F6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Application", "3 - Application", "{BEC834FD-8AAD-4C45-87F5-93D117525514}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Presentation", "5 - Presentation", "{7B51DA41-8198-4F71-BCFF-C12C783CD4B7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FaciliHosp.Application", "src\FaciliHosp.Application\FaciliHosp.Application.csproj", "{78B44B22-2E56-4EA6-A78F-0D49CC953402}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.Services.Api", "src\Facilidata.Services.Api\Facilidata.Services.Api.csproj", "{29D6D309-FEF0-48FA-BA19-10AFF05E90B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilidata.FaciliHosp.Services.Api", "src\Facilidata.FaciliHosp.Services.Api\Facilidata.FaciliHosp.Services.Api.csproj", "{C51F625E-FF83-4E73-B3D8-5B2352A33348}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,33 +23,28 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{074728AC-F9E1-4C98-83C6-BEFA906CD12F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{074728AC-F9E1-4C98-83C6-BEFA906CD12F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{074728AC-F9E1-4C98-83C6-BEFA906CD12F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{074728AC-F9E1-4C98-83C6-BEFA906CD12F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1D531359-77FF-4D2B-8F92-0C30CC52661A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1D531359-77FF-4D2B-8F92-0C30CC52661A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D531359-77FF-4D2B-8F92-0C30CC52661A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D531359-77FF-4D2B-8F92-0C30CC52661A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78B44B22-2E56-4EA6-A78F-0D49CC953402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78B44B22-2E56-4EA6-A78F-0D49CC953402}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78B44B22-2E56-4EA6-A78F-0D49CC953402}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78B44B22-2E56-4EA6-A78F-0D49CC953402}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29D6D309-FEF0-48FA-BA19-10AFF05E90B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29D6D309-FEF0-48FA-BA19-10AFF05E90B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29D6D309-FEF0-48FA-BA19-10AFF05E90B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29D6D309-FEF0-48FA-BA19-10AFF05E90B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{523DECCD-6451-4B6E-98A3-2FB72A4B155D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{523DECCD-6451-4B6E-98A3-2FB72A4B155D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{523DECCD-6451-4B6E-98A3-2FB72A4B155D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{523DECCD-6451-4B6E-98A3-2FB72A4B155D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4447D1C7-3650-4D40-9823-7511B28254A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4447D1C7-3650-4D40-9823-7511B28254A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4447D1C7-3650-4D40-9823-7511B28254A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4447D1C7-3650-4D40-9823-7511B28254A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{074728AC-F9E1-4C98-83C6-BEFA906CD12F} = {620E443D-311F-4554-B1CF-34ACFBAE96A2}
-		{1D531359-77FF-4D2B-8F92-0C30CC52661A} = {1FC8E712-0062-4BB8-A036-9E3524044581}
-		{78B44B22-2E56-4EA6-A78F-0D49CC953402} = {E5387791-9E36-4AFE-AAA8-5A0C7FC7ADB0}
-		{29D6D309-FEF0-48FA-BA19-10AFF05E90B7} = {BD75E7D2-4892-4915-86AA-ACED371888F6}
+		{523DECCD-6451-4B6E-98A3-2FB72A4B155D} = {6BC8379C-C3D5-408B-85F5-5E31C797DEF6}
+		{4447D1C7-3650-4D40-9823-7511B28254A2} = {58C9688B-4A05-46AB-B996-81C126BBFFE9}
+		{C51F625E-FF83-4E73-B3D8-5B2352A33348} = {86959B5B-D7DE-4B6A-8114-8591D8E421E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {857E2712-53DB-4115-9C16-F7570C330FDA}
+		SolutionGuid = {603A7163-B0BE-4F4D-ADE8-58C60FC426A5}
 	EndGlobalSection
 EndGlobal
