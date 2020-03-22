@@ -1,5 +1,8 @@
-﻿namespace Facilidata.FaciliHosp.Domain.Entidades
+﻿using System.Collections.Generic;
+
+namespace Facilidata.FaciliHosp.Domain.Entidades
 {
+
     public class Hospital : Entidade
     {
         protected Hospital() { }
@@ -20,5 +23,8 @@
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string UserId { get; set; }
+
+        // Entity Framework
+        public List<Exame> Exames { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
+using Facilidata.FaciloHosp.Infra.Data.MapsEntidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Context
@@ -13,6 +14,12 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
         public DbSet<Hospital> Hospitais { get; set; }
         public DbSet<Exame> Exames { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new HospitalMap());
+            modelBuilder.ApplyConfiguration(new ExameMap());
 
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
