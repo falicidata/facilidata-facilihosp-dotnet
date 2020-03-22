@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciliHosp.Infra.Identity.Context;
+using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Facilidata.FaciloHosp.Infra.Data.Repositories;
 using Facilidata.FaciloHosp.Infra.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,7 +36,15 @@ namespace Facilidata.FaciliHosp.Services.Api
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddDbContext<ContextSQLS>(options => options.UseSqlServer(connectionString));
+           
+            // Identity
+            services.AddDbContext<ContextIdentity>(options => options.UseSqlServer(connectionString));
+            services.AddIdentity<Usuario, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ContextIdentity>();
 
+
+            // Injeção de Depedencia
             // Repositories
             services.AddScoped<ContextSQLS>();
             services.AddScoped<IUnitOfWork,UnitOfWork>();
