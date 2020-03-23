@@ -34,7 +34,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
 
         public virtual TEntidade ObterPorId(string id)
         {
-            return _dbSet.Find(id);
+            return _dbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
         }
 
         public virtual List<TEntidade> ObterTodos()
@@ -51,8 +51,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
         {
             var entidadeFind = _dbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
             if (entidadeFind == null) return;
-            entidade.Id = id;
-            _dbSet.Update(entidade);
+            _dbSet.Remove(entidadeFind);
         }
     }
 }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Facilidata.FaciliHosp.Infra.Identity\Facilidata.FaciliHosp.Infra.Identity.csproj" />
+    <ProjectReference Include="..\Facilidata.FaciliHosp.Infra.IoC\Facilidata.FaciliHosp.Infra.IoC.csproj" />
     <ProjectReference Include="..\Facilidata.FaciloHosp.Infra.Data\Facilidata.FaciloHosp.Infra.Data.csproj" />
   </ItemGroup>
 

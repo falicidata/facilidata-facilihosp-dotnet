@@ -2,28 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
-using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
-using Facilidata.FaciliHosp.Infra.Identity.Repositories;
-using Facilidata.FaciliHosp.Infra.Identity.Services;
-using Facilidata.FaciliHosp.Infra.Identity.UnitOfWork;
 using Facilidata.FaciliHosp.Infra.IoC;
 using Facilidata.FaciloHosp.Infra.Data.Context;
-using Facilidata.FaciloHosp.Infra.Data.Repositories;
-using Facilidata.FaciloHosp.Infra.Data.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
-namespace Facilidata.FaciliHosp.Services.Api
+namespace Facilidata.FaciliHosp.Presentation.Site
 {
     public class Startup
     {
@@ -37,9 +28,8 @@ namespace Facilidata.FaciliHosp.Services.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
 
-            services.AddMvc().AddNewtonsoftJson();
-            services.AddControllers();
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
             services.AddDbContext<ContextSQLS>(options => options.UseSqlServer(connectionString));
@@ -58,7 +48,6 @@ namespace Facilidata.FaciliHosp.Services.Api
                 .AddEntityFrameworkStores<ContextIdentity>();
 
 
-
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
 
@@ -71,6 +60,11 @@ namespace Facilidata.FaciliHosp.Services.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -78,7 +72,9 @@ namespace Facilidata.FaciliHosp.Services.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

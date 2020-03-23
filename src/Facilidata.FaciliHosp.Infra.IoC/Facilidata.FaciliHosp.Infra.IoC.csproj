@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Facilidata.FaciliHosp.Infra.Identity\Facilidata.FaciliHosp.Infra.Identity.csproj" />
+    <ProjectReference Include="..\Facilidata.FaciloHosp.Infra.Data\Facilidata.FaciloHosp.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
