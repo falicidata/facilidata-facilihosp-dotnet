@@ -7,6 +7,7 @@ using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.Identity.Repositories;
+using Facilidata.FaciliHosp.Infra.Identity.Services;
 using Facilidata.FaciliHosp.Infra.Identity.UnitOfWork;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Facilidata.FaciloHosp.Infra.Data.Repositories;
@@ -35,6 +36,7 @@ namespace Facilidata.FaciliHosp.Services.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc().AddNewtonsoftJson();
             services.AddControllers();
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
@@ -42,21 +44,34 @@ namespace Facilidata.FaciliHosp.Services.Api
            
             // Identity
             services.AddDbContext<ContextIdentity>(options => options.UseSqlServer(connectionString));
-            services.AddIdentity<Usuario, IdentityRole>()
+            services.AddIdentity<Usuario, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+            })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ContextIdentity>();
+
 
 
             // Injeção de Depedencia
             // Repositories
             services.AddScoped<ContextSQLS>();
             services.AddScoped<IUnitOfWork<ContextSQLS>, UnitOfWorkSQLS>();
-            services.AddScoped<IUnitOfWork<ContextIdentity>, UnitOfWorkIdentity> ();
+
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();
+
+            // Identity
+            services.AddScoped<IUnitOfWork<ContextIdentity>, UnitOfWorkIdentity>();
             services.AddScoped<IPacienteRepository, PacienteRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
+            // 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
