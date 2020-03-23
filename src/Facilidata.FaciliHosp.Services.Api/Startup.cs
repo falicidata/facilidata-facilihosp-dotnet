@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
+using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
+using Facilidata.FaciliHosp.Infra.Identity.Repositories;
+using Facilidata.FaciliHosp.Infra.Identity.UnitOfWork;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Facilidata.FaciloHosp.Infra.Data.Repositories;
 using Facilidata.FaciloHosp.Infra.Data.UnitOfWork;
@@ -47,9 +50,12 @@ namespace Facilidata.FaciliHosp.Services.Api
             // Injeção de Depedencia
             // Repositories
             services.AddScoped<ContextSQLS>();
-            services.AddScoped<IUnitOfWork,UnitOfWork>();
+            services.AddScoped<IUnitOfWork<ContextSQLS>, UnitOfWorkSQLS>();
+            services.AddScoped<IUnitOfWork<ContextIdentity>, UnitOfWorkIdentity> ();
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();
+            services.AddScoped<IPacienteRepository, PacienteRepository>();
+            services.AddScoped<IMedicoRepository, MedicoRepository>();
 
         }
 

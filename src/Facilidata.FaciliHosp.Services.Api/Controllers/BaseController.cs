@@ -1,4 +1,5 @@
 ﻿using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -9,9 +10,9 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase
     {
-        private readonly IUnitOfWork _uow;
+        private readonly IUnitOfWork<ContextSQLS> _uow;
 
-        protected BaseController(IUnitOfWork uow)
+        protected BaseController(IUnitOfWork<ContextSQLS> uow)
         {
             _uow = uow;
         }

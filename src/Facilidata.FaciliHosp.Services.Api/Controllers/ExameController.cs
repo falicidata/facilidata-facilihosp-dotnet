@@ -1,5 +1,6 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Facilidata.FaciliHosp.Services.Api.Controllers
@@ -8,7 +9,7 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     {
         private readonly IExameRepository _exameRepository;
 
-        public ExameController(IUnitOfWork uow, IExameRepository exameRepository) : base(uow)
+        public ExameController(IUnitOfWork<ContextSQLS> uow, IExameRepository exameRepository) : base(uow)
         {
             _exameRepository = exameRepository;
         }

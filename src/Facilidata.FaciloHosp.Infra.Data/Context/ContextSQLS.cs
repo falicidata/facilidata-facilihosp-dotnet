@@ -6,7 +6,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
 {
     public class ContextSQLS : DbContext
     {
-        public ContextSQLS(DbContextOptions options) : base(options)
+        public ContextSQLS(DbContextOptions<ContextSQLS> options) : base(options)
         {
 
         }

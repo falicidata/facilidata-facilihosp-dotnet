@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Repositories
 {
-    public class ExameRepository : Repository<Exame>, IExameRepository
+    public class ExameRepository : Repository<Exame,ContextSQLS>, IExameRepository
     {
         public ExameRepository(ContextSQLS context) : base(context)
         {
