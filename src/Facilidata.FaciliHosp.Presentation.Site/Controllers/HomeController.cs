@@ -20,7 +20,10 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+                return View();
+            else return RedirectToAction("Login", "Usuario");
+
         }
 
         public IActionResult Privacy()

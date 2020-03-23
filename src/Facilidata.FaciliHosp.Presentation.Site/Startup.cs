@@ -47,6 +47,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ContextIdentity>();
 
+            services.AddAuthentication();
 
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
@@ -67,6 +68,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
