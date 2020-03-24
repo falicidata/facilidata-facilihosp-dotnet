@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Facilidata.FaciliHosp.Application.AutoMapperProfiles;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
@@ -57,7 +59,7 @@ namespace Facilidata.FaciliHosp.Services.Api
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ContextIdentity>();
 
-
+            services.AddAutoMapper(typeof(ViewModelToModel));
 
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
