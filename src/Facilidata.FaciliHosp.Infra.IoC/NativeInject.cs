@@ -1,4 +1,6 @@
-﻿using Facilidata.FaciliHosp.Domain.Interfaces;
+﻿using Facilidata.FaciliHosp.Application.Interfaces;
+using Facilidata.FaciliHosp.Application.Services;
+using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Repositories;
@@ -33,7 +35,8 @@ namespace Facilidata.FaciliHosp.Infra.IoC
             services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IUsuarioService, UsuarioService>();
 
-            // 
+            // Services
+            services.AddScoped<IHospitalService, HospitalService>();
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model List<Hospital>
+
+@{
+    ViewData["Title"] = "Hospital";
+}
+<h1>Hospitais</h1>
+<a class="btn btn-primary" asp-action="Editar">Novo Hospital</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Ações</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hospital in Model)
+        {
+            <tr>
+                <th scope="row">@hospital.Nome</th>
+                <td>
+                    <a class="btn btn-warning" asp-action="Editar" asp-route-id="@hospital.Id">Editar</a>
+                    <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@hospital.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

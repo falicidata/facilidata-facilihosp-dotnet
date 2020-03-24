@@ -78,7 +78,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
                 var entidade = (Entidade)entry.Entity;
                 entidade.DeletadoEm = DateTime.Now;
                 entidade.Deletado = true;
-                entidade.AtualizadoPor = _usuarioAspNet.GetUserName();
+                entidade.DeletadoPor = _usuarioAspNet.GetUserName();
 
                 entry.State = EntityState.Modified;
             }

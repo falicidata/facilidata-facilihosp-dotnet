@@ -22,13 +22,13 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
         {
             var entidadeFind = _dbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
             if (entidadeFind == null) return;
-            entidadeFind.Deletado = true;
-            this.Atualizar(id, entidadeFind);
+            _dbSet.Remove(entidadeFind);
 
         }
 
         public virtual void Inserir(TEntidade entidade)
         {
+            if (string.IsNullOrEmpty(entidade.Id)) entidade.Id = Guid.NewGuid().ToString();
             _dbSet.Add(entidade);
         }
 
@@ -51,7 +51,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
         {
             var entidadeFind = _dbSet.AsNoTracking().FirstOrDefault(e => e.Id == id);
             if (entidadeFind == null) return;
-            _dbSet.Remove(entidadeFind);
+            _dbSet.Update(entidade);
         }
     }
 }

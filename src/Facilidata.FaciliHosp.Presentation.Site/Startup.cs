@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Facilidata.FaciliHosp.Application.AutoMapperProfiles;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.IoC;
@@ -49,6 +51,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site
 
             services.AddAuthentication();
 
+            services.AddAutoMapper(typeof(ViewModelToModel));
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
 
