@@ -1,0 +1,34 @@
+﻿@model ExameIndexViewModel
+
+@{
+    ViewData["Title"] = "Exame";
+}
+<h1>Exames</h1>
+<a class="btn btn-primary" asp-action="Editar" asp-route-hospitalId="@Model.HospitalId" asp-route-usuarioId="@Model.UsuarioId">Novo Exame</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Tipo</th>
+            <th scope="col">Data</th>
+            <th scope="col">Ações</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exame in Model.Exames)
+        {
+        <tr>
+            <th scope="row">@exame.Tipo</th>
+            <th scope="row">@exame.CriadoEm</th>
+            <td>
+                <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UserId">Editar</a>
+                <a class="btn btn-warning" asp-action="Deletar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UserId">Anexo</a>
+                <a class="btn btn-danger" asp-action="Deletar">Excluir</a>
+            </td>
+        </tr>
+        }
+
+
+    </tbody>
+</table>

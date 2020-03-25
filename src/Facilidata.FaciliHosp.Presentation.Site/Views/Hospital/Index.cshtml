@@ -21,6 +21,7 @@
                 <th scope="row">@hospital.Nome</th>
                 <td>
                     <a class="btn btn-warning" asp-action="Editar" asp-route-id="@hospital.Id">Editar</a>
+                    <a class="btn btn-warning" asp-controller="Exame" asp-action="Pacientes" asp-route-hospitalId="@hospital.Id">Exames</a>
                     <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@hospital.Id">Deletar</a>
                 </td>
             </tr>

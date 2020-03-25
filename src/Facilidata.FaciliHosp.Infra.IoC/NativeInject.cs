@@ -37,6 +37,7 @@ namespace Facilidata.FaciliHosp.Infra.IoC
 
             // Services
             services.AddScoped<IHospitalService, HospitalService>();
+            services.AddScoped<IExameService, ExameService>();
         }
     }
 }

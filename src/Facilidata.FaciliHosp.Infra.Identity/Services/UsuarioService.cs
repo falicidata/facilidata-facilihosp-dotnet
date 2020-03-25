@@ -5,8 +5,10 @@ using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,13 +21,21 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
         private readonly IMedicoRepository _medicoRepository;
         private readonly IPacienteRepository _pacienteRepository;
         private readonly IUnitOfWork<ContextIdentity> _uow;
-        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository, IUnitOfWork<ContextIdentity> uow)
+        private readonly ContextIdentity _contextIdentity;
+        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository, IUnitOfWork<ContextIdentity> uow, ContextIdentity contextIdentity)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _medicoRepository = medicoRepository;
             _pacienteRepository = pacienteRepository;
             _uow = uow;
+            _contextIdentity = contextIdentity;
+        }
+
+
+        public List<Paciente> ObterPacientes()
+        {
+            return _contextIdentity.Pacientes.Include(paciente => paciente.Usuario).Where(paciente => !paciente.Deletado).ToList();
         }
 
         public async Task<IdentityResult> Registro(RegistroUsuarioViewModel viewModel)
