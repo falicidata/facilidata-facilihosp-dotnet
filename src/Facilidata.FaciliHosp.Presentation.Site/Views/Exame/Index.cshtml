@@ -23,8 +23,8 @@
             <th scope="row">@exame.CriadoEm</th>
             <td>
                 <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Editar</a>
-                <a class="btn btn-warning" asp-action="Deletar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Anexo</a>
-                <a class="btn btn-danger" asp-action="Deletar">Excluir</a>
+                <a class="btn btn-warning" asp-action="DownloadAnexo" asp-route-id="@exame.Id" >Anexo</a>
+                <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Excluir</a>
             </td>
         </tr>
         }

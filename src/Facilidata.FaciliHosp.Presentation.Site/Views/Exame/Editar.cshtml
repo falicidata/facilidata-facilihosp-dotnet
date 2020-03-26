@@ -13,10 +13,13 @@ else
 
 
 
-<form>
+<form method="post" enctype="multipart/form-data">
     <input asp-for="Id" hidden />
     <input asp-for="HospitalId" hidden />
     <input asp-for="UsuarioId" hidden />
+  
+    <input asp-for="ContentType" hidden />
+    <input asp-for="NomeArquivo" hidden />
     <div class="form-group">
         <label>Tipo</label>
         <input asp-for="Tipo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -26,6 +29,19 @@ else
         <label>Resultado</label>
         <input asp-for="Resultado" class="form-control">
     </div>
+
+    @if (Model.Anexo == null || Model.Anexo.Length == 0)
+    {
+        <div class="form-group">
+            <label>Upload</label>
+            <input type="file" asp-for="Upload" class="form-control">
+        </div>
+    }
+    else
+    {
+        <button class="btn btn-warning" type="submit" asp-action="RemoverAnexo">Excluir Anexo</button>
+        <a class="btn btn-warning" asp-action="DownloadAnexo" asp-route-id="@Model.Id">Download Anexo</a>
+    }
 
     <button type="submit" class="btn btn-primary" asp-action="Salvar">Salvar</button>
 </form>

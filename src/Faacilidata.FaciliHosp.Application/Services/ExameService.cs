@@ -7,6 +7,7 @@ using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -21,6 +22,16 @@ namespace Facilidata.FaciliHosp.Application.Services
         {
             _exameRepository = exameRepository;
             _usuarioService = usuarioService;
+        }
+
+        public void RemoverAnexo(EditarExameViewModel viewModel)
+        {
+            var exame = _exameRepository.ObterPorId(viewModel.Id);
+            exame.ContentType = null;
+            exame.Anexo = new byte[] { };
+            exame.NomeArquivo = null;
+            _exameRepository.Atualizar(viewModel.Id,exame);
+            _uow.Commit();
         }
 
         public bool Deletar(string id)
@@ -54,11 +65,33 @@ namespace Facilidata.FaciliHosp.Application.Services
             return viewModel;
         }
 
+        private byte[] ConverteStreamToByteArray(Stream stream)
+        {
+            byte[] byteArray = new byte[16 * 1024];
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                int bit;
+                while ((bit = stream.Read(byteArray, 0, byteArray.Length)) > 0)
+                {
+                    mStream.Write(byteArray, 0, bit);
+                }
+                return mStream.ToArray();
+            }
+        }
+
         public bool Salvar(EditarExameViewModel viewModel)
         {
             if (string.IsNullOrEmpty(viewModel.Id))
             {
                 var novoExame = _mapper.Map<Exame>(viewModel);
+                
+                if(viewModel.Upload != null)
+                {
+                    novoExame.NomeArquivo = viewModel.Upload.FileName;
+                    novoExame.ContentType = viewModel.Upload.ContentType;
+                    novoExame.Anexo = ConverteStreamToByteArray(viewModel.Upload.OpenReadStream());
+                }
+
                 _exameRepository.Inserir(novoExame);
                 var novoResultado = _uow.Commit();
                 return novoResultado;
@@ -67,6 +100,13 @@ namespace Facilidata.FaciliHosp.Application.Services
             var exame = _exameRepository.ObterPorId(viewModel.Id);
             if (exame == null) return false;
             var exameAtualizado = _mapper.Map<Exame>(viewModel);
+            if (viewModel.Upload != null)
+            {
+                exameAtualizado.NomeArquivo = viewModel.Upload.FileName;
+                exameAtualizado.ContentType = viewModel.Upload.ContentType;
+                exameAtualizado.Anexo = ConverteStreamToByteArray(viewModel.Upload.OpenReadStream());
+            }
+            if (viewModel.Upload == null && exame.Anexo != exameAtualizado.Anexo) exameAtualizado.Anexo = exame.Anexo;
             _exameRepository.Atualizar(viewModel.Id, exameAtualizado);
             var atualizacaoResultado = _uow.Commit();
             return atualizacaoResultado;

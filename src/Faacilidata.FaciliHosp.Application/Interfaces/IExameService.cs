@@ -5,6 +5,7 @@ namespace Facilidata.FaciliHosp.Application.Interfaces
 {
     public interface IExameService
     {
+        void RemoverAnexo(EditarExameViewModel viewModel);
         bool Deletar(string id);
         EditarExameViewModel Editar(string id, string hospitalId, string usuarioId);
         bool Salvar(EditarExameViewModel viewModel);

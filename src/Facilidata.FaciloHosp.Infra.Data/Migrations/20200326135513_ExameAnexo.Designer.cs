@@ -4,14 +4,16 @@ using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Migrations
 {
     [DbContext(typeof(ContextSQLS))]
-    partial class ContextSQLSModelSnapshot : ModelSnapshot
+    [Migration("20200326135513_ExameAnexo")]
+    partial class ExameAnexo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
