@@ -32,7 +32,7 @@ namespace Facilidata.FaciliHosp.Application.Services
         public EditarExameViewModel Editar(string id,string hospitalId,string usuarioId)
         {
             if (string.IsNullOrEmpty(id))
-                return new EditarExameViewModel() { HospitalId = hospitalId, UserId = usuarioId };
+                return new EditarExameViewModel() { HospitalId = hospitalId, UsuarioId = usuarioId };
 
             var exame = _exameRepository.ObterPorId(id);
             if (exame == null) return null;

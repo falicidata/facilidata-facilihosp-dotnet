@@ -22,8 +22,8 @@
             <th scope="row">@exame.Tipo</th>
             <th scope="row">@exame.CriadoEm</th>
             <td>
-                <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UserId">Editar</a>
-                <a class="btn btn-warning" asp-action="Deletar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UserId">Anexo</a>
+                <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Editar</a>
+                <a class="btn btn-warning" asp-action="Deletar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Anexo</a>
                 <a class="btn btn-danger" asp-action="Deletar">Excluir</a>
             </td>
         </tr>

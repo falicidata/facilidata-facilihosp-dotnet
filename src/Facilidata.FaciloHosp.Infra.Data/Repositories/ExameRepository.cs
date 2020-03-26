@@ -20,7 +20,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
 
         public List<Exame> ObterTodosPorHospitalIdPorUsuarioId(string hospitalId, string usuarioId)
         {
-            return _dbSet.Where(exame => !exame.Deletado && exame.HospitalId == hospitalId && exame.UserId == usuarioId).ToList();
+            return _dbSet.Where(exame => !exame.Deletado && exame.HospitalId == hospitalId && exame.UsuarioId == usuarioId).ToList();
         }
 
     }

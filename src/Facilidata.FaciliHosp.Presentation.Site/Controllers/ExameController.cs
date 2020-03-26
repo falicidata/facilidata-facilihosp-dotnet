@@ -39,7 +39,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (!ModelState.IsValid) return View("Editar", viewModel);
             var resultado = _exameService.Salvar(viewModel);
-            if (resultado) return RedirectToAction("Index", new { HospitalId = viewModel.HospitalId, UsuarioId = viewModel.UserId });
+            if (resultado) return RedirectToAction("Index", new { HospitalId = viewModel.HospitalId, UsuarioId = viewModel.UsuarioId });
             return View("Editar", viewModel);
         }
 

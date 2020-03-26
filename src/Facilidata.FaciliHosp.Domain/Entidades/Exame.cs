@@ -6,7 +6,7 @@
         public Exame(string hospitalId, string userId, string tipo, string resultado, string url, byte[] anexo)
         {
             HospitalId = hospitalId;
-            UserId = userId;
+            UsuarioId = userId;
             Tipo = tipo;
             Resultado = resultado;
             Url = url;
@@ -14,7 +14,7 @@
         }
 
         public string HospitalId { get; set; }
-        public string UserId { get; set; }
+        public string UsuarioId { get; set; }
         public string Tipo { get; set; }
         public string Resultado { get; set; }
         public string Url { get; set; }

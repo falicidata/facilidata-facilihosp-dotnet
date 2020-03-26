@@ -6,7 +6,7 @@ namespace Facilidata.FaciliHosp.Application.ViewModels
     {
         public string Id { get; set; }
         public string HospitalId { get; set; }
-        public string UserId { get; set; }
+        public string UsuarioId { get; set; }
         [Required]
         public string Tipo { get; set; }
         public string Resultado { get; set; }
