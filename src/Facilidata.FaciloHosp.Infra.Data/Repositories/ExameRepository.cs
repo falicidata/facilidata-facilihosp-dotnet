@@ -1,5 +1,7 @@
-﻿using Facilidata.FaciliHosp.Domain.Entidades;
+﻿using Dapper;
+using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciliHosp.Domain.Models;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -11,6 +13,16 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
     {
         public ExameRepository(ContextSQLS context) : base(context)
         {
+        }
+
+        public List<ExameSemAnexo> ObterTodosSemAnexoPorHospitalIdEUsuarioId(string hospitalId, string usuarioId)
+        {
+            using (var conexão = _context.Database.GetDbConnection())
+            {
+                string query = "select id, tipo, hospitalId,usuarioId, criadoEm from exames where deletado = 0 and hospitalId = @hospitalId and usuarioId = @usuarioId";
+                var resultado = conexão.Query<ExameSemAnexo>(query, new { UsuarioId = usuarioId, HospitalId = hospitalId }).ToList();
+                return resultado;
+            }
         }
 
         public List<Exame> ObterTodosJoinHospital()

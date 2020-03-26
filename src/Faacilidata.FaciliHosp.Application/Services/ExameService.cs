@@ -53,7 +53,7 @@ namespace Facilidata.FaciliHosp.Application.Services
 
         public ExameIndexViewModel ObterExamesPorHospitaIdEUsuarioId(string hospitalId, string usuarioId)
         {
-            var exames = _exameRepository.ObterTodosPorHospitalIdPorUsuarioId(hospitalId, usuarioId);
+            var exames = _exameRepository.ObterTodosSemAnexoPorHospitalIdEUsuarioId(hospitalId, usuarioId);
             var viewModel = new ExameIndexViewModel() { Exames = exames, HospitalId = hospitalId, UsuarioId = usuarioId };
             return viewModel;
         }

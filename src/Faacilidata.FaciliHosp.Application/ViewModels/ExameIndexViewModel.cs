@@ -1,4 +1,5 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
+using Facilidata.FaciliHosp.Domain.Models;
 using System.Collections.Generic;
 
 namespace Facilidata.FaciliHosp.Application.ViewModels
@@ -7,6 +8,6 @@ namespace Facilidata.FaciliHosp.Application.ViewModels
     {
         public string UsuarioId { get; set; }
         public string HospitalId { get; set; }
-        public List<Exame> Exames { get; set; }
+        public List<ExameSemAnexo> Exames { get; set; }
     }
 }
