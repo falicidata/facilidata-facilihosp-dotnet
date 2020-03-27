@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Facilidata.FaciliHosp.Presentation.Site.Models;
+using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUsuarioAspNet _usuarioAspNet;
+        private readonly IUsuarioService _usuarioService;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, IUsuarioAspNet usuarioAspNet, IUsuarioService usuarioService)
         {
             _logger = logger;
+            _usuarioAspNet = usuarioAspNet;
+            _usuarioService = usuarioService;
         }
 
         public IActionResult Index()
@@ -23,7 +30,6 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             if (HttpContext.User.Identity.IsAuthenticated)
                 return View();
             else return RedirectToAction("Login", "Usuario");
-
         }
 
         public IActionResult Privacy()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Facilidata.FaciliHosp.Application.AutoMapperProfiles;
+using Facilidata.FaciliHosp.Infra.Identity.Claims;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.IoC;
@@ -47,7 +48,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site
                 options.Password.RequireNonAlphanumeric = false;
             })
                 .AddDefaultTokenProviders()
-                .AddEntityFrameworkStores<ContextIdentity>();
+                .AddEntityFrameworkStores<ContextIdentity>()
+                .AddClaimsPrincipalFactory<UsuarioClaimsPrincipalFactory>();
 
             services.AddAuthentication();
 

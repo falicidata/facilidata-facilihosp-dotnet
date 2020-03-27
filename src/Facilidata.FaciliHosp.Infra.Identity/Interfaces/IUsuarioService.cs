@@ -1,4 +1,5 @@
 ﻿using Facilidata.FaciliHosp.Infra.Identity.Entidades;
+using Facilidata.FaciliHosp.Infra.Identity.Enums;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Interfaces
         Task<IdentityResult> Registro(RegistroUsuarioViewModel viewModel);
         Task<bool> Login(LoginUsuarioViewModel viewModel);
         Task Logout();
+        ETipoUsuario? GetTipoUsuarioLogado();
 
     }
 }

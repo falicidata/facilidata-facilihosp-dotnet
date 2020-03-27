@@ -1,7 +1,12 @@
-﻿@model List<Hospital>
+﻿@inject IUsuarioService usuarioService;
+@inject IUsuarioAspNet usuarioAspNet;
+@model List<Hospital>
+
 
 @{
     ViewData["Title"] = "Hospital";
+    var tipoUsuario = usuarioService.GetTipoUsuarioLogado();
+    var usuarioId = usuarioAspNet.GetUsuarioId();
 }
 <h1>Hospitais</h1>
 <a class="btn btn-primary" asp-action="Editar">Novo Hospital</a>
@@ -21,7 +26,14 @@
                 <th scope="row">@hospital.Nome</th>
                 <td>
                     <a class="btn btn-warning" asp-action="Editar" asp-route-id="@hospital.Id">Editar</a>
-                    <a class="btn btn-warning" asp-controller="Exame" asp-action="Pacientes" asp-route-hospitalId="@hospital.Id">Exames</a>
+                    @if (tipoUsuario == Facilidata.FaciliHosp.Infra.Identity.Enums.ETipoUsuario.Medico)
+                    {
+                        <a class="btn btn-warning" asp-controller="Exame" asp-action="Pacientes" asp-route-hospitalId="@hospital.Id">Exames</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning" asp-controller="Exame" asp-action="Index" asp-route-hospitalId="@hospital.Id" asp-route-usuarioId="@usuarioId" >Exames</a>
+                    }
                     <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@hospital.Id">Deletar</a>
                 </td>
             </tr>

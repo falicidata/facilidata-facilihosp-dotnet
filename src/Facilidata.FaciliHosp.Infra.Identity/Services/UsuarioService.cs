@@ -1,9 +1,11 @@
 ﻿using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Entidades;
+using Facilidata.FaciliHosp.Infra.Identity.Enums;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,7 +24,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
         private readonly IPacienteRepository _pacienteRepository;
         private readonly IUnitOfWork<ContextIdentity> _uow;
         private readonly ContextIdentity _contextIdentity;
-        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository, IUnitOfWork<ContextIdentity> uow, ContextIdentity contextIdentity)
+        private readonly IUsuarioAspNet _usuarioAspNet;
+        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, IMedicoRepository medicoRepository, IPacienteRepository pacienteRepository, IUnitOfWork<ContextIdentity> uow, ContextIdentity contextIdentity, IUsuarioAspNet usuarioAspNet)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -30,6 +33,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             _pacienteRepository = pacienteRepository;
             _uow = uow;
             _contextIdentity = contextIdentity;
+            _usuarioAspNet = usuarioAspNet;
         }
 
 
@@ -85,6 +89,14 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             }
 
             return null;
+        }
+
+        public ETipoUsuario? GetTipoUsuarioLogado()
+        {
+            var claimsUsuario = _usuarioAspNet.GetClaims();
+            var usuarioTipoClaim = claimsUsuario.FirstOrDefault(claim => claim.Type == "TipoUsuario")?.Value;
+            if (string.IsNullOrEmpty(usuarioTipoClaim)) return null;
+            else return Enum.Parse<ETipoUsuario>(usuarioTipoClaim);
         }
 
         public async Task<bool> Login(LoginUsuarioViewModel viewModel)

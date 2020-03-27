@@ -1,5 +1,8 @@
 ﻿using Facilidata.FaciliHosp.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Services
 {
@@ -20,6 +23,17 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
         public bool IsAuthenticated()
         {
             return _accessor.HttpContext.User.Identity.IsAuthenticated;
+        }
+
+
+        public string GetUsuarioId()
+        {
+            return _accessor.HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "UsuarioId")?.Value;
+        }
+
+        public List<Claim> GetClaims()
+        {
+            return _accessor.HttpContext.User.Claims.ToList();
         }
     }
 }
