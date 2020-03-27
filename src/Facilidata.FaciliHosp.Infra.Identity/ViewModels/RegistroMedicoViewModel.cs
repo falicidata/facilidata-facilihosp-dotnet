@@ -14,6 +14,6 @@ namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
         [Required]
         public string CRM { get; set; }
         [Required]
-        public ESexoConta? Sexo { get; set; }
+        public string Sexo { get; set; }
     }
 }

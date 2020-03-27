@@ -42,7 +42,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
 
         public async Task<IdentityResult> RegistroMedico(RegistroMedicoViewModel viewModel)
         {
-            var medico = new Medico() { CRM = viewModel.CRM };
+            var medico = new Medico() { CRM = viewModel.CRM , Sexo = Enum.Parse<ESexoConta>(viewModel.Sexo) };
             var usuario = new Usuario(viewModel.Email, medico.Id);
 
             _medicoRepository.Inserir(medico);
@@ -65,7 +65,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             var paciente = new Paciente()
             {
                 CPF = viewModel.CPF,
-                ConvenioMedico = viewModel.ConvenioMedico
+                ConvenioMedico = viewModel.ConvenioMedico,
+                Sexo = Enum.Parse<ESexoConta>(viewModel.Sexo)
             };
             var usuario = new Usuario(viewModel.Email, paciente.Id);
 
