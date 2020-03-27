@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
 {
-    public class RegistroUsuarioViewModel
+    public class RegistroPacienteViewModel
     {
         [Required, EmailAddress]
         public string Email { get; set; }
@@ -12,6 +12,10 @@ namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
         [Required, Compare("Senha")]
         public string ConfirmacaoSenha { get; set; }
         [Required]
-        public ETipoUsuario? Tipo { get; set; }
+        public string CPF { get; set; }
+        public string ConvenioMedico { get; set; }
+        [Required]
+        public string Sexo { get; set; }
+
     }
 }

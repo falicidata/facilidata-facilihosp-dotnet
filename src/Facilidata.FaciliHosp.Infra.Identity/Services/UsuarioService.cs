@@ -5,13 +5,11 @@ using Facilidata.FaciliHosp.Infra.Identity.Enums;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Services
@@ -42,53 +40,49 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             return _contextIdentity.Pacientes.Include(paciente => paciente.Usuario).Where(paciente => !paciente.Deletado).ToList();
         }
 
-        public async Task<IdentityResult> Registro(RegistroUsuarioViewModel viewModel)
+        public async Task<IdentityResult> RegistroMedico(RegistroMedicoViewModel viewModel)
         {
-            var tipo = viewModel.Tipo.Value;
+            var medico = new Medico() { CRM = viewModel.CRM };
+            var usuario = new Usuario(viewModel.Email, medico.Id);
 
-            if (tipo == Enums.ETipoUsuario.Medico)
+            _medicoRepository.Inserir(medico);
+            var resultadoCommit = _uow.Commit();
+
+            if (resultadoCommit == false) return null;
+
+            var resultadoIdentity = await _userManager.CreateAsync(usuario, viewModel.Senha);
+            if (!resultadoIdentity.Succeeded)
             {
-                var medico = new Medico();
-                var usuario = new Usuario(viewModel.Email, medico.Id);
-
-                _medicoRepository.Inserir(medico);
-                var resultadoCommit = _uow.Commit();
-
-                if (resultadoCommit == false) return null;
-
-                var resultadoIdentity = await _userManager.CreateAsync(usuario, viewModel.Senha);
-                if (!resultadoIdentity.Succeeded)
-                {
-                    _medicoRepository.Deletar(medico.Id);
-                    return resultadoIdentity;
-                }
+                _medicoRepository.Deletar(medico.Id);
                 return resultadoIdentity;
-
-
             }
-            else // Paciente
+            return resultadoIdentity;
+        }
+
+
+        public async Task<IdentityResult> RegistroPaciente(RegistroPacienteViewModel viewModel)
+        {
+            var paciente = new Paciente()
             {
-                var paciente = new Paciente();
-                var usuario = new Usuario(viewModel.Email, paciente.Id);
+                CPF = viewModel.CPF,
+                ConvenioMedico = viewModel.ConvenioMedico
+            };
+            var usuario = new Usuario(viewModel.Email, paciente.Id);
 
-                _pacienteRepository.Inserir(paciente);
-                var resultadoCommit = _uow.Commit();
+            _pacienteRepository.Inserir(paciente);
+            var resultadoCommit = _uow.Commit();
 
-                if (resultadoCommit == false) return null;
-                if (resultadoCommit == true)
-                {
-                    var resultadoIdentity = await _userManager.CreateAsync(usuario, viewModel.Senha);
-                    if (!resultadoIdentity.Succeeded)
-                    {
-                        _pacienteRepository.Deletar(paciente.Id);
-                        return resultadoIdentity;
-                    }
+            if (resultadoCommit == false) return null;
 
-                    return resultadoIdentity;
-                }
+            var resultadoIdentity = await _userManager.CreateAsync(usuario, viewModel.Senha);
+            if (!resultadoIdentity.Succeeded)
+            {
+                _pacienteRepository.Deletar(paciente.Id);
+                return resultadoIdentity;
             }
 
-            return null;
+            return resultadoIdentity;
+
         }
 
         public ETipoUsuario? GetTipoUsuarioLogado()

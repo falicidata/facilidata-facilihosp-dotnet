@@ -1,0 +1,84 @@
+﻿@using Facilidata.FaciliHosp.Infra.Identity.Enums
+@model RegistroPacienteViewModel
+
+@{
+    ViewData["Title"] = "Registro Paciente";
+    var sexoConta = Enum.GetNames(typeof(ESexoConta)).ToList();
+    var sexoContaSelectList = sexoConta.Select((sexo, index) => new SelectListItem(sexo, sexo));
+
+
+}
+
+<link rel="stylesheet" type="text/css" href="~/css/cadastro_userstyle.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex"></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center">Bem vindo ao FaciliData</h3>
+                    <form class="form-signin">
+                        <div class="form-label-group">
+                            E-mail
+                            <input asp-for="Email" type="email" id="inputemail" class="form-control" required>
+                            <span id="msgEmail"></span>
+                            <label for="inputemail"></label>
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+
+                        <div class="form-label-group">
+                            Insira seu CPF
+                            <input asp-for="CPF" type="number" class="form-control" name="CPF" id="inputCPF" required
+                                   maxlength="11">
+                            <span id="msgCPF"></span>
+                            <label for="inputdata"></label>
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+
+                        <div class="form-label-group">
+                            Insira seu Convenio Medico
+                            <input asp-for="ConvenioMedico" class="form-control" />
+                            <span id="msgConvenio"></span>
+                            <label for="inputdata"></label>
+                        </div>
+
+                        <div class="form-label-group">
+                            Sexo:
+                            <select class="custom-select" asp-for="Sexo" asp-items="sexoContaSelectList"> </select>
+                        </div>
+                        <hr>
+                        <div class="form-label-group">
+                            Senha
+                            <input asp-for="Senha" type="password" id="inputpassword" class="form-control" placeholder="Senha"
+                                   required minlength="6">
+                            <span id="msgPassword"></span>
+                            <label for="inputpassword"></label>
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+                        <div class="form-label-group">
+                            Confirme Senha
+                            <input asp-for="ConfirmacaoSenha" type="password" id="inputConfirmPassword" class="form-control"
+                                   placeholder="Confirme Senha" required>
+                            <span id="msgConfirmPassword"></span>
+                            <label for="inputConfirmPassword"></label>
+                            <span asp-validation-for="Email" class="text-danger" />
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-success btn-block text-uppercase" asp-controller="Usuario" asp-action="RegistrarPaciente">
+                            Cadastrar
+                        </button>
+                        <a class="d-block text-center mt-2 small"  asp-controller="Usuario" asp-action="RegistroMedico">Cadastro para Medicos</a>
+                        <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="Login">Logar</a>
+                        <hr class="my-4">
+                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
+                            <i class="fab fa-google mr-2"></i> Sign up with Google
+                        </button>
+                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit">
+                            <i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

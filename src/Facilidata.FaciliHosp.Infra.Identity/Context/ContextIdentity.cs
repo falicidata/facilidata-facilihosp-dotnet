@@ -26,6 +26,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ContaMap());
+            builder.ApplyConfiguration(new PacienteMap());
+            builder.ApplyConfiguration(new MedicoMap());
             builder.ApplyConfiguration(new UsuarioMap());
             
             base.OnModelCreating(builder);

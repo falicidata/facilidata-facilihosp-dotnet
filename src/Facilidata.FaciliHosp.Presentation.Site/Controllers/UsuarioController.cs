@@ -24,12 +24,39 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Registrar(RegistroUsuarioViewModel viewModel)
+        public async Task<IActionResult> Registrar(RegistroPacienteViewModel viewModel)
         {
-            var res = await _usuarioService.Registro(viewModel);
+            var res = await _usuarioService.RegistroPaciente(viewModel);
             if (res.Succeeded) return RedirectToAction("Login");
             return View("Registro");
         }
+
+        public async Task<IActionResult> RegistrarPaciente(RegistroPacienteViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return View("RegistroPaciente", viewModel);
+            var res = await _usuarioService.RegistroPaciente(viewModel);
+            if (res.Succeeded) return RedirectToAction("Login");
+            return View("Registro");
+        }
+        public async Task<IActionResult> RegistrarMedico(RegistroMedicoViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return View("RegistroMedico", viewModel);
+            var res = await _usuarioService.RegistroMedico(viewModel);
+            if (res.Succeeded) return RedirectToAction("Login");
+            return View("Registro");
+        }
+
+        public IActionResult RegistroPaciente()
+        {
+            return View();
+        }
+
+        public IActionResult RegistroMedico()
+        {
+            return View();
+        }
+
+
 
         [Route("/login")]
         public IActionResult Login()

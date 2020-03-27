@@ -9,8 +9,9 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Interfaces
 {
     public interface IUsuarioService
     {
+        Task<IdentityResult> RegistroMedico(RegistroMedicoViewModel viewModel);
         List<Paciente> ObterPacientes();
-        Task<IdentityResult> Registro(RegistroUsuarioViewModel viewModel);
+        Task<IdentityResult> RegistroPaciente(RegistroPacienteViewModel viewModel);
         Task<bool> Login(LoginUsuarioViewModel viewModel);
         Task Logout();
         ETipoUsuario? GetTipoUsuarioLogado();

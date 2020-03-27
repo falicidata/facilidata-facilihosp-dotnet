@@ -4,16 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Mapping
 {
-    public class ContaMap : IEntityTypeConfiguration<Conta>
+    public class MedicoMap : IEntityTypeConfiguration<Medico>
     {
-        public void Configure(EntityTypeBuilder<Conta> builder)
+        public void Configure(EntityTypeBuilder<Medico> builder)
         {
-            builder.ToTable("Contas");
-
-            builder.Property(conta => conta.Sexo)
-                .HasConversion<string>()
-                .HasColumnType("varchar(20)")
+            builder.Property(medico => medico.CRM)
                 .HasMaxLength(20)
+                .HasColumnType("varchar(20)")
                 .IsRequired();
         }
     }

@@ -26,15 +26,15 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
         }
 
 
-        [HttpPost("registro")]
-        public async Task<IActionResult> Registro([FromBody] RegistroUsuarioViewModel viewModel)
-        {
-            if (!ModelState.IsValid) return Resposta();
-            var resultadoRegistro = await _usuarioService.Registro(viewModel);
-            AdicionaErrosIdentityResultModelState(resultadoRegistro);
-            return Resposta();
+        //[HttpPost("registro")]
+        //public async Task<IActionResult> Registro([FromBody] RegistroPacienteViewModel viewModel)
+        //{
+        //    if (!ModelState.IsValid) return Resposta();
+        //    var resultadoRegistro = await _usuarioService.Registro(viewModel);
+        //    AdicionaErrosIdentityResultModelState(resultadoRegistro);
+        //    return Resposta();
 
-        }
+        //}
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]LoginUsuarioViewModel viewModel)
