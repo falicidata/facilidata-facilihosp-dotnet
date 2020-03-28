@@ -3,6 +3,7 @@ using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.MapsEntidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,13 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
     public class ContextSQLS : DbContext
     {
         private readonly IUsuarioAspNet _usuarioAspNet;
-        public ContextSQLS(DbContextOptions<ContextSQLS> options, IUsuarioAspNet usuarioAspNet) : base(options)
+
+        public ContextSQLS()
+        {
+
+        }
+
+        public ContextSQLS(IUsuarioAspNet usuarioAspNet)
         {
             _usuarioAspNet = usuarioAspNet;
         }
@@ -26,6 +33,15 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ExameMap());
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            string connectionString = configuration.GetConnectionString("Default");
+            optionsBuilder.UseSqlServer(connectionString);
+
+            base.OnConfiguring(optionsBuilder);
         }
 
         public override int SaveChanges()

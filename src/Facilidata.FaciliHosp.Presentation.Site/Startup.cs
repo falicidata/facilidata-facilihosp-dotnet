@@ -35,10 +35,10 @@ namespace Facilidata.FaciliHosp.Presentation.Site
 
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
-            services.AddDbContext<ContextSQLS>(options => options.UseSqlServer(connectionString));
+        
 
             // Identity
-            services.AddDbContext<ContextIdentity>(options => options.UseSqlServer(connectionString));
+        
             services.AddIdentity<Usuario, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;

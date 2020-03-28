@@ -12,8 +12,8 @@ namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
         public void Configure(EntityTypeBuilder<Exame> builder)
         {
             builder.Property(exame => exame.Tipo)
-                .HasColumnType("varchar(250)")
-                .HasMaxLength(250)
+                .HasColumnType("varchar(251)")
+                .HasMaxLength(251)
                 .IsRequired();
 
             builder.Property(exame => exame.Resultado)

@@ -6,6 +6,7 @@ using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,11 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Medico> Medicos { get; set; }
+
+        public ContextIdentity()
+        {
+
+        }
         public ContextIdentity(DbContextOptions<ContextIdentity> options, IUsuarioAspNet usuarioAspNet) : base(options)
         {
             _usuarioAspNet = usuarioAspNet;
@@ -33,6 +39,14 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
             base.OnModelCreating(builder);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            string connectionString = configuration.GetConnectionString("Default");
+            optionsBuilder.UseSqlServer(connectionString);
+            
+            base.OnConfiguring(optionsBuilder);
+        }
         public override int SaveChanges()
         {
             var inseridos = this.ChangeTracker.Entries().Where(entry => entry.Entity is Entidade && entry.State == EntityState.Added).ToList();

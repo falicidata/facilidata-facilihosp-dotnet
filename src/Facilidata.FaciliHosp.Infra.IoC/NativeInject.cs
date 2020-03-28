@@ -22,13 +22,14 @@ namespace Facilidata.FaciliHosp.Infra.IoC
 
             // Injeção de Depedencia
             // Repositories
-            services.AddScoped<ContextSQLS>();
+            services.AddDbContext<ContextSQLS>();
             services.AddScoped<IUnitOfWork<ContextSQLS>, UnitOfWorkSQLS>();
 
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();
 
             // Identity
+            services.AddDbContext<ContextIdentity>();
             services.AddScoped<IUsuarioAspNet, UsuarioAspNet>();
             services.AddScoped<IUnitOfWork<ContextIdentity>, UnitOfWorkIdentity>();
             services.AddScoped<IPacienteRepository, PacienteRepository>();

@@ -9,8 +9,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Mapping
         public void Configure(EntityTypeBuilder<Paciente> builder)
         {
             builder.Property(paciente => paciente.CPF)
-                 .HasMaxLength(11)
-                 .HasColumnType("varchar(11)")
+                 .HasMaxLength(20)
+                 .HasColumnType("varchar(20)")
                  .IsRequired();
 
             builder.Property(paciente => paciente.ConvenioMedico)
