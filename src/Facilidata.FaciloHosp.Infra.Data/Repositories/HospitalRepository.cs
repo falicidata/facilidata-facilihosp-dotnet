@@ -4,9 +4,9 @@ using Facilidata.FaciloHosp.Infra.Data.Context;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Repositories
 {
-    public class HospitalRepository : Repository<Hospital, ContextSQLS>, IHospitalRepository
+    public class HospitalRepository : Repository<Hospital, ContextSQL>, IHospitalRepository
     {
-        public HospitalRepository(ContextSQLS context) : base(context)
+        public HospitalRepository(ContextSQL context) : base(context)
         {
             
         }

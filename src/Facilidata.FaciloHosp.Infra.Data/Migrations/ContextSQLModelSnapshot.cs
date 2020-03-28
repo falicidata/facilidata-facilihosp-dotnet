@@ -3,64 +3,62 @@ using System;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Oracle.EntityFrameworkCore.Metadata;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Migrations
 {
-    [DbContext(typeof(ContextSQLS))]
-    [Migration("20200326002317_userId")]
-    partial class userId
+    [DbContext(typeof(ContextSQL))]
+    partial class ContextSQLModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn)
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             modelBuilder.Entity("Facilidata.FaciliHosp.Domain.Entidades.Exame", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("Anexo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<byte[]>("Anexo");
 
-                    b.Property<DateTime?>("AtualizadoEm")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("AtualizadoEm");
 
-                    b.Property<string>("AtualizadoPor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("AtualizadoPor");
 
-                    b.Property<DateTime?>("CriadoEm")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ContentType")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
 
-                    b.Property<string>("CriadoPor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("CriadoEm");
 
-                    b.Property<bool>("Deletado")
-                        .HasColumnType("bit");
+                    b.Property<string>("CriadoPor");
 
-                    b.Property<DateTime?>("DeletadoEm")
-                        .HasColumnType("datetime2");
+                    b.Property<bool>("Deletado");
 
-                    b.Property<string>("DeletadoPor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("DeletadoEm");
+
+                    b.Property<string>("DeletadoPor");
 
                     b.Property<string>("HospitalId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired();
+
+                    b.Property<string>("NomeArquivo")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Resultado")
-                        .HasColumnType("varchar(max)");
+                        .HasColumnType("varchar(2000)")
+                        .HasMaxLength(2000);
 
                     b.Property<string>("Tipo")
                         .IsRequired()
-                        .HasColumnType("varchar(250)")
-                        .HasMaxLength(250);
+                        .HasColumnType("varchar(251)")
+                        .HasMaxLength(251);
 
                     b.Property<string>("Url")
                         .HasColumnType("varchar(500)")
@@ -80,13 +78,11 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
             modelBuilder.Entity("Facilidata.FaciliHosp.Domain.Entidades.Hospital", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("AtualizadoEm")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("AtualizadoEm");
 
-                    b.Property<string>("AtualizadoPor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("AtualizadoPor");
 
                     b.Property<string>("Bairro")
                         .HasColumnType("varchar(250)")
@@ -100,20 +96,15 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                         .HasColumnType("varchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<DateTime?>("CriadoEm")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("CriadoEm");
 
-                    b.Property<string>("CriadoPor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("CriadoPor");
 
-                    b.Property<bool>("Deletado")
-                        .HasColumnType("bit");
+                    b.Property<bool>("Deletado");
 
-                    b.Property<DateTime?>("DeletadoEm")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("DeletadoEm");
 
-                    b.Property<string>("DeletadoPor")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("DeletadoPor");
 
                     b.Property<string>("Endereco")
                         .HasColumnType("varchar(250)")
@@ -128,8 +119,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                         .HasColumnType("varchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
@@ -141,8 +131,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                     b.HasOne("Facilidata.FaciliHosp.Domain.Entidades.Hospital", "Hospital")
                         .WithMany("Exames")
                         .HasForeignKey("HospitalId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

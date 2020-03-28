@@ -19,9 +19,9 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         private readonly IHospitalService _hospitalService;
         private readonly IMapper _mapper;
 
-        private readonly IUnitOfWork<ContextSQLS> _uow;
+        private readonly IUnitOfWork<ContextSQL> _uow;
 
-        public HospitalController(IHospitalRepository hospitalRepository, IUnitOfWork<ContextSQLS> uow, IHospitalService hospitalService, IMapper mapper)
+        public HospitalController(IHospitalRepository hospitalRepository, IUnitOfWork<ContextSQL> uow, IHospitalService hospitalService, IMapper mapper)
         {
             _hospitalRepository = hospitalRepository;
             _uow = uow;

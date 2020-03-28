@@ -42,8 +42,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string connectionString = configuration.GetConnectionString("Default");
-            optionsBuilder.UseSqlServer(connectionString);
+            string connectionString = configuration.GetConnectionString("Oracle");
+            optionsBuilder.UseOracle(connectionString);
             
             base.OnConfiguring(optionsBuilder);
         }

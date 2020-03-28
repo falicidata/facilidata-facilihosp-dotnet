@@ -44,7 +44,7 @@ namespace Facilidata.FaciliHosp.Services.Api
             services.AddControllers();
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
-            services.AddDbContext<ContextSQLS>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<ContextSQL>(options => options.UseSqlServer(connectionString));
 
             // Identity
             services.AddDbContext<ContextIdentity>(options => options.UseSqlServer(connectionString));

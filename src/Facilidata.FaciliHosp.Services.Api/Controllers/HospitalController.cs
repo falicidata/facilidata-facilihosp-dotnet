@@ -9,7 +9,7 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     {
         private readonly IHospitalRepository _hospitalRepository;
 
-        public HospitalController(IUnitOfWork<ContextSQLS> uow, IHospitalRepository hospitalRepository) : base(uow)
+        public HospitalController(IUnitOfWork<ContextSQL> uow, IHospitalRepository hospitalRepository) : base(uow)
         {
             _hospitalRepository = hospitalRepository;
         }

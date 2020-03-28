@@ -17,7 +17,8 @@ namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
                 .IsRequired();
 
             builder.Property(exame => exame.Resultado)
-             .HasColumnType("varchar(max)");
+                .HasMaxLength(2000)
+             .HasColumnType("varchar(2000)");
 
             builder.Property(exame => exame.UsuarioId)
             .HasColumnType("varchar(36)")

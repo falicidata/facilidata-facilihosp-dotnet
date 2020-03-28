@@ -10,16 +10,16 @@ using System.Linq;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Context
 {
-    public class ContextSQLS : DbContext
+    public class ContextSQL : DbContext
     {
         private readonly IUsuarioAspNet _usuarioAspNet;
 
-        public ContextSQLS()
+        public ContextSQL()
         {
 
         }
 
-        public ContextSQLS(IUsuarioAspNet usuarioAspNet)
+        public ContextSQL(IUsuarioAspNet usuarioAspNet)
         {
             _usuarioAspNet = usuarioAspNet;
         }
@@ -38,8 +38,8 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string connectionString = configuration.GetConnectionString("Default");
-            optionsBuilder.UseSqlServer(connectionString);
+            string connectionString = configuration.GetConnectionString("Oracle");
+            optionsBuilder.UseOracle(connectionString);
 
             base.OnConfiguring(optionsBuilder);
         }

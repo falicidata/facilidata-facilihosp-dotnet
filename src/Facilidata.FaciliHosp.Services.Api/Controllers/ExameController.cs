@@ -9,7 +9,7 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     {
         private readonly IExameRepository _exameRepository;
 
-        public ExameController(IUnitOfWork<ContextSQLS> uow, IExameRepository exameRepository) : base(uow)
+        public ExameController(IUnitOfWork<ContextSQL> uow, IExameRepository exameRepository) : base(uow)
         {
             _exameRepository = exameRepository;
         }

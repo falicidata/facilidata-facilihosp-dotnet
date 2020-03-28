@@ -4,10 +4,10 @@ using System;
 
 namespace Facilidata.FaciloHosp.Infra.Data.UnitOfWork
 {
-    public class UnitOfWorkSQLS : IUnitOfWork<ContextSQLS>
+    public class UnitOfWorkSQLS : IUnitOfWork<ContextSQL>
     {
-        private readonly ContextSQLS _context;
-        public UnitOfWorkSQLS(ContextSQLS context)
+        private readonly ContextSQL _context;
+        public UnitOfWorkSQLS(ContextSQL context)
         {
             _context = context;
         }

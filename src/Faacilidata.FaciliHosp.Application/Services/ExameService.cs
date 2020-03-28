@@ -18,7 +18,7 @@ namespace Facilidata.FaciliHosp.Application.Services
         private readonly IExameRepository _exameRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public ExameService(IUnitOfWork<ContextSQLS> uow, IMapper mapper, IExameRepository exameRepository, IUsuarioService usuarioService) : base(uow, mapper)
+        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IExameRepository exameRepository, IUsuarioService usuarioService) : base(uow, mapper)
         {
             _exameRepository = exameRepository;
             _usuarioService = usuarioService;

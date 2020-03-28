@@ -10,9 +10,9 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase
     {
-        private readonly IUnitOfWork<ContextSQLS> _uow;
+        private readonly IUnitOfWork<ContextSQL> _uow;
 
-        protected BaseController(IUnitOfWork<ContextSQLS> uow)
+        protected BaseController(IUnitOfWork<ContextSQL> uow)
         {
             _uow = uow;
         }

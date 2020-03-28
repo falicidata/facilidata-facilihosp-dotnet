@@ -22,8 +22,8 @@ namespace Facilidata.FaciliHosp.Infra.IoC
 
             // Injeção de Depedencia
             // Repositories
-            services.AddDbContext<ContextSQLS>();
-            services.AddScoped<IUnitOfWork<ContextSQLS>, UnitOfWorkSQLS>();
+            services.AddDbContext<ContextSQL>();
+            services.AddScoped<IUnitOfWork<ContextSQL>, UnitOfWorkSQLS>();
 
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();

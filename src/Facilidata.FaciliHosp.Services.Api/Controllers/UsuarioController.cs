@@ -12,7 +12,7 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     public class UsuarioController : BaseController
     {
         private readonly IUsuarioService _usuarioService;
-        public UsuarioController(IUnitOfWork<ContextSQLS> uow, IUsuarioService usuarioService) : base(uow)
+        public UsuarioController(IUnitOfWork<ContextSQL> uow, IUsuarioService usuarioService) : base(uow)
         {
             _usuarioService = usuarioService;
         }

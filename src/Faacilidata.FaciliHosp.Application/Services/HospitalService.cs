@@ -13,7 +13,7 @@ namespace Facilidata.FaciliHosp.Application.Services
     public class HospitalService : Service,IHospitalService
     {
         private readonly IHospitalRepository _hospitalRepository;
-        public HospitalService(IUnitOfWork<ContextSQLS> uow, IMapper mapper, IHospitalRepository hospitalRepository) : base(uow, mapper)
+        public HospitalService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IHospitalRepository hospitalRepository) : base(uow, mapper)
         {
             _hospitalRepository = hospitalRepository;
         }
