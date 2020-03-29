@@ -9,7 +9,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
         public string Email { get; set; }
         [Required]
         public string Senha { get; set; }
-        [Required]
+   
         public ETipoUsuario? Tipo { get; set; }
     }
 }

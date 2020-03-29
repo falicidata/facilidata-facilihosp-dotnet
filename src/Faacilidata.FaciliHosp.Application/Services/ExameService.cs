@@ -5,6 +5,7 @@ using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,7 @@ namespace Facilidata.FaciliHosp.Application.Services
         private readonly IExameRepository _exameRepository;
         private readonly IUsuarioService _usuarioService;
 
-        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IExameRepository exameRepository, IUsuarioService usuarioService) : base(uow, mapper)
+        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor, IExameRepository exameRepository, IUsuarioService usuarioService) : base(uow, mapper, actionContextAccessor)
         {
             _exameRepository = exameRepository;
             _usuarioService = usuarioService;

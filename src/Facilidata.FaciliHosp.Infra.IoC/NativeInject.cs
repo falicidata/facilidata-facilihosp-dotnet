@@ -9,6 +9,7 @@ using Facilidata.FaciliHosp.Infra.Identity.UnitOfWork;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Facilidata.FaciloHosp.Infra.Data.Repositories;
 using Facilidata.FaciloHosp.Infra.Data.UnitOfWork;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -19,6 +20,7 @@ namespace Facilidata.FaciliHosp.Infra.IoC
         public static void InjectDependecies(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
             // Injeção de Depedencia
             // Repositories

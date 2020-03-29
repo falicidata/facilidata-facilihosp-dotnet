@@ -19,17 +19,17 @@
                 <div class="card-body">
                     <h3 class="card-title text-center">Bem vindo ao FaciliData</h3>
                     <form class="form-signin">
-
+                        <partial name="_ErroAlert" />
                         <div class="form-label-group">
                             E-mail
                             <input asp-for="Email" type="email" id="inputemail" class="form-control" required>
                             <span id="msgEmail"></span>
                             <label for="inputemail"></label>
-                            <span asp-validation-for="Email" class="text-danger"/>
+                            <span asp-validation-for="Email" class="text-danger" />
                         </div>
                         <div class="form-label-group">
                             Insira seu CRM
-                            <input asp-for="CRM" type="number" class="form-control"  id="inputCRM" required
+                            <input asp-for="CRM" type="number" class="form-control" id="inputCRM" required
                                    minlength="4" maxlength="10">
                             <span id="msgCRM"></span>
                             <label for="inputdata"></label>
@@ -56,11 +56,11 @@
                             <label for="inputConfirmPassword"></label>
                             <span asp-validation-for="Email" class="text-danger" />
                         </div>
-                        <button class="btn btn-lg btn-success btn-block text-uppercase"  asp-controller="Usuario" asp-action="RegistrarMedico" >
+                        <button class="btn btn-lg btn-success btn-block text-uppercase" asp-controller="Usuario" asp-action="RegistrarMedico">
                             Cadastrar
                         </button>
-                        <a class="d-block text-center mt-2 small"  asp-controller="Usuario" asp-action="RegistroPaciente">Cadastro para Pacientes</a>
-                        <a class="d-block text-center mt-2 small"  asp-controller="Usuario" asp-action="Login">Logar</a>
+                        <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="RegistroPaciente">Cadastro para Pacientes</a>
+                        <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="Login">Logar</a>
                         <hr class="my-4">
                         <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
                             <i class="fab fa-google mr-2"></i> Sign up with Google

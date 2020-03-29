@@ -4,6 +4,7 @@ using Facilidata.FaciliHosp.Application.ViewModels;
 using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,7 +14,8 @@ namespace Facilidata.FaciliHosp.Application.Services
     public class HospitalService : Service,IHospitalService
     {
         private readonly IHospitalRepository _hospitalRepository;
-        public HospitalService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IHospitalRepository hospitalRepository) : base(uow, mapper)
+        
+        public HospitalService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IHospitalRepository hospitalRepository,IActionContextAccessor actionContextAccessor) : base(uow, mapper, actionContextAccessor)
         {
             _hospitalRepository = hospitalRepository;
         }
@@ -22,19 +24,25 @@ namespace Facilidata.FaciliHosp.Application.Services
 
         public bool Salvar(EditarHospitalViewModel viewModel)
         {
+           
             Hospital hospital;
             if (string.IsNullOrEmpty(viewModel.Id))
             {
                 hospital = _mapper.Map<Hospital>(viewModel);
                 _hospitalRepository.Inserir(hospital);
-                return _uow.Commit();
+                return Commit();
 
             }
 
             hospital = _hospitalRepository.ObterPorId(viewModel.Id);
+            if(hospital == null)
+            {
+                AdicionarErroModelState("Hospital não encontrado");
+                return false;
+            }
 
             _hospitalRepository.Atualizar(viewModel.Id, _mapper.Map<Hospital>(viewModel));
-            return _uow.Commit();
+            return Commit();
         }
 
     }

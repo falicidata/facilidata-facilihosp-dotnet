@@ -73,10 +73,17 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
         public async Task<IActionResult> EnviarLogin(LoginUsuarioViewModel viewModel)
         {
+            if (!ModelState.IsValid) return View("Login",viewModel);
             var res = await _usuarioService.Login(viewModel);
-            var auth = HttpContext.User.Identity.IsAuthenticated;
-            if (res == true) return RedirectToAction("Index", "Home");
-            else return View("Login");
+            if (res == true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("Login", "Email ou Senha incorretos");
+                return View("Login");
+            }
         }
     }
 }

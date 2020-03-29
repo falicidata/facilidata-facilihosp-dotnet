@@ -19,6 +19,7 @@
                 <div class="card-body">
                     <h3 class="card-title text-center">Bem vindo ao FaciliData</h3>
                     <form class="form-signin">
+                        <partial name="_ErroAlert" />
                         <div class="form-label-group">
                             E-mail
                             <input asp-for="Email" type="email" id="inputemail" class="form-control" required>
@@ -67,7 +68,7 @@
                         <button type="submit" class="btn btn-lg btn-success btn-block text-uppercase" asp-controller="Usuario" asp-action="RegistrarPaciente">
                             Cadastrar
                         </button>
-                        <a class="d-block text-center mt-2 small"  asp-controller="Usuario" asp-action="RegistroMedico">Cadastro para Medicos</a>
+                        <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="RegistroMedico">Cadastro para Medicos</a>
                         <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="Login">Logar</a>
                         <hr class="my-4">
                         <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">

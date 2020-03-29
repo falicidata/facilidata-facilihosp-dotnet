@@ -1,0 +1,18 @@
+﻿@{
+    var erros = ViewData.ModelState
+        .SelectMany(modelState => modelState.Value.Errors)
+        .Select(erro => erro.ErrorMessage)
+        .ToList();
+}
+
+
+@if (erros.Count > 0)
+{
+
+    <div class="alert alert-danger" role="alert">
+        @foreach (var erro in erros)
+        {
+            <div>@erro</div>
+        }
+    </div>
+}
