@@ -1,4 +1,5 @@
-﻿using Facilidata.FaciliHosp.Domain.Entidades;
+﻿using Facilidata.FaciliHosp.Application.Interfaces;
+using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Authorization;
@@ -10,10 +11,12 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
     public class ExameController : BaseController
     {
         private readonly IExameRepository _exameRepository;
+        private readonly IAzureStorageService _azureStorageService;
 
-        public ExameController(IUnitOfWork<ContextSQL> uow, IExameRepository exameRepository) : base(uow)
+        public ExameController(IUnitOfWork<ContextSQL> uow, IExameRepository exameRepository, IAzureStorageService azureStorageService) : base(uow)
         {
             _exameRepository = exameRepository;
+            _azureStorageService = azureStorageService;
         }
 
         [HttpGet]
@@ -25,10 +28,11 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
 
 
         [HttpGet("anexo")]
-        public IActionResult GetAnexosPorId(string id)
+        public IActionResult GetAnexoPorId(string id)
         {
             var exame = _exameRepository.ObterPorId(id);
-            var obj = new { Anexo = exame.Anexo, ContentType = exame.ContentType, NomeArquivo = exame.NomeArquivo };
+            string base64 = _azureStorageService.DownloadToBase64(exame.Url);
+            var obj = new { Base64 = base64, ContentType = exame.ContentType, NomeArquivo = exame.NomeArquivo };
             return Resposta(obj);
         }
 

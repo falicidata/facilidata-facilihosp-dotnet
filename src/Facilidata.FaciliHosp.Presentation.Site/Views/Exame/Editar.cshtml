@@ -30,7 +30,7 @@ else
         <input asp-for="Resultado" class="form-control">
     </div>
 
-    @if (Model.Anexo == null || Model.Anexo.Length == 0)
+    @if (string.IsNullOrEmpty(Model.Url))
     {
         <div class="form-group">
             <label>Upload</label>

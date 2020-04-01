@@ -2,6 +2,7 @@
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.Linq;
 
 namespace Facilidata.FaciliHosp.Application.Services
 {
@@ -17,6 +18,11 @@ namespace Facilidata.FaciliHosp.Application.Services
             _actionContextAccessor = actionContextAccessor;
         }
 
+
+        public bool ExisteErrosNoModelState()
+        {
+            return _actionContextAccessor.ActionContext.ModelState.Where(e => e.Value.Errors.Any()).Any();
+        }
 
         protected void AdicionarErroModelState(string erro, string key = null)
         {

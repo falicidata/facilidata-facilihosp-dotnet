@@ -3,14 +3,14 @@
     public class Exame : Entidade
     {
         protected Exame() { }
-        public Exame(string hospitalId, string userId, string tipo, string resultado, string url, byte[] anexo)
+        public Exame(string hospitalId, string userId, string tipo, string resultado, string url)
         {
             HospitalId = hospitalId;
             UsuarioId = userId;
             Tipo = tipo;
             Resultado = resultado;
             Url = url;
-            Anexo = anexo;
+
         }
 
         public string HospitalId { get; set; }
@@ -20,7 +20,6 @@
         public string Url { get; set; }
         public string ContentType { get; set; }
         public string NomeArquivo { get; set; }
-        public byte[] Anexo { get; set; }
 
         // Entity Framework
         public Hospital Hospital { get; set; }

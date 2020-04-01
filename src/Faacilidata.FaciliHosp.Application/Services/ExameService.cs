@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Storage.Blobs;
 using Facilidata.FaciliHosp.Application.Interfaces;
 using Facilidata.FaciliHosp.Application.ViewModels;
 using Facilidata.FaciliHosp.Domain.Entidades;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Application.Services
 {
@@ -18,19 +20,24 @@ namespace Facilidata.FaciliHosp.Application.Services
     {
         private readonly IExameRepository _exameRepository;
         private readonly IUsuarioService _usuarioService;
+        private readonly IAzureStorageService _azureStorageService;
 
-        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor, IExameRepository exameRepository, IUsuarioService usuarioService) : base(uow, mapper, actionContextAccessor)
+        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor, IExameRepository exameRepository, IUsuarioService usuarioService, IAzureStorageService azureStorageService) : base(uow, mapper, actionContextAccessor)
         {
             _exameRepository = exameRepository;
             _usuarioService = usuarioService;
+            _azureStorageService = azureStorageService;
         }
 
         public void RemoverAnexo(EditarExameViewModel viewModel)
         {
             var exame = _exameRepository.ObterPorId(viewModel.Id);
+            _azureStorageService.Deletar(exame.Url);
+            if (ExisteErrosNoModelState()) return;
+
             exame.ContentType = null;
-            exame.Anexo = new byte[] { };
             exame.NomeArquivo = null;
+            exame.Url = null;
             _exameRepository.Atualizar(viewModel.Id,exame);
             _uow.Commit();
         }
@@ -66,22 +73,9 @@ namespace Facilidata.FaciliHosp.Application.Services
             return viewModel;
         }
 
-        private byte[] ConverteStreamToByteArray(Stream stream)
+        public   bool Salvar(EditarExameViewModel viewModel)
         {
-            byte[] byteArray = new byte[16 * 1024];
-            using (MemoryStream mStream = new MemoryStream())
-            {
-                int bit;
-                while ((bit = stream.Read(byteArray, 0, byteArray.Length)) > 0)
-                {
-                    mStream.Write(byteArray, 0, bit);
-                }
-                return mStream.ToArray();
-            }
-        }
 
-        public bool Salvar(EditarExameViewModel viewModel)
-        {
             if (string.IsNullOrEmpty(viewModel.Id))
             {
                 var novoExame = _mapper.Map<Exame>(viewModel);
@@ -90,7 +84,9 @@ namespace Facilidata.FaciliHosp.Application.Services
                 {
                     novoExame.NomeArquivo = viewModel.Upload.FileName;
                     novoExame.ContentType = viewModel.Upload.ContentType;
-                    novoExame.Anexo = ConverteStreamToByteArray(viewModel.Upload.OpenReadStream());
+                    string path = _azureStorageService.Upload(viewModel.Upload.OpenReadStream(), viewModel.Upload.FileName);
+                    if (ExisteErrosNoModelState()) return false;
+                    novoExame.Url = path;
                 }
 
                 _exameRepository.Inserir(novoExame);
@@ -105,9 +101,11 @@ namespace Facilidata.FaciliHosp.Application.Services
             {
                 exameAtualizado.NomeArquivo = viewModel.Upload.FileName;
                 exameAtualizado.ContentType = viewModel.Upload.ContentType;
-                exameAtualizado.Anexo = ConverteStreamToByteArray(viewModel.Upload.OpenReadStream());
+                string path = _azureStorageService.Upload(viewModel.Upload.OpenReadStream(), viewModel.Upload.FileName);
+                if (ExisteErrosNoModelState()) return false;
+                exameAtualizado.Url = path;
             }
-            if (viewModel.Upload == null && exame.Anexo != exameAtualizado.Anexo) exameAtualizado.Anexo = exame.Anexo;
+           
             _exameRepository.Atualizar(viewModel.Id, exameAtualizado);
             var atualizacaoResultado = _uow.Commit();
             return atualizacaoResultado;

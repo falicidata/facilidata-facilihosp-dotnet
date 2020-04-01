@@ -58,7 +58,6 @@ EXECUTE IMMEDIATE 'CREATE TABLE
     "Url" varchar(500),
     "ContentType" varchar(50),
     "NomeArquivo" varchar(100),
-    "Anexo" RAW(2000),
     CONSTRAINT "PK_Exames" PRIMARY KEY ("Id"),
     CONSTRAINT "FK_Exames_Hospitais_HospitalId" FOREIGN KEY ("HospitalId") REFERENCES "Hospitais" ("Id")
 )';

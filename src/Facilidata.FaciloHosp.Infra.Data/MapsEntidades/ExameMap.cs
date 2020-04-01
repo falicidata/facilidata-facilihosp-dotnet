@@ -20,6 +20,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
                 .HasMaxLength(2000)
              .HasColumnType("varchar(2000)");
 
+
             builder.Property(exame => exame.UsuarioId)
             .HasColumnType("varchar(36)")
             .HasMaxLength(36);

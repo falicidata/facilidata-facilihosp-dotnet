@@ -14,7 +14,7 @@ namespace Facilidata.FaciliHosp.Application.ViewModels
         public string Url { get; set; }
         public string ContentType { get; set; }
         public string NomeArquivo { get; set; }
-        public byte[] Anexo { get; set; }
+        public string Base64Anexo { get; set; }
         public IFormFile Upload { get; set; }
 
     }

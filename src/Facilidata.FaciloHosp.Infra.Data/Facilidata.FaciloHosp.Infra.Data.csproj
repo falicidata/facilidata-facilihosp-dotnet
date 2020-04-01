@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200401154643_exameBase64.cs" />
+    <Compile Remove="Migrations\20200401154643_exameBase64.Designer.cs" />
+    <Compile Remove="Migrations\20200401154843_exameBase64.cs" />
+    <Compile Remove="Migrations\20200401154843_exameBase64.Designer.cs" />
+    <Compile Remove="Migrations\20200401154952_exameBase64.cs" />
+    <Compile Remove="Migrations\20200401154952_exameBase64.Designer.cs" />
+    <Compile Remove="Migrations\20200401155037_exameBase64.cs" />
+    <Compile Remove="Migrations\20200401155037_exameBase64.Designer.cs" />
+    <Compile Remove="Migrations\20200401155213_exameBase64.cs" />
+    <Compile Remove="Migrations\20200401155213_exameBase64.Designer.cs" />
+    <Compile Remove="Migrations\20200401173042_exameAnexoDrop.cs" />
+    <Compile Remove="Migrations\20200401173042_exameAnexoDrop.Designer.cs" />
+    <Compile Remove="Migrations\20200401173321_exameAnexoDrop.cs" />
+    <Compile Remove="Migrations\20200401173321_exameAnexoDrop.Designer.cs" />
+    <Compile Remove="Migrations\20200401173620_exameAnexoDrop.cs" />
+    <Compile Remove="Migrations\20200401173620_exameAnexoDrop.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
 

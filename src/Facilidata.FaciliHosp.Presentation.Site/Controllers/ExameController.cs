@@ -6,7 +6,10 @@ using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
@@ -14,12 +17,14 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
     {
         private readonly IExameService _exameService;
         private readonly IExameRepository _exameRepository;
+        private readonly IAzureStorageService _azureStorageService;
 
-        public ExameController(IExameService exameService, IExameRepository exameRepository)
+        public ExameController(IExameService exameService, IExameRepository exameRepository, IAzureStorageService azureStorageService)
         {
 
             _exameService = exameService;
             _exameRepository = exameRepository;
+            _azureStorageService = azureStorageService;
         }
 
         public IActionResult Pacientes(string hospitalId)
@@ -40,17 +45,18 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         public IActionResult RemoverAnexo(EditarExameViewModel viewModel)
         {
             _exameService.RemoverAnexo(viewModel);
+            if (!ModelState.IsValid) View("Editar", viewModel);
             viewModel.ContentType = null;
             viewModel.NomeArquivo = null;
-            viewModel.Anexo = new byte[] { };
             return View("Editar", viewModel);
         }
 
         public object DownloadAnexo(string id)
         {
             var exame = _exameRepository.ObterPorId(id);
-            if (exame.Anexo == null || exame.Anexo.Length == 0) return null;
-            return File(exame.Anexo, exame.ContentType, exame.NomeArquivo);
+            if (string.IsNullOrEmpty(exame.Url)) return null;
+            var arraybyte = _azureStorageService.DownloadToBytes(exame.Url);
+            return File(arraybyte, exame.ContentType, exame.NomeArquivo);
         }
 
 

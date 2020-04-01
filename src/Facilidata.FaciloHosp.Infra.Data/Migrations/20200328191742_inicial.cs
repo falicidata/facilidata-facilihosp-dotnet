@@ -51,7 +51,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                     Url = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true),
                     ContentType = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true),
                     NomeArquivo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
-                    Anexo = table.Column<byte[]>(nullable: true)
+ 
                 },
                 constraints: table =>
                 {
