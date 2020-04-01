@@ -53,7 +53,6 @@ namespace Facilidata.FaciliHosp.Presentation.Site
 
             services.AddAuthentication();
 
-            services.AddAutoMapper(typeof(ViewModelToModel));
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
 

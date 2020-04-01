@@ -1,4 +1,6 @@
-﻿using Facilidata.FaciliHosp.Application.Interfaces;
+﻿using AutoMapper;
+using Facilidata.FaciliHosp.Application.AutoMapperProfiles;
+using Facilidata.FaciliHosp.Application.Interfaces;
 using Facilidata.FaciliHosp.Application.Services;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
@@ -41,6 +43,9 @@ namespace Facilidata.FaciliHosp.Infra.IoC
             // Services
             services.AddScoped<IHospitalService, HospitalService>();
             services.AddScoped<IExameService, ExameService>();
+
+            // Application
+            services.AddAutoMapper(typeof(ViewModelToModel));
         }
     }
 }

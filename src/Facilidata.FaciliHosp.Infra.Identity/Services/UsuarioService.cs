@@ -94,6 +94,13 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             else return Enum.Parse<ETipoUsuario>(usuarioTipoClaim);
         }
 
+        public ETipoUsuario GetTipoUsuario(Usuario usuario)
+        {
+            var conta = _pacienteRepository.ObterPorId(usuario.ContaId);
+            return conta != null ? ETipoUsuario.Paciente : ETipoUsuario.Medico;
+        }
+
+
         public async Task<bool> Login(LoginUsuarioViewModel viewModel)
         {
             var resultadoLogin = await _signInManager.PasswordSignInAsync(viewModel.Email, viewModel.Senha, false, false);

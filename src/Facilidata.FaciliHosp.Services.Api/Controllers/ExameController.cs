@@ -1,6 +1,7 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Facilidata.FaciliHosp.Services.Api.Controllers
@@ -14,9 +15,11 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
             _exameRepository = exameRepository;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult GetObterTodos()
         {
+            var usuario = HttpContext.User;
             var hospitais = _exameRepository.ObterTodos();
             return Resposta(hospitais);
         }
