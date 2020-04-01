@@ -62,8 +62,11 @@ namespace Facilidata.FaciliHosp.Services.Api
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ContextIdentity>();
 
-            // Inje��o de Depedencia
+            // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
+
+            services.AddSwaggerConfiguration();
+
 
         }
 
@@ -81,6 +84,10 @@ namespace Facilidata.FaciliHosp.Services.Api
 
             app.UseAuthorization();
 
+            app.UseSwagger();
+
+            app.UseSwaggerConfiguration();
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

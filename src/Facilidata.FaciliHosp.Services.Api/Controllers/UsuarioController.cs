@@ -106,14 +106,6 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
 
         //}
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]LoginUsuarioViewModel viewModel)
-        {
-            if (!ModelState.IsValid) return Resposta();
-            var resultadoLogin = await _usuarioService.Login(viewModel);
-            if (resultadoLogin == false) AdicionarErroModelState("Usuario ou Senha incorretos");
-            return Resposta();
-        }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
