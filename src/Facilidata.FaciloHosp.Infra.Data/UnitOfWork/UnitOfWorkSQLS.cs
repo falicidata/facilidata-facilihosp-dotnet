@@ -17,8 +17,9 @@ namespace Facilidata.FaciloHosp.Infra.Data.UnitOfWork
             {
                 return _context.SaveChanges() > 0;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                string erroMessage = e.Message;
                 return false;
             }
         }

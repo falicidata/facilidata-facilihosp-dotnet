@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Services.Api.Controllers
 {
+    [AllowAnonymous]
     public class UsuarioController : BaseController
     {
         private readonly IUsuarioService _usuarioService;
@@ -96,16 +97,35 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
         }
 
 
-        //[HttpPost("registro")]
-        //public async Task<IActionResult> Registro([FromBody] RegistroPacienteViewModel viewModel)
-        //{
-        //    if (!ModelState.IsValid) return Resposta();
-        //    var resultadoRegistro = await _usuarioService.Registro(viewModel);
-        //    AdicionaErrosIdentityResultModelState(resultadoRegistro);
-        //    return Resposta();
+        [HttpPost("registro-medico")]
+        public async Task<IActionResult> RegistroMedico([FromBody] RegistroMedicoViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return Resposta();
+            var resultadoRegistro = await _usuarioService.RegistroMedico(viewModel);
+            AdicionaErrosIdentityResultModelState(resultadoRegistro);
+            return Resposta();
 
-        //}
+        }
 
+
+        [HttpPost("registro-paciente")]
+        public async Task<IActionResult> RegistroPaciente([FromBody] RegistroPacienteViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return Resposta();
+            var resultadoRegistro = await _usuarioService.RegistroPaciente(viewModel);
+            AdicionaErrosIdentityResultModelState(resultadoRegistro);
+            return Resposta();
+
+        }
+
+        [HttpPost("pacientes")]
+        public IActionResult Pacientes()
+        {
+            if (!ModelState.IsValid) return Resposta();
+            var resultado = _usuarioService.ObterPacientes();
+            return Resposta(resultado);
+
+        }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()

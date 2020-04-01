@@ -17,7 +17,11 @@ namespace Facilidata.FaciliHosp.Services.Api.Configurations
                     .RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(filtro));
 
-            }).AddNewtonsoftJson();
+            }).AddNewtonsoftJson(
+                options => {
+                    options.SerializerSettings.ReferenceLoopHandling =  Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                }
+            );
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Facilidata.FaciliHosp.Services.Api.Controllers
 {
+    [AllowAnonymous]
     public class HospitalController : BaseController
     {
         private readonly IHospitalRepository _hospitalRepository;

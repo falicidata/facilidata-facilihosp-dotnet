@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Facilidata.FaciliHosp.Services.Api.Controllers
 {
+    [AllowAnonymous]
     public class ExameController : BaseController
     {
         private readonly IExameRepository _exameRepository;
@@ -15,13 +16,20 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
             _exameRepository = exameRepository;
         }
 
-        [Authorize]
         [HttpGet]
-        public IActionResult GetObterTodos()
+        public IActionResult GetObterTodos(string hospitaId, string usuarioId)
         {
-            var usuario = HttpContext.User;
-            var hospitais = _exameRepository.ObterTodos();
+            var hospitais = _exameRepository.ObterTodosSemAnexoPorHospitalIdEUsuarioId(hospitaId, usuarioId);
             return Resposta(hospitais);
+        }
+
+
+        [HttpGet("anexo")]
+        public IActionResult GetAnexosPorId(string id)
+        {
+            var exame = _exameRepository.ObterPorId(id);
+            var obj = new { Anexo = exame.Anexo, ContentType = exame.ContentType, NomeArquivo = exame.NomeArquivo };
+            return Resposta(obj);
         }
 
         [HttpGet("{id}")]

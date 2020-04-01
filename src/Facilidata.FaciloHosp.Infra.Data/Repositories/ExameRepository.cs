@@ -19,8 +19,8 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
         {
             using (var conexão = _context.Database.GetDbConnection())
             {
-                string query = "select id, tipo, hospitalId,usuarioId, criadoEm from exames where deletado = 0 and hospitalId = @hospitalId and usuarioId = @usuarioId";
-                var resultado = conexão.Query<ExameSemAnexo>(query, new { UsuarioId = usuarioId, HospitalId = hospitalId }).ToList();
+                string query = $"select \"Id\", \"Tipo\", \"HospitalId\",\"UsuarioId\", \"CriadoEm\" from \"Exames\" where \"Deletado\" = 0  and \"HospitalId\" = '{hospitalId}' and \"UsuarioId\" = '{usuarioId}'";
+                var resultado = conexão.Query<ExameSemAnexo>(query).ToList();
                 return resultado;
             }
         }
