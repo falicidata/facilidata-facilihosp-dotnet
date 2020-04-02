@@ -1,0 +1,9 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="container">
+        <h1 class="my-4">
+            FACILIDATA
+            <a class="btn btn-sm btn-primary text-uppercase" asp-action="Logout" asp-controller="Usuario">Sair</a>
+        </h1>
+    </div>
+}

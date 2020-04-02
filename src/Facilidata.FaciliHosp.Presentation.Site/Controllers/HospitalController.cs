@@ -29,7 +29,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string usuarioId)
         {
 
             var hospitais = _hospitalRepository.ObterTodos();

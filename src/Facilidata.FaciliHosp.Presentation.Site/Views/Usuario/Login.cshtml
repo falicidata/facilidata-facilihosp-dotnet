@@ -6,19 +6,36 @@
 }
 
 
-<partial name="_ErroAlert"/>
 
-<form>
-    <div class="form-group">
-        <label>Email</label>
-        <input type="email" asp-for="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<link rel="stylesheet" type="text/css" href="~/css/homestyle.css">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex"></div>
+                <div class="card-body">
+                    <h3 class="card-title text-center">Bem vindo ao FaciliData</h3>
+                    <form class="form-signin">
+                        <partial name="_ErroAlert" />
+                        <div class="form-label-group">
+                            E-mail
+                            <input asp-for="Email" type="email" id="inputemail" class="form-control" placeholder="E-mail" required>
+                            <label for="inputemail"></label>
+                        </div>
+                        <div class="form-label-group">
+                            Senha
+                            <input asp-for="Senha" type="password" id="inputpassword" class="form-control" placeholder="Senha" required>
+                            <label for="inputpassword"></label>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary btn-block text-uppercase" asp-action="EnviarLogin">Logar</button>
+                        <a class="btn btn-lg btn-success btn-block text-uppercase" asp-action="RegistroPaciente">Cadastre-se</a>
+                        <hr class="my-4">
+                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
+                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Senha</label>
-        <input type="password" asp-for="Senha" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary" asp-action="EnviarLogin">Login</button>
-</form>
-<div>
-    <a class="btn btn-primary" asp-action="RegistroPaciente">Registro</a>
 </div>
+

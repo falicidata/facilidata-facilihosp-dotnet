@@ -18,15 +18,28 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         private readonly IExameService _exameService;
         private readonly IExameRepository _exameRepository;
         private readonly IAzureStorageService _azureStorageService;
+        private readonly IUsuarioService _usuarioService;
+        private readonly IUsuarioAspNet _usuarioAspNet;
+        private readonly IHospitalRepository _hospitalRepository;
 
-        public ExameController(IExameService exameService, IExameRepository exameRepository, IAzureStorageService azureStorageService)
+        public ExameController(IExameService exameService, IExameRepository exameRepository, IAzureStorageService azureStorageService, IUsuarioService usuarioService, IUsuarioAspNet usuarioAspNet, IHospitalRepository hospitalRepository)
         {
 
             _exameService = exameService;
             _exameRepository = exameRepository;
             _azureStorageService = azureStorageService;
+            _usuarioService = usuarioService;
+            _usuarioAspNet = usuarioAspNet;
+            _hospitalRepository = hospitalRepository;
         }
 
+
+        public IActionResult NovoExameHospitais(string usuarioId)
+        {
+            var hospitais = _hospitalRepository.ObterTodos();
+
+            return View(new NovoExameHospitalIndexViewModel { UsuarioId = usuarioId, Hospitais = hospitais });
+        }
         public IActionResult Pacientes(string hospitalId)
         {
 
@@ -65,13 +78,19 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (!ModelState.IsValid) return View("Editar", viewModel);
             var resultado = _exameService.Salvar(viewModel);
-            if (resultado) return RedirectToAction("Index", new { HospitalId = viewModel.HospitalId, UsuarioId = viewModel.UsuarioId });
+            if (resultado) return RedirectToAction("Index");
             return View("Editar", viewModel);
         }
 
-        public IActionResult Index(string hospitalId, string usuarioId)
+        public IActionResult Index()
         {
-            return View(_exameService.ObterExamesPorHospitaIdEUsuarioId(hospitalId, usuarioId));
+            var tipoUsuario = _usuarioService.GetTipoUsuarioLogado();
+            var usuarioId = _usuarioAspNet.GetUsuarioId();
+
+            if (tipoUsuario == Infra.Identity.Enums.ETipoUsuario.Medico)
+                return View(_exameRepository.ObterTodosSemAnexoComHospitalEUsuario());
+            else
+                return View(_exameRepository.ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(usuarioId));
         }
 
         public IActionResult Deletar(string id, string hospitalId, string usuarioId)

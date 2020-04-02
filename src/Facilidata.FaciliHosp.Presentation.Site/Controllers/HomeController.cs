@@ -28,8 +28,31 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         public IActionResult Index()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
-                return View();
-            else return RedirectToAction("Login", "Usuario");
+            {
+                var tipo = _usuarioService.GetTipoUsuarioLogado();
+                if (tipo == Infra.Identity.Enums.ETipoUsuario.Medico)
+                {
+                    return RedirectToAction("IndexMedico");
+                }
+                else
+                {
+                    return RedirectToAction("IndexPaciente");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
+        }
+
+        public IActionResult IndexPaciente()
+        {
+            return View();
+        }
+
+        public IActionResult IndexMedico()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

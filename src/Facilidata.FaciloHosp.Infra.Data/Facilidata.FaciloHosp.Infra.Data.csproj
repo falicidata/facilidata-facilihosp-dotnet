@@ -52,4 +52,8 @@
     <ProjectReference Include="..\Facilidata.FaciliHosp.Domain\Facilidata.FaciliHosp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

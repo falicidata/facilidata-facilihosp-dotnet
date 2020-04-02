@@ -25,6 +25,27 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
             }
         }
 
+        public List<ExameComHospitaisUsuarios> ObterTodosSemAnexoComHospitalEUsuario()
+        {
+            using (var conexão = _context.Database.GetDbConnection())
+            {
+                string query = $"select e.\"Id\",e.\"HospitalId\",e.\"UsuarioId\",u.\"Email\", e.\"Tipo\",e.\"CriadoEm\",h.\"Nome\" Hospital from \"Exames\"  e join \"Hospitais\" h on h.\"Id\" = e.\"HospitalId\" join \"AspNetUsers\" u on u.\"Id\" = e.\"UsuarioId\" where e.\"Deletado\" = 0";
+                var resultado = conexão.Query<ExameComHospitaisUsuarios>(query).ToList();
+                return resultado;
+            }
+        }
+
+        public List<ExameComHospitaisUsuarios> ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(string usuarioId)
+        {
+            using (var conexão = _context.Database.GetDbConnection())
+            {
+                string query = $"select e.\"Id\",e.\"HospitalId\",e.\"UsuarioId\",u.\"Email\", e.\"Tipo\",e.\"CriadoEm\",h.\"Nome\" Hospital from \"Exames\"  e join \"Hospitais\" h on h.\"Id\" = e.\"HospitalId\" join \"AspNetUsers\" u on u.\"Id\" = e.\"UsuarioId\" where e.\"Deletado\" = 0 and e.\"UsuarioId\" = {usuarioId}";
+                var resultado = conexão.Query<ExameComHospitaisUsuarios>(query).ToList();
+                return resultado;
+            }
+        }
+
+
         public List<Exame> ObterTodosJoinHospital()
         {
             return _dbSet.Where(exame => exame.Deletado == false).Include(exame => exame.Hospital).ToList();
