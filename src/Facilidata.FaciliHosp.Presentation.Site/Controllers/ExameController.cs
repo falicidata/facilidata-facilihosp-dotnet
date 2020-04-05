@@ -24,7 +24,6 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
         public ExameController(IExameService exameService, IExameRepository exameRepository, IAzureStorageService azureStorageService, IUsuarioService usuarioService, IUsuarioAspNet usuarioAspNet, IHospitalRepository hospitalRepository)
         {
-
             _exameService = exameService;
             _exameRepository = exameRepository;
             _azureStorageService = azureStorageService;
@@ -88,9 +87,9 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             var usuarioId = _usuarioAspNet.GetUsuarioId();
 
             if (tipoUsuario == Infra.Identity.Enums.ETipoUsuario.Medico)
-                return View(_exameRepository.ObterTodosSemAnexoComHospitalEUsuario());
+                return View("IndexMedico",_exameRepository.ObterTodosSemAnexoComHospitalEUsuario());
             else
-                return View(_exameRepository.ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(usuarioId));
+                return View("IndexPaciente",_exameRepository.ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(usuarioId));
         }
 
         public IActionResult Deletar(string id, string hospitalId, string usuarioId)

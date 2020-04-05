@@ -25,6 +25,11 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             _usuarioService = usuarioService;
         }
 
+        public IActionResult ComingSoon()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             if (HttpContext.User.Identity.IsAuthenticated)
@@ -41,7 +46,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             }
             else
             {
-                return RedirectToAction("Login", "Usuario");
+                return View();
             }
         }
 

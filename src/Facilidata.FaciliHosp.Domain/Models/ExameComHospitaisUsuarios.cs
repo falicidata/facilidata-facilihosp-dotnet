@@ -5,6 +5,7 @@ namespace Facilidata.FaciliHosp.Domain.Models {
     {
         public string Id { get; set; }
         public string UsuarioId { get; set; }
+        public string CriadoPor { get; set; }
         public string HospitalId { get; set; }
         public string Email { get; set; }
         public string Tipo { get; set; }

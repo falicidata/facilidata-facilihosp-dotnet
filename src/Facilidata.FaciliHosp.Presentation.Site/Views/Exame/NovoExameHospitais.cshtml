@@ -5,42 +5,30 @@
 }
 <link href="~/css/tab.paciente_medstyle.css" rel="stylesheet" type="text/css">
 
-<div class="limiter">
-    <div class="container-table100">
-        <div class="wrap-table100">
-            <div class="table100">
+<div class="container">
+    <br /><br />
+    <table>
+        <thead>
+            <tr class="table100-head">
+                <th class="column1">Hospital</th>
+                <th class="column5">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hospital in Model.Hospitais)
+            {
+                <tr>
+                    <td class="column1">@hospital.Nome</td>
+                    <td class="column5">
+                        <a asp-action="Editar" asp-controller="Exame" asp-route-usuarioId="@Model.UsuarioId" asp-route-hospitalId="@hospital.Id">Escolher Hospital</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br /><br />
+    <a class="btn btn-warning" asp-controller="Exame" asp-action="Pacientes">
+        Voltar para Pacientes
+    </a>
 
-                <table>
-                    <thead>
-                        <tr class="table100-head">
-                            <th class="column1">Hospital</th>
-                            <th class="column5">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var hospital in Model.Hospitais)
-                        {
-                            <tr>
-                                <td class="column1">@hospital.Nome</td>
-                                <td class="column5">
-                                    <a asp-action="Editar" asp-controller="Exame" asp-route-usuarioId="@Model.UsuarioId"  asp-route-hospitalId="@hospital.Id">Escolher Hospital</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table><br>
-
-                *<button class="btn btn-warning btn-lg" id="botão04" asp-controller="Exame" asp-action="Pacientes">
-                    Voltar para Pacientes
-                </button>
-
-                <a class="btn btn-warning btn-lg" id="botão04" asp-controller="Home" asp-action="Index">
-                    Voltar para o Menu
-                </a>
-
-
-            </div>
-
-        </div>
-    </div>
 </div>

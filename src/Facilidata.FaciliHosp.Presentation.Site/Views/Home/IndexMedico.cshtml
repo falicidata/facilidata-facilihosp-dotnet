@@ -3,36 +3,29 @@
 }
 <link rel="stylesheet" type="text/css" href="~/css/recursos_medstyle.css">
 
-<partial name="_Menu"/>
 <div class="container">
-
+    <br />
+    <br />
     <div class="row">
         <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card h-100">
-                <a href="#">
-                    <img class="card-img-top"
-                         src="~/assets/lista.jpg"
-                         alt="">
-                </a>
-                <div class="card-body">
-                    <h4 class="card-title">
-                        <a href="#" onclick="BPM()">Minhas Consultas</a>
-                    </h4>
-                    <p class="card-text">Local para gestão de consultas futuras ou ja realizadas pelo paciente</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100">
-                <a href="#">
-                    <img class="card-img-top"
-                         src="~/assets/paciente.jpg" alt="">
-                </a>
+                <img class="card-img-top" src="~/assets/paciente.jpg" alt="">
                 <div class="card-body">
                     <h4 class="card-title">
                         <a asp-controller="Exame" asp-action="Index">Meus Pacientes</a>
                     </h4>
                     <p class="card-text">Lista contendo Pacientes e ultimos exames realizados pelo Paciente.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" src="~/assets/lista.jpg" alt="">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a asp-controller="Home" asp-action="ComingSoon">Minhas Consultas</a>
+                    </h4>
+                    <p class="card-text">Local para gestão de consultas futuras ou ja realizadas pelo paciente</p>
                 </div>
             </div>
         </div>

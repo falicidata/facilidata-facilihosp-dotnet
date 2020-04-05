@@ -1,0 +1,43 @@
+﻿@model List<ExameComHospitaisUsuarios>
+
+@{
+    ViewData["Title"] = "Exames";
+}
+<link href="~/css/tab.paciente_medstyle.css" rel="stylesheet" type="text/css">
+
+<div class="container">
+    <br /><br />
+    <a class="btn btn-warning" asp-controller="Exame" asp-action="Pacientes">
+        Adicionar Exame
+    </a>
+    <br /><br />
+    <table class="text-center">
+        <thead>
+            <tr class="table100-head">
+                <th class="column1">Nome Paciente</th>
+                <th class="column2">Exame Realizado</th>
+                <th class="column3">Data do Exame</th>
+                <th class="column4">Hospital / Laboratorio</th>
+                <th class="column5">Anexo</th>
+                <th class="column6"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var exame in Model)
+            {
+                <tr>
+                    <td class="column1">@exame.Email</td>
+                    <td class="column2">@exame.Tipo</td>
+                    <td class="column3">@exame.CriadoEm</td>
+                    <td class="column4">@exame.Hospital</td>
+                    <td class="column5">
+                        <a class="btn btn-info" asp-action="DownloadAnexo" asp-route-id="@exame.Id">Download</a>
+                    </td>
+                    <td class="column6">
+                        <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id" asp-route-usuarioId="@exame.UsuarioId" asp-route-hospitalId="@exame.HospitalId">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

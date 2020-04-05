@@ -5,74 +5,30 @@
 }
 <link href="~/css/tab.paciente_medstyle.css" rel="stylesheet" type="text/css">
 
-<div class="limiter">
-    <div class="container-table100">
-        <div class="wrap-table100">
-            <div class="table100">
-
-                <table>
-                    <thead>
-                        <tr class="table100-head">
-                            <th class="column1">Paciente</th>
-                            <th class="column5">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var paciente in Model)
-                        {
-                            <tr>
-                                <td class="column1">@paciente.Nome</td>
-                                <td class="column5">
-                                    <a asp-action="NovoExameHospitais" asp-controller="Exame" asp-route-usuarioId="@paciente.Id">Escolher Paciente</a>
-                                </td>
-                            </tr>
-                        }
-
-
-                    </tbody>
-                </table><br>
-
-               *<button class="btn btn-warning btn-lg" id="botão04" asp-controller="Exame" asp-action="Index">
-                        Voltar para Exames
-                    </button>
-
-                <a class="btn btn-warning btn-lg" id="botão04" asp-controller="Home" asp-action="Index">
-                    Voltar para o Menu
-                </a>
-
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-@*<h1>Exames</h1>
-    <a class="btn btn-primary" asp-action="Editar" asp-route-hospitalId="@Model.HospitalId" asp-route-usuarioId="@Model.UsuarioId">Novo Exame</a>
-
-    <table class="table">
+<div class="container">
+    <br /><br />
+    <table>
         <thead>
-            <tr>
-                <th scope="col">Tipo</th>
-                <th scope="col">Data</th>
-                <th scope="col">Ações</th>
-
+            <tr class="table100-head">
+                <th class="column1">Paciente</th>
+                <th class="column5">Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var exame in Model)
+            @foreach (var paciente in Model)
             {
                 <tr>
-                    <th scope="row">@exame.Tipo</th>
-                    <th scope="row">@exame.CriadoEm</th>
-                    <td>
-                        <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Editar</a>
-                        <a class="btn btn-warning" asp-action="DownloadAnexo" asp-route-id="@exame.Id">Anexo</a>
-                        <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@exame.Id" asp-route-hospitalId="@exame.HospitalId" asp-route-usuarioId="@exame.UsuarioId">Excluir</a>
+                    <td class="column1">@paciente.Nome</td>
+                    <td class="column5">
+                        <a asp-action="NovoExameHospitais" asp-controller="Exame" asp-route-usuarioId="@paciente.Id">Escolher Paciente</a>
                     </td>
                 </tr>
             }
-
-
         </tbody>
-    </table>*@
+    </table>
+    <br /><br />
+    <a class="btn btn-warning" asp-controller="Exame" asp-action="Index">
+        Voltar para Exames
+    </a>
+
+</div>

@@ -2,26 +2,6 @@
 	font-family:OpenSans-Regular;src:url(../fonts/OpenSans/OpenSans-Regular.ttf)}*{margin:0;padding:0;box-sizing:border-box}
 
 
-body,html{
-	height:100%;font-family:sans-serif}a{margin:0;transition:all .4s;
-	-webkit-transition:all .4s;
-	-o-transition:all .4s;
-	-moz-transition:all .4s}a:focus{outline:none!important}a:hover{text-decoration:none}h1,h2,h3,h4,h5,h6{margin:0}p{margin:0}ul,li{margin:0;
-	list-style-type:none
-}
-
-input {
-	display:block;
-	outline:none;
-	border:none!important}textarea{display:block;outline:none}textarea:focus,input:focus{border-color:transparent!important}button{outline:none!important;
-	border:none;background:0 0}button:hover{cursor:pointer}iframe{border:none!important}
-
-
-.limiter{
-	width:100%;
-	margin:0 auto
-	}
-
 .container-table100 {
 	width:100%;
 	min-height:100vh;
@@ -120,35 +100,34 @@ cursor:pointer
 }
 
 .column1 {
-	width:150px;
+	width:20%;
 	padding-left:40px;
 	text-align:center
 }
 
 .column2 {
-	width:150px;
+	width:15%;
 	text-align:center;
 }
 
 .column3 {
-	width:150px;
+	width:15%;
 	text-align:center;
 }
 
 .column4 {
-	width:150px;
+	width:20%;
 	text-align:center;
 }
 
 .column5 {
-	width:75px;
+	width:15%;
 	text-align:center;
 }
 
 .column6 {
-	width:200px;
-	text-align:center;
-	
+	width:15%;
+	text-align: center;
 }
 
 @media screen and (max-width:992px) {
