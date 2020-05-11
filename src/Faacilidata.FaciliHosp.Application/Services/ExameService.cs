@@ -4,6 +4,7 @@ using Facilidata.FaciliHosp.Application.Interfaces;
 using Facilidata.FaciliHosp.Application.ViewModels;
 using Facilidata.FaciliHosp.Domain.Entidades;
 using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciliHosp.Domain.Models;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -21,12 +22,14 @@ namespace Facilidata.FaciliHosp.Application.Services
         private readonly IExameRepository _exameRepository;
         private readonly IUsuarioService _usuarioService;
         private readonly IAzureStorageService _azureStorageService;
+        private readonly IUsuarioAspNet _usuarioAspNet;
 
-        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor, IExameRepository exameRepository, IUsuarioService usuarioService, IAzureStorageService azureStorageService) : base(uow, mapper, actionContextAccessor)
+        public ExameService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor, IExameRepository exameRepository, IUsuarioService usuarioService, IAzureStorageService azureStorageService, IUsuarioAspNet usuarioAspNet) : base(uow, mapper, actionContextAccessor)
         {
             _exameRepository = exameRepository;
             _usuarioService = usuarioService;
             _azureStorageService = azureStorageService;
+            _usuarioAspNet = usuarioAspNet;
         }
 
         public void RemoverAnexo(EditarExameViewModel viewModel)
@@ -48,10 +51,12 @@ namespace Facilidata.FaciliHosp.Application.Services
             return _uow.Commit();
         }
 
-        public EditarExameViewModel Editar(string id,string hospitalId,string usuarioId)
+        public EditarExameViewModel Editar(string id)
         {
+            string usuarioId = _usuarioAspNet.GetUsuarioId();
+
             if (string.IsNullOrEmpty(id))
-                return new EditarExameViewModel() { HospitalId = hospitalId, UsuarioId = usuarioId };
+                return new EditarExameViewModel() { UsuarioId = usuarioId };
 
             var exame = _exameRepository.ObterPorId(id);
             if (exame == null) return null;
@@ -59,19 +64,13 @@ namespace Facilidata.FaciliHosp.Application.Services
             return viewModel;
         }
 
-        public ExameIndexViewModel ObterExamesPorHospitaIdEUsuarioId(string hospitalId, string usuarioId)
+        public List<ExameSemAnexo> ObterExamesUsuarioLogado()
         {
-            var exames = _exameRepository.ObterTodosSemAnexoPorHospitalIdEUsuarioId(hospitalId, usuarioId);
-            var viewModel = new ExameIndexViewModel() { Exames = exames, HospitalId = hospitalId, UsuarioId = usuarioId };
-            return viewModel;
+            string usuarioId = _usuarioAspNet.GetUsuarioId();
+            if (string.IsNullOrEmpty(usuarioId)) return new List<ExameSemAnexo>();
+            return _exameRepository.ObterTodosSemAnexoPorUsuarioId(usuarioId);
         }
 
-        public List<ExamePacientesViewModel> ObterPacientes(string hospitalId)
-        {
-            var pacientes = _usuarioService.ObterPacientes();
-            var viewModel = pacientes.Select(paciente => new ExamePacientesViewModel() { HospitalId = hospitalId, Nome = paciente.Usuario.UserName, Id = paciente.Usuario.Id }).ToList();
-            return viewModel;
-        }
 
         public   bool Salvar(EditarExameViewModel viewModel)
         {

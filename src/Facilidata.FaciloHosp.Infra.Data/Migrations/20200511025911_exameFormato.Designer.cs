@@ -4,14 +4,16 @@ using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Migrations
 {
     [DbContext(typeof(ContextSQL))]
-    partial class ContextSQLModelSnapshot : ModelSnapshot
+    [Migration("20200511025911_exameFormato")]
+    partial class exameFormato
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ContentType")
+                        .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasMaxLength(50);
 
@@ -63,6 +66,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                         .HasMaxLength(40);
 
                     b.Property<string>("NomeArquivo")
+                        .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);
 
@@ -78,6 +82,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                         .HasMaxLength(251);
 
                     b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("varchar(500)")
                         .HasMaxLength(500);
 

@@ -10,14 +10,10 @@ namespace Facilidata.FaciliHosp.Application.AutoMapperProfiles
     {
         public ViewModelToModel()
         {
-            this.CreateMap<EditarHospitalViewModel, Hospital>();
-            this.CreateMap<EditarHospitalViewModel, Hospital>().ReverseMap();
             this.CreateMap<EditarExameViewModel, Exame>();
             this.CreateMap<EditarExameViewModel, Exame>().ReverseMap();
-            this.CreateMap<RegistroPacienteViewModel, Paciente>().ReverseMap();
-            this.CreateMap<RegistroPacienteViewModel, Paciente>().ReverseMap();
-            this.CreateMap<RegistroMedicoViewModel, Medico>().ReverseMap();
-            this.CreateMap<RegistroMedicoViewModel, Medico>().ReverseMap();
+            this.CreateMap<RegistroViewModel, Conta>().ReverseMap();
+            this.CreateMap<RegistroViewModel, Conta>().ReverseMap();
         }
     }
 }

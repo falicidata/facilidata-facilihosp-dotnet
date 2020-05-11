@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Oracle.EntityFrameworkCore.Metadata;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
 {
@@ -34,11 +33,10 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                     DeletadoPor = table.Column<string>(nullable: true),
                     DeletadoEm = table.Column<DateTime>(nullable: true),
                     Deletado = table.Column<bool>(nullable: false),
-                    Sexo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
-                    CRM = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
-                    CPF = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true),
-                    ConvenioMedico = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: true)
+                    Nome = table.Column<string>(nullable: true),
+                    Crm = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: true),
+                    DataNascimento = table.Column<DateTime>(nullable: false),
+                    Sexo = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +48,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -104,7 +102,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -193,7 +191,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -214,7 +213,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                 name: "IX_AspNetUsers_ContaId",
                 table: "AspNetUsers",
                 column: "ContaId",
-                unique: true);
+                unique: true,
+                filter: "[ContaId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
@@ -225,7 +225,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

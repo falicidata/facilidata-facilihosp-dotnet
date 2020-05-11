@@ -6,11 +6,9 @@ namespace Facilidata.FaciliHosp.Domain.Interfaces
 {
     public interface IExameRepository : IRepository<Exame>
     {
-        List<Exame> ObterTodosJoinHospital();
         List<ExameComHospitaisUsuarios> ObterTodosSemAnexoComHospitalEUsuario();
         List<ExameComHospitaisUsuarios> ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(string usuarioId);
-        List<Exame> ObterTodosPorHospitalIdPorUsuarioId(string hospitalId, string usuarioId);
-        List<ExameSemAnexo> ObterTodosSemAnexoPorHospitalIdEUsuarioId(string hospitalId, string usuarioId);
+        List<ExameSemAnexo> ObterTodosSemAnexoPorUsuarioId(string usuarioId);
 
     }
 }

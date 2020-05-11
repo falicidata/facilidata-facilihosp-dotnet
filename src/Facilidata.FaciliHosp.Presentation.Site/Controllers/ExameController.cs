@@ -20,47 +20,34 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         private readonly IAzureStorageService _azureStorageService;
         private readonly IUsuarioService _usuarioService;
         private readonly IUsuarioAspNet _usuarioAspNet;
-        private readonly IHospitalRepository _hospitalRepository;
 
-        public ExameController(IExameService exameService, IExameRepository exameRepository, IAzureStorageService azureStorageService, IUsuarioService usuarioService, IUsuarioAspNet usuarioAspNet, IHospitalRepository hospitalRepository)
+        public ExameController(IExameService exameService, IExameRepository exameRepository, IAzureStorageService azureStorageService, IUsuarioService usuarioService, IUsuarioAspNet usuarioAspNet)
         {
             _exameService = exameService;
             _exameRepository = exameRepository;
             _azureStorageService = azureStorageService;
             _usuarioService = usuarioService;
             _usuarioAspNet = usuarioAspNet;
-            _hospitalRepository = hospitalRepository;
         }
 
 
-        public IActionResult NovoExameHospitais(string usuarioId)
-        {
-            var hospitais = _hospitalRepository.ObterTodos();
 
-            return View(new NovoExameHospitalIndexViewModel { UsuarioId = usuarioId, Hospitais = hospitais });
-        }
-        public IActionResult Pacientes(string hospitalId)
+        public IActionResult Editar(string id)
         {
 
-            return View(_exameService.ObterPacientes(hospitalId));
-        }
-
-        public IActionResult Editar(string id, string hospitalId, string usuarioId)
-        {
-
-            var viewModel = _exameService.Editar(id, hospitalId, usuarioId);
-            if (viewModel == null) return RedirectToAction("Index", new { HospitalId = hospitalId, UsuarioId = usuarioId });
+            var viewModel = _exameService.Editar(id);
+            if (viewModel == null) return RedirectToAction("Index", new { });
             return View(viewModel);
 
         }
 
+
         public IActionResult RemoverAnexo(EditarExameViewModel viewModel)
         {
-            _exameService.RemoverAnexo(viewModel);
+
             if (!ModelState.IsValid) View("Editar", viewModel);
-            viewModel.ContentType = null;
-            viewModel.NomeArquivo = null;
-            return View("Editar", viewModel);
+            _exameService.RemoverAnexo(viewModel);
+            return RedirectToAction("Editar", new { Id = viewModel.Id });
         }
 
         public object DownloadAnexo(string id)
@@ -68,6 +55,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             var exame = _exameRepository.ObterPorId(id);
             if (string.IsNullOrEmpty(exame.Url)) return null;
             var arraybyte = _azureStorageService.DownloadToBytes(exame.Url);
+            if (arraybyte == null) return null;
             return File(arraybyte, exame.ContentType, exame.NomeArquivo);
         }
 
@@ -83,19 +71,13 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
         public IActionResult Index()
         {
-            var tipoUsuario = _usuarioService.GetTipoUsuarioLogado();
-            var usuarioId = _usuarioAspNet.GetUsuarioId();
-
-            if (tipoUsuario == Infra.Identity.Enums.ETipoUsuario.Medico)
-                return View("IndexMedico",_exameRepository.ObterTodosSemAnexoComHospitalEUsuario());
-            else
-                return View("IndexPaciente",_exameRepository.ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(usuarioId));
+            return View(_exameService.ObterExamesUsuarioLogado());
         }
 
-        public IActionResult Deletar(string id, string hospitalId, string usuarioId)
+        public IActionResult Deletar(string id)
         {
             _exameService.Deletar(id);
-            return RedirectToAction("Index", new { HospitalId = hospitalId, UsuarioId = usuarioId });
+            return RedirectToAction("Index");
         }
     }
 

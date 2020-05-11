@@ -29,19 +29,17 @@ namespace Facilidata.FaciliHosp.Infra.IoC
             services.AddDbContext<ContextSQL>();
             services.AddScoped<IUnitOfWork<ContextSQL>, UnitOfWorkSQLS>();
 
-            services.AddScoped<IHospitalRepository, HospitalRepository>();
+            services.AddScoped<IExameTipoRepository, ExameTipoRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
 
             // Identity
             services.AddDbContext<ContextIdentity>();
             services.AddScoped<IUsuarioAspNet, UsuarioAspNet>();
             services.AddScoped<IUnitOfWork<ContextIdentity>, UnitOfWorkIdentity>();
-            services.AddScoped<IPacienteRepository, PacienteRepository>();
-            services.AddScoped<IMedicoRepository, MedicoRepository>();
             services.AddScoped<IUsuarioService, UsuarioService>();
 
             // Services
-            services.AddScoped<IHospitalService, HospitalService>();
             services.AddScoped<IExameService, ExameService>();
             services.AddScoped<IAzureStorageService, AzureStorageService>();
 

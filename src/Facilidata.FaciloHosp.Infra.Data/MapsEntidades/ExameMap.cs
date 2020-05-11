@@ -1,9 +1,6 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
 {
@@ -11,38 +8,50 @@ namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
     {
         public void Configure(EntityTypeBuilder<Exame> builder)
         {
-            builder.Property(exame => exame.Tipo)
+            builder.HasKey(exame => exame.Id);
+
+            builder.HasOne(exame => exame.Tipo)
+                .WithMany(exameTipo => exameTipo.Exames)
+                .HasForeignKey(exameTipo => exameTipo.TipoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(exame => exame.Formato)
+                .HasConversion<string>()
+                 .HasColumnType("varchar(20)")
+                 .HasMaxLength(20);
+
+            builder.Property(exame => exame.TipoOutro)
                 .HasColumnType("varchar(251)")
-                .HasMaxLength(251)
-                .IsRequired();
+                .HasMaxLength(251);
 
             builder.Property(exame => exame.Resultado)
-                .HasMaxLength(2000)
-             .HasColumnType("varchar(2000)");
+                .HasMaxLength(5000)
+                .HasColumnType("varchar(5000)");
 
+            builder.Property(exame => exame.Fornecedor)
+                .HasColumnType("varchar(250)")
+                .HasMaxLength(250);
+
+            builder.Property(exame => exame.FornecedorId)
+                .HasColumnType("varchar(40)")
+                .HasMaxLength(40);
 
             builder.Property(exame => exame.UsuarioId)
-            .HasColumnType("varchar(36)")
-            .HasMaxLength(36);
+                .HasColumnType("varchar(40)")
+                .HasMaxLength(40)
+                .IsRequired();
 
             builder.Property(exame => exame.Url)
                 .HasColumnType("varchar(500)")
                 .HasMaxLength(500);
 
             builder.Property(exame => exame.ContentType)
-              .HasColumnType("varchar(50)")
-              .HasMaxLength(50);
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50);
 
             builder.Property(exame => exame.NomeArquivo)
-              .HasColumnType("varchar(100)")
-              .HasMaxLength(100);
-
-            builder.HasOne(exame => exame.Hospital)
-                .WithMany(hospital => hospital.Exames)
-                .HasForeignKey(exame => exame.HospitalId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict); ;
-
+                .HasColumnType("varchar(100)")
+                .HasMaxLength(100);
 
         }
     }

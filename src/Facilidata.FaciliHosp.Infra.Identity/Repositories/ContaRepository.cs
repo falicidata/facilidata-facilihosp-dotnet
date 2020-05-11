@@ -5,9 +5,9 @@ using Facilidata.FaciloHosp.Infra.Data.Repositories;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Repositories
 {
-    public class PacienteRepository : Repository<Paciente, ContextIdentity>, IPacienteRepository
+    public class ContaRepository : Repository<Conta, ContextIdentity>, IContaRepository
     {
-        public PacienteRepository(ContextIdentity context) : base(context)
+        public ContaRepository(ContextIdentity context) : base(context)
         {
         }
     }

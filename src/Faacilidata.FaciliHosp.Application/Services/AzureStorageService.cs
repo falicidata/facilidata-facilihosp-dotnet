@@ -32,9 +32,10 @@ namespace Facilidata.FaciliHosp.Application.Services
             try
             {
                 string nomeArquivoBlob = Path.GetFileName(path);
-                var blobClient = _containerClient.GetBlobClient(nomeArquivoBlob);
-                var response = blobClient.Delete();
-                return true;
+              
+                var result = _containerClient.DeleteBlobIfExists(nomeArquivoBlob);
+         
+                return result.Value;
             }
             catch (Exception e)
             {

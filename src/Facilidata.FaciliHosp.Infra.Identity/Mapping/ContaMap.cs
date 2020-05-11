@@ -15,6 +15,14 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Mapping
                 .HasColumnType("varchar(20)")
                 .HasMaxLength(20)
                 .IsRequired();
+
+            builder.Property(conta => conta.DataNascimento)
+                        .IsRequired();
+
+
+            builder.Property(conta => conta.Crm)
+                        .HasColumnType("varchar(10)")
+                        .HasMaxLength(10);
         }
     }
 }

@@ -34,30 +34,19 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                var tipo = _usuarioService.GetTipoUsuarioLogado();
-                if (tipo == Infra.Identity.Enums.ETipoUsuario.Medico)
-                {
-                    return RedirectToAction("IndexMedico");
-                }
-                else
-                {
-                    return RedirectToAction("IndexPaciente");
-                }
+                return View("IndexUsuario");
             }
             else
             {
                 return View();
             }
+
         }
 
-        public IActionResult IndexPaciente()
+        public IActionResult IndexUsuario()
         {
             return View();
-        }
 
-        public IActionResult IndexMedico()
-        {
-            return View();
         }
 
         public IActionResult Privacy()

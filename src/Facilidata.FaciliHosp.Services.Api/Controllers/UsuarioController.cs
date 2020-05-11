@@ -55,13 +55,11 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
             }
 
             var usuario = await _userManager.FindByEmailAsync(viewModel.Email);
-            var usuarioTipo = _usuarioService.GetTipoUsuario(usuario);
 
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")));
             claims.Add(new Claim(JwtRegisteredClaimNames.UniqueName, usuario.Id));
             claims.Add(new Claim("UsuarioId", usuario.Id));
-            claims.Add(new Claim("UsuarioTipo", usuarioTipo.ToString()));
 
             GenericIdentity genericIdentity = new GenericIdentity(usuario.Email, "Login");
             ClaimsIdentity identity = new ClaimsIdentity(genericIdentity, claims);
@@ -88,7 +86,6 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
             return Resposta(new
             {
                 email = usuario.Email,
-                tipo = usuarioTipo.ToString(),
                 usuarioId = usuario.Id,
                 created = dtCreation.ToString("yyyy-MM-dd HH:mm:ss"),
                 expiration = dtExpiration.ToString("yyyy- MM-dd HH:mm:ss"),
@@ -98,32 +95,12 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
 
 
         [HttpPost("registro-medico")]
-        public async Task<IActionResult> RegistroMedico([FromBody] RegistroMedicoViewModel viewModel)
+        public async Task<IActionResult> RegistroMedico([FromBody] RegistroViewModel viewModel)
         {
             if (!ModelState.IsValid) return Resposta();
-            var resultadoRegistro = await _usuarioService.RegistroMedico(viewModel);
+            var resultadoRegistro = await _usuarioService.Registro(viewModel);
             AdicionaErrosIdentityResultModelState(resultadoRegistro);
             return Resposta();
-
-        }
-
-
-        [HttpPost("registro-paciente")]
-        public async Task<IActionResult> RegistroPaciente([FromBody] RegistroPacienteViewModel viewModel)
-        {
-            if (!ModelState.IsValid) return Resposta();
-            var resultadoRegistro = await _usuarioService.RegistroPaciente(viewModel);
-            AdicionaErrosIdentityResultModelState(resultadoRegistro);
-            return Resposta();
-
-        }
-
-        [HttpPost("pacientes")]
-        public IActionResult Pacientes()
-        {
-            if (!ModelState.IsValid) return Resposta();
-            var resultado = _usuarioService.ObterPacientes();
-            return Resposta(resultado);
 
         }
 

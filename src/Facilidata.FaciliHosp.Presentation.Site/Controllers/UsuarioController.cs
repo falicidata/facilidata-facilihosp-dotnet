@@ -2,9 +2,6 @@
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
@@ -24,39 +21,14 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Registrar(RegistroPacienteViewModel viewModel)
+ 
+        public async Task<IActionResult> Registrar(RegistroViewModel viewModel)
         {
-            var res = await _usuarioService.RegistroPaciente(viewModel);
+            if (!ModelState.IsValid) return View("Registro", viewModel);
+            var res = await _usuarioService.Registro(viewModel);
             if (res.Succeeded) return RedirectToAction("Login");
             return View("Registro");
         }
-
-        public async Task<IActionResult> RegistrarPaciente(RegistroPacienteViewModel viewModel)
-        {
-            if (!ModelState.IsValid) return View("RegistroPaciente", viewModel);
-            var res = await _usuarioService.RegistroPaciente(viewModel);
-            if (res.Succeeded) return RedirectToAction("Login");
-            return View("Registro");
-        }
-        public async Task<IActionResult> RegistrarMedico(RegistroMedicoViewModel viewModel)
-        {
-            if (!ModelState.IsValid) return View("RegistroMedico", viewModel);
-            var res = await _usuarioService.RegistroMedico(viewModel);
-            if (res.Succeeded) return RedirectToAction("Login");
-            return View("Registro");
-        }
-
-        public IActionResult RegistroPaciente()
-        {
-            return View();
-        }
-
-        public IActionResult RegistroMedico()
-        {
-            return View();
-        }
-
-
 
         [Route("/login")]
         public IActionResult Login()
@@ -77,7 +49,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             var res = await _usuarioService.Login(viewModel);
             if (res == true)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexUsuario", "Home");
             }
             else
             {

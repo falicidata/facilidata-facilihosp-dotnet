@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home";
 }
-<link rel="stylesheet" type="text/css" href="~/css/recursos_medstyle.css">
+<link rel="stylesheet" type="text/css" href="~/css/recursos_userstyle.css">
 
 <div class="container">
     <br />
@@ -9,16 +9,16 @@
     <div class="row">
         <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card h-100">
-                <img class="card-img-top" src="~/assets/paciente.jpg" alt="">
+                <img class="card-img-top" src="~/assets/checklist.jpg" alt="">
                 <div class="card-body">
                     <h4 class="card-title">
-                        <a asp-controller="Exame" asp-action="Index">Meus Pacientes</a>
+                        <a asp-controller="Exame" asp-action="Index">Lista de Exames</a>
                     </h4>
-                    <p class="card-text">Lista contendo Pacientes e ultimos exames realizados pelo Paciente.</p>
+                    <p class="card-text">Área de armazenamento de exames realizados para controle ou de uso em futuras consultas.</p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-sm-6 mb-4">
+        @*<div class="col-lg-4 col-sm-6 mb-4">
             <div class="card h-100">
                 <img class="card-img-top" src="~/assets/lista.jpg" alt="">
                 <div class="card-body">
@@ -28,8 +28,6 @@
                     <p class="card-text">Local para gestão de consultas futuras ou ja realizadas pelo paciente</p>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
-
-</div>
 

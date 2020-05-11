@@ -3,7 +3,7 @@ using Facilidata.FaciliHosp.Infra.Identity.Entidades;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Interfaces
 {
-    public interface IMedicoRepository : IRepository<Medico>
+    public interface IContaRepository : IRepository<Conta>
     {
     }
 }

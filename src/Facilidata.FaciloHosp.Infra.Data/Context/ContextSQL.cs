@@ -24,12 +24,11 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
             _usuarioAspNet = usuarioAspNet;
         }
 
-        public DbSet<Hospital> Hospitais { get; set; }
         public DbSet<Exame> Exames { get; set; }
+        public DbSet<ExameTipo> ExameTipos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new HospitalMap());
             modelBuilder.ApplyConfiguration(new ExameMap());
 
             base.OnModelCreating(modelBuilder);
@@ -38,8 +37,8 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string connectionString = configuration.GetConnectionString("Oracle");
-            optionsBuilder.UseOracle(connectionString);
+            string connectionString = configuration.GetConnectionString("SQLServer");
+            optionsBuilder.UseSqlServer(connectionString);
 
             base.OnConfiguring(optionsBuilder);
         }

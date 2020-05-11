@@ -1,4 +1,5 @@
 ﻿using Facilidata.FaciliHosp.Application.ViewModels;
+using Facilidata.FaciliHosp.Domain.Models;
 using System.Collections.Generic;
 
 namespace Facilidata.FaciliHosp.Application.Interfaces
@@ -7,9 +8,8 @@ namespace Facilidata.FaciliHosp.Application.Interfaces
     {
         void RemoverAnexo(EditarExameViewModel viewModel);
         bool Deletar(string id);
-        EditarExameViewModel Editar(string id, string hospitalId, string usuarioId);
+        EditarExameViewModel Editar(string id);
         bool Salvar(EditarExameViewModel viewModel);
-        List<ExamePacientesViewModel> ObterPacientes(string hospitalId);
-        ExameIndexViewModel ObterExamesPorHospitaIdEUsuarioId(string hospitalId, string usuarioId);
+       List<ExameSemAnexo> ObterExamesUsuarioLogado();
     }
 }

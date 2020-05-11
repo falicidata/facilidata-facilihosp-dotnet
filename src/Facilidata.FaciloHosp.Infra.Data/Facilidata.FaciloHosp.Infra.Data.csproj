@@ -5,22 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200401154643_exameBase64.cs" />
-    <Compile Remove="Migrations\20200401154643_exameBase64.Designer.cs" />
-    <Compile Remove="Migrations\20200401154843_exameBase64.cs" />
-    <Compile Remove="Migrations\20200401154843_exameBase64.Designer.cs" />
-    <Compile Remove="Migrations\20200401154952_exameBase64.cs" />
-    <Compile Remove="Migrations\20200401154952_exameBase64.Designer.cs" />
-    <Compile Remove="Migrations\20200401155037_exameBase64.cs" />
-    <Compile Remove="Migrations\20200401155037_exameBase64.Designer.cs" />
-    <Compile Remove="Migrations\20200401155213_exameBase64.cs" />
-    <Compile Remove="Migrations\20200401155213_exameBase64.Designer.cs" />
-    <Compile Remove="Migrations\20200401173042_exameAnexoDrop.cs" />
-    <Compile Remove="Migrations\20200401173042_exameAnexoDrop.Designer.cs" />
-    <Compile Remove="Migrations\20200401173321_exameAnexoDrop.cs" />
-    <Compile Remove="Migrations\20200401173321_exameAnexoDrop.Designer.cs" />
-    <Compile Remove="Migrations\20200401173620_exameAnexoDrop.cs" />
-    <Compile Remove="Migrations\20200401173620_exameAnexoDrop.Designer.cs" />
+    <Compile Remove="Migrations\20200510213806_inicial.cs" />
+    <Compile Remove="Migrations\20200510213806_inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200510214128_inicial.cs" />
+    <Compile Remove="Migrations\20200510214128_inicial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,16 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.30" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
-    <PackageReference Include="Oracle.EntityFrameworkCore" Version="2.19.60" />
   </ItemGroup>
 
   <ItemGroup>

@@ -17,8 +17,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
     {
         private readonly IUsuarioAspNet _usuarioAspNet;
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Paciente> Pacientes { get; set; }
-        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Conta> Contas { get; set; }
+
 
         public ContextIdentity()
         {
@@ -32,8 +32,6 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new ContaMap());
-            builder.ApplyConfiguration(new PacienteMap());
-            builder.ApplyConfiguration(new MedicoMap());
             builder.ApplyConfiguration(new UsuarioMap());
             
             base.OnModelCreating(builder);
@@ -42,9 +40,9 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            string connectionString = configuration.GetConnectionString("Oracle");
-            optionsBuilder.UseOracle(connectionString);
-            
+            string connectionString = configuration.GetConnectionString("SQLServer");
+            optionsBuilder.UseSqlServer(connectionString);
+
             base.OnConfiguring(optionsBuilder);
         }
         public override int SaveChanges()

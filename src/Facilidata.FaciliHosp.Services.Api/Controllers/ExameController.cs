@@ -19,12 +19,12 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
             _azureStorageService = azureStorageService;
         }
 
-        [HttpGet]
-        public IActionResult GetObterTodos(string hospitaId, string usuarioId)
-        {
-            var hospitais = _exameRepository.ObterTodosSemAnexoPorHospitalIdEUsuarioId(hospitaId, usuarioId);
-            return Resposta(hospitais);
-        }
+        //[HttpGet]
+        //public IActionResult GetObterTodos(string hospitaId, string usuarioId)
+        //{
+        //    var hospitais = _exameRepository.ObterTodosSemAnexoPorHospitalIdEUsuarioId(hospitaId, usuarioId);
+        //    return Resposta(hospitais);
+        //}
 
 
         [HttpGet("anexo")]

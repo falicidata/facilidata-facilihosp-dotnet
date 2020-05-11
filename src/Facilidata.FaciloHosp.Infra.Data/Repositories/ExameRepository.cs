@@ -15,11 +15,11 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
         {
         }
 
-        public List<ExameSemAnexo> ObterTodosSemAnexoPorHospitalIdEUsuarioId(string hospitalId, string usuarioId)
+        public List<ExameSemAnexo> ObterTodosSemAnexoPorUsuarioId(string usuarioId)
         {
             using (var conexão = _context.Database.GetDbConnection())
             {
-                string query = $"select \"Id\", \"Tipo\", \"HospitalId\",\"UsuarioId\", \"CriadoEm\" from \"Exames\" where \"Deletado\" = 0  and \"HospitalId\" = '{hospitalId}' and \"UsuarioId\" = '{usuarioId}'";
+                string query = $"select Id, TipoOutro,Url, Fornecedor, Formato, TipoId,UsuarioId, CriadoEm from Exames where Deletado = 0 and UsuarioId = '{usuarioId}'";
                 var resultado = conexão.Query<ExameSemAnexo>(query).ToList();
                 return resultado;
             }
@@ -46,15 +46,7 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
         }
 
 
-        public List<Exame> ObterTodosJoinHospital()
-        {
-            return _dbSet.Where(exame => exame.Deletado == false).Include(exame => exame.Hospital).ToList();
-        }
-
-        public List<Exame> ObterTodosPorHospitalIdPorUsuarioId(string hospitalId, string usuarioId)
-        {
-            return _dbSet.Where(exame => !exame.Deletado && exame.HospitalId == hospitalId && exame.UsuarioId == usuarioId).ToList();
-        }
+ 
 
     }
 }

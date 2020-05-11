@@ -1,15 +1,15 @@
 ﻿@using Facilidata.FaciliHosp.Infra.Identity.Enums
-@model RegistroMedicoViewModel
+@model RegistroViewModel
 
 @{
-    ViewData["Title"] = "Registro Medico";
+    ViewData["Title"] = "Registro";
     var sexoConta = Enum.GetNames(typeof(ESexoConta)).ToList();
     var sexoContaSelectList = sexoConta.Select((sexo, index) => new SelectListItem(sexo, sexo));
 
 
 }
 
-<link rel="stylesheet" type="text/css" href="~/css/cadastro_medstyle.css">
+<link rel="stylesheet" type="text/css" href="~/css/cadastro_userstyle.css">
 
 <div class="container">
     <div class="row">
@@ -21,20 +21,36 @@
                     <form class="form-signin">
                         <partial name="_ErroAlert" />
                         <div class="form-label-group">
+                            Nome Completo
+                            <input asp-for="Nome" id="inputemail" class="form-control" required>
+                            <span id="msgEmail"></span>
+                            <label for="inputemail"></label>
+                            <span asp-validation-for="Nome" class="text-danger" />
+                        </div>
+                        <div class="form-label-group">
+                            Data de Nascimento
+                            <input asp-for="DataNascimento" type="date" id="inputemail" class="form-control" required>
+                            <span id="msgEmail"></span>
+                            <label for="inputemail"></label>
+                            <span asp-validation-for="DataNascimento" class="text-danger" />
+                        </div>
+                        <div class="form-label-group">
                             E-mail
                             <input asp-for="Email" type="email" id="inputemail" class="form-control" required>
                             <span id="msgEmail"></span>
                             <label for="inputemail"></label>
                             <span asp-validation-for="Email" class="text-danger" />
                         </div>
+
                         <div class="form-label-group">
-                            Insira seu CRM
-                            <input asp-for="CRM" type="number" class="form-control" id="inputCRM" required
-                                   minlength="4" maxlength="10">
-                            <span id="msgCRM"></span>
+                            Insira seu CPF
+                            <input asp-for="CPF" type="number" class="form-control" name="CPF" id="inputCPF" required
+                                   maxlength="11">
+                            <span id="msgCPF"></span>
                             <label for="inputdata"></label>
                             <span asp-validation-for="Email" class="text-danger" />
                         </div>
+
                         <div class="form-label-group">
                             Sexo:
                             <select class="custom-select" asp-for="Sexo" asp-items="sexoContaSelectList"> </select>
@@ -56,10 +72,9 @@
                             <label for="inputConfirmPassword"></label>
                             <span asp-validation-for="Email" class="text-danger" />
                         </div>
-                        <button class="btn btn-lg btn-success btn-block text-uppercase" asp-controller="Usuario" asp-action="RegistrarMedico">
+                        <button type="submit" class="btn btn-lg btn-success btn-block text-uppercase" asp-controller="Usuario" asp-action="Registrar">
                             Cadastrar
                         </button>
-                        <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="RegistroPaciente">Cadastro para Pacientes</a>
                         <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="Login">Logar</a>
                         <hr class="my-4">
                         <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
@@ -74,4 +89,3 @@
         </div>
     </div>
 </div>
-
