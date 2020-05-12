@@ -14,9 +14,10 @@ namespace Facilidata.FaciliHosp.Application.Services
     {
         private readonly BlobServiceClient _blobServiceClient;
         private readonly BlobContainerClient _containerClient;
- 
+        private readonly IUsuarioAspNet _usuarioAspNet;
 
-        public AzureStorageService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor) : base(uow, mapper, actionContextAccessor)
+        protected string UsuarioId { get { return _usuarioAspNet.GetUsuarioId(); } }
+        public AzureStorageService(IUnitOfWork<ContextSQL> uow, IMapper mapper, IActionContextAccessor actionContextAccessor, IUsuarioAspNet usuarioAspNet) : base(uow, mapper, actionContextAccessor)
         {
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             string connectionString = configuration.GetSection("AzureStorageBlob:ConnectionString").Value;
@@ -24,7 +25,7 @@ namespace Facilidata.FaciliHosp.Application.Services
 
             _blobServiceClient = new BlobServiceClient(connectionString);
             _containerClient = _blobServiceClient.GetBlobContainerClient(container);
-        
+            _usuarioAspNet = usuarioAspNet;
         }
 
         public bool Deletar(string path)
@@ -32,9 +33,8 @@ namespace Facilidata.FaciliHosp.Application.Services
             try
             {
                 string nomeArquivoBlob = Path.GetFileName(path);
-              
-                var result = _containerClient.DeleteBlobIfExists(nomeArquivoBlob);
-         
+                var container = _blobServiceClient.GetBlobContainerClient(UsuarioId);
+                var result = container.DeleteBlobIfExists(nomeArquivoBlob);
                 return result.Value;
             }
             catch (Exception e)
@@ -48,14 +48,19 @@ namespace Facilidata.FaciliHosp.Application.Services
         {
             try
             {
-                string nomeArquivoStorage = $"{Guid.NewGuid().ToString()}_{nomeArquivo}";
-                string path = Path.Combine(_containerClient.Uri.AbsoluteUri, nomeArquivoStorage);
-                _containerClient.UploadBlob(nomeArquivoStorage, stream);
+              
+                var container = _blobServiceClient.GetBlobContainerClient(UsuarioId);
+                var res = container.CreateIfNotExists( Azure.Storage.Blobs.Models.PublicAccessType.Blob);
+
+                string path = container.Uri.AbsoluteUri + "/" + nomeArquivo;
+                var resDelete = container.DeleteBlobIfExistsAsync(nomeArquivo).GetAwaiter().GetResult();
+                
+                container.UploadBlob(nomeArquivo, stream);
                 return path;
             }
             catch (Exception e)
             {
-                AdicionarErroModelState("AzureStorageService", $"Erro ao fazer upload do arquivo : Erro: {e.Message}");
+                AdicionarErroModelState($"Erro ao fazer upload do arquivo : Erro: {e.Message}","AzureStorageService");
                 return null;
             }
         }
@@ -78,8 +83,9 @@ namespace Facilidata.FaciliHosp.Application.Services
         {
             try
             {
+                var container = _blobServiceClient.GetBlobContainerClient(UsuarioId);
                 string nomeArquivoBlob = Path.GetFileName(path);
-                var blobClient = _containerClient.GetBlobClient(nomeArquivoBlob);
+                var blobClient = container.GetBlobClient(nomeArquivoBlob);
                 var response = blobClient.Download();
                 Stream streamDownload = response.Value.Content;
                 var bytesArquivo = ConverteStreamToByteArray(streamDownload);
