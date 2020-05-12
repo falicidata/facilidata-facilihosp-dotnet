@@ -15,17 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Services", "4 - Service
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Application", "3 - Application", "{BEC834FD-8AAD-4C45-87F5-93D117525514}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.FaciliHosp.Services.Api", "src\Facilidata.FaciliHosp.Services.Api\Facilidata.FaciliHosp.Services.Api.csproj", "{C51F625E-FF83-4E73-B3D8-5B2352A33348}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.FaciliHosp.Infra.Identity", "src\Facilidata.FaciliHosp.Infra.Identity\Facilidata.FaciliHosp.Infra.Identity.csproj", "{89DF0256-F087-4B1A-A832-5CB5ABE6351E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Presentation", "5 - Presentation", "{1D10363B-D0A1-48DB-9A4A-F08787C2D073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilidata.FaciliHosp.Presentation.Site", "src\Facilidata.FaciliHosp.Presentation.Site\Facilidata.FaciliHosp.Presentation.Site.csproj", "{0C3EA607-50C9-49ED-9404-CD2B2B315716}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.FaciliHosp.Presentation.Site", "src\Facilidata.FaciliHosp.Presentation.Site\Facilidata.FaciliHosp.Presentation.Site.csproj", "{0C3EA607-50C9-49ED-9404-CD2B2B315716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilidata.FaciliHosp.Infra.IoC", "src\Facilidata.FaciliHosp.Infra.IoC\Facilidata.FaciliHosp.Infra.IoC.csproj", "{99519C46-5A59-4D88-BE5F-6072E0C0B773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.FaciliHosp.Infra.IoC", "src\Facilidata.FaciliHosp.Infra.IoC\Facilidata.FaciliHosp.Infra.IoC.csproj", "{99519C46-5A59-4D88-BE5F-6072E0C0B773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facilidata.FaciliHosp.Application", "src\Faacilidata.FaciliHosp.Application\Facilidata.FaciliHosp.Application.csproj", "{03B859D0-FC92-4558-80C7-A5DEABC96906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Facilidata.FaciliHosp.Application", "src\Faacilidata.FaciliHosp.Application\Facilidata.FaciliHosp.Application.csproj", "{03B859D0-FC92-4558-80C7-A5DEABC96906}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{4447D1C7-3650-4D40-9823-7511B28254A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4447D1C7-3650-4D40-9823-7511B28254A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4447D1C7-3650-4D40-9823-7511B28254A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C51F625E-FF83-4E73-B3D8-5B2352A33348}.Release|Any CPU.Build.0 = Release|Any CPU
 		{89DF0256-F087-4B1A-A832-5CB5ABE6351E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{89DF0256-F087-4B1A-A832-5CB5ABE6351E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89DF0256-F087-4B1A-A832-5CB5ABE6351E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,7 +62,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{523DECCD-6451-4B6E-98A3-2FB72A4B155D} = {6BC8379C-C3D5-408B-85F5-5E31C797DEF6}
 		{4447D1C7-3650-4D40-9823-7511B28254A2} = {58C9688B-4A05-46AB-B996-81C126BBFFE9}
-		{C51F625E-FF83-4E73-B3D8-5B2352A33348} = {86959B5B-D7DE-4B6A-8114-8591D8E421E6}
 		{89DF0256-F087-4B1A-A832-5CB5ABE6351E} = {6BC8379C-C3D5-408B-85F5-5E31C797DEF6}
 		{0C3EA607-50C9-49ED-9404-CD2B2B315716} = {1D10363B-D0A1-48DB-9A4A-F08787C2D073}
 		{99519C46-5A59-4D88-BE5F-6072E0C0B773} = {6BC8379C-C3D5-408B-85F5-5E31C797DEF6}
