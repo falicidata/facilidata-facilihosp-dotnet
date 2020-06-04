@@ -17,23 +17,23 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
 
         public string GetUserName()
         {
-            return _accessor.HttpContext.User.Identity.Name;
+            return _accessor.HttpContext?.User?.Identity?.Name;
         }
 
         public bool IsAuthenticated()
         {
-            return _accessor.HttpContext.User.Identity.IsAuthenticated;
+            return _accessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
         }
 
 
         public string GetUsuarioId()
         {
-            return _accessor.HttpContext.User.Claims.FirstOrDefault(claim => claim.Type == "UsuarioId")?.Value;
+            return _accessor.HttpContext?.User?.Claims?.FirstOrDefault(claim => claim.Type == "UsuarioId")?.Value;
         }
 
         public List<Claim> GetClaims()
         {
-            return _accessor.HttpContext.User.Claims.ToList();
+            return _accessor.HttpContext?.User?.Claims?.ToList();
         }
     }
 }

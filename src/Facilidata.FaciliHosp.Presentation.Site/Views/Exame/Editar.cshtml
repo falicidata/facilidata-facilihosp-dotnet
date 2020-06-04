@@ -7,60 +7,94 @@
 
 }
 
-    <div class="container">
-        <partial name="_ErroAlert"/>
-        <br /><br />
-        @if (string.IsNullOrEmpty(Model.Id))
+<div class="container">
+    <partial name="_ErroAlert" />
+    <br /><br />
+    @if (string.IsNullOrEmpty(Model.Id))
+    {
+        <h1>Novo Exame</h1>
+    }
+    else
+    {<h1>Editar Exame</h1>}
+    <br />
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="Id" hidden />
+        <input asp-for="UsuarioId" hidden />
+        <input asp-for="Url" hidden />
+        <input asp-for="ContentType" hidden />
+        <input asp-for="NomeArquivo" hidden />
+
+        <div class="form-group">
+            <label>Tipo</label>
+            <input asp-for="TipoOutro" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <span asp-validation-for="TipoOutro" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-label-group">
+            Formato do Exame:
+            <select class="custom-select" asp-for="Formato" asp-items="formatossExameSelectList"> </select>
+        </div>
+        <div class="form-group">
+            <label>Hospital / Laboratório </label>
+            <input asp-for="Fornecedor" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Médico</label>
+            <input asp-for="Medico" class="form-control">
+        </div>
+        <br />
+
+        @if (!string.IsNullOrEmpty(Model.Id) && !string.IsNullOrEmpty(Model.Url) && Model.Formato == EFormatoExame.Laudo)
         {
-            <h1>Novo Exame</h1>
+            <div class="form-group">
+
+                <label>Resultado</label>
+                <textarea rows="10" asp-for="Resultado" class="form-control" disabled></textarea>
+            </div>
+        }
+
+
+        <br />
+
+        @if (string.IsNullOrEmpty(Model.Url))
+        {
+            <div class="form-group">
+                <label>Upload</label>
+                <input type="file" asp-for="Upload" class="form-control" accept="application/pdf,image/*">
+            </div>
         }
         else
-        {<h1>Editar Exame</h1>}
-        <br />
-        <form method="post" enctype="multipart/form-data">
-            <input asp-for="Id" hidden />
-            <input asp-for="UsuarioId" hidden />
-            <input asp-for="Url" hidden />
-            <input asp-for="ContentType" hidden />
-            <input asp-for="NomeArquivo" hidden />
+        {
+            <button class="btn btn-warning" type="submit" asp-action="RemoverAnexo">Excluir Anexo</button>
+            <a class="btn btn-warning" asp-action="DownloadAnexo" asp-route-id="@Model.Id">Download Anexo</a>
+        }
+        <br /><br />
 
-            <div class="form-group">
-                <label>Tipo</label>
-                <input asp-for="TipoOutro" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <span asp-validation-for="TipoOutro" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-label-group">
-                Formato do Exame:
-                <select class="custom-select" asp-for="Formato" asp-items="formatossExameSelectList"> </select>
-            </div>
-            <div class="form-group">
-                <label>Hospital / Laboratório </label>
-                <input asp-for="Fornecedor" class="form-control">
-            </div>
-            <br />
-            <div class="form-group">
-                <label>Resultado</label>
-                <textarea rows="3" asp-for="Resultado" class="form-control"></textarea>
-            </div>
-            <br />
-            @if (string.IsNullOrEmpty(Model.Url))
-            {
-                <div class="form-group">
-                    <label>Upload</label>
-                    <input type="file" asp-for="Upload" class="form-control">
-                </div>
-            }
-            else
-            {
-                <button class="btn btn-warning" type="submit" asp-action="RemoverAnexo">Excluir Anexo</button>
-                <a class="btn btn-warning" asp-action="DownloadAnexo" asp-route-id="@Model.Id">Download Anexo</a>
-            }
-            <br /><br />
+        <a class="btn btn-warning" asp-controller="Exame" asp-action="Index">
+            Voltar
+        </a>
 
-            <a class="btn btn-warning" asp-controller="Exame" asp-action="Index">
-                Voltar
-            </a>
-            <button type="submit" class="btn btn-primary" asp-action="Salvar">Salvar</button>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-primary" asp-action="Salvar">
+            Salvar
+        </button>
+
+    </form>
+</div>
+
+<script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
+<script>
+
+    function viewModel() {
+
+        this.salvarLoading = ko.observable(false);
+        this.deletarAnexoLoading = ko.observable(false);
+
+        this.salvar = function () {
+            this.salvarLoading(true)
+        }
+
+    }
+
+    ko.applyBindings(new viewModel());
+
+</script>

@@ -20,7 +20,9 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                   
+                    webBuilder.UseStartup<Startup>().
+                    UseKestrel(k => k.Limits.MaxRequestBodySize = null);
                 });
     }
 }

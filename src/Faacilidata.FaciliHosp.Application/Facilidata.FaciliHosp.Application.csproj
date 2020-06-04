@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <UserSecretsId>757a71dc-4bc9-40a0-bf78-7f23bc77852a</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,9 +20,13 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.4.2" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.Azure.Storage.Blob" Version="11.1.5" />
+    <PackageReference Include="PdfSharpTextExtractor" Version="1.0.2" />
+    <PackageReference Include="sautinsoft.pdffocus" Version="7.5.3.27" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="Tesseract" Version="3.3.0" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
   </ItemGroup>
 
@@ -29,6 +34,12 @@
     <ProjectReference Include="..\Facilidata.FaciliHosp.Domain\Facilidata.FaciliHosp.Domain.csproj" />
     <ProjectReference Include="..\Facilidata.FaciliHosp.Infra.Identity\Facilidata.FaciliHosp.Infra.Identity.csproj" />
     <ProjectReference Include="..\Facilidata.FaciloHosp.Infra.Data\Facilidata.FaciloHosp.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="por.traineddata">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

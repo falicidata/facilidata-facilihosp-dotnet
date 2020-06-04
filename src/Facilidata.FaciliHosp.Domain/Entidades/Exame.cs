@@ -5,7 +5,7 @@ namespace Facilidata.FaciliHosp.Domain.Entidades
     public class Exame : Entidade
     {
         protected Exame() { }
-        public Exame(string usuarioId, string tipoOutro, string resultado, string url, EFormatoExame formato, string tipoId, string fornecedorId, string fornecedor)
+        public Exame(string usuarioId, string tipoOutro, string resultado, string url, EFormatoExame formato, string tipoId, string fornecedorId, string fornecedor, string medico = null)
         {
             UsuarioId = usuarioId;
             TipoOutro = tipoOutro;
@@ -15,9 +15,11 @@ namespace Facilidata.FaciliHosp.Domain.Entidades
             FornecedorId = fornecedorId;
             Formato = formato;
             Fornecedor = fornecedor;
+            Medico = medico;
         }
 
         public EFormatoExame Formato { get; set; }
+        public string Medico { get; set; }
         public string UsuarioId { get; set; }
         public string FornecedorId { get; set; }
         public string TipoId { get; set; }

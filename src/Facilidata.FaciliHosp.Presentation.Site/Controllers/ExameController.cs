@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
+  
     public class ExameController : Controller
     {
         private readonly IExameService _exameService;
@@ -59,7 +60,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return File(arraybyte, exame.ContentType, exame.NomeArquivo);
         }
 
-
+       
         [HttpPost]
         public IActionResult Salvar(EditarExameViewModel viewModel)
         {

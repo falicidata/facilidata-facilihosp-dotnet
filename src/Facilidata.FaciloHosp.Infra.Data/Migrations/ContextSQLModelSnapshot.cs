@@ -62,6 +62,10 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                         .HasColumnType("varchar(40)")
                         .HasMaxLength(40);
 
+                    b.Property<string>("Medico")
+                        .HasColumnType("varchar(50)")
+                        .HasMaxLength(50);
+
                     b.Property<string>("NomeArquivo")
                         .HasColumnType("varchar(100)")
                         .HasMaxLength(100);

@@ -13,56 +13,55 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/icons/fh.png" style="width: 20%;"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-            <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-info" asp-controller="Exame" asp-action="Index">Lista de Exames</a>
-                </li>
-                @*<li class="nav-item">
+<nav class="navbar navbar-expand-md navbar-light bg-white">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/icons/fh.png" style="width: 20%;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-info" asp-controller="Exame" asp-action="Index">Lista de Exames</a>
+            </li>
+            @*<li class="nav-item">
                     <a class="nav-link text-info" asp-controller="Home" asp-action="ComingSoon">Verificar Consultas</a>
                 </li>*@
-                <li class="nav-item">
-                    <a class="nav-link text-info" asp-controller="Usuario" asp-action="Logout">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    }
-    else
-    {
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logoFh" src="~/assets/icons/fh.png" style="width:20%;" /></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-            <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link text-info" asp-controller="Usuario" asp-action="Login">Login</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    }
+            <li class="nav-item">
+                <a class="nav-link text-info" asp-controller="Usuario" asp-action="Logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav> }
+else
+{
+<nav class="navbar navbar-expand-md navbar-light bg-white">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img class="logoFh" src="~/assets/icons/fh.png" style="width:20%;" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-info" asp-controller="Usuario" asp-action="Login">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>}
 
     <main role="main">
         @RenderBody()
     </main>
 
-    <footer class="footer border-top">
-        <div class="container">
-            <p class="text-right">&copy; FaciliHosp by Facilidata - 2020</p>
-        </div>
-    </footer>
+    @*<footer class="footer border-top">
+            <div class="container">
+                <p class="text-right">&copy; FaciliHosp by Facilidata - 2020</p>
+            </div>
+        </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 

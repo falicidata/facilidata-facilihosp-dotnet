@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Facilidata.FaciliHosp.Application.AutoMapperProfiles;
 using Facilidata.FaciliHosp.Infra.Identity.Claims;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.IoC;
-using Facilidata.FaciloHosp.Infra.Data.Context;
+using Facilidata.FaciliHosp.Presentation.Site.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Facilidata.FaciliHosp.Presentation.Site
 {
@@ -24,6 +18,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -35,7 +30,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site
 
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
-        
+
+
 
             // Identity
         
@@ -55,6 +51,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site
 
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
+
+            services.AddExameTipoImport();
 
         }
 

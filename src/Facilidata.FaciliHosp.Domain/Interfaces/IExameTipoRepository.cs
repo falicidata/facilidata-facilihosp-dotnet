@@ -4,5 +4,6 @@ namespace Facilidata.FaciliHosp.Domain.Interfaces
 {
     public interface IExameTipoRepository : IRepository<ExameTipo>
     {
+        ExameTipo InsereSeNaoExistir(string tipo);
     }
 }
