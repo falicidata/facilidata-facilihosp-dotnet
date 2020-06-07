@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using System.IO;
 
 namespace Facilidata.FaciliHosp.Presentation.Site
 {
@@ -53,6 +54,13 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             NativeInject.InjectDependecies(services);
 
             services.AddExameTipoImport();
+
+            // Cria pasta temporaria se não existir
+            string currentPath = Directory.GetCurrentDirectory();
+            string pathTmp = Path.Combine(currentPath, "tmp");
+            bool exists =  Directory.Exists(pathTmp);
+            if(!exists)
+                Directory.CreateDirectory(Path.Combine(currentPath,"tmp"));
 
         }
 
