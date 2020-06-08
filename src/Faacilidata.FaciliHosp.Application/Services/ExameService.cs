@@ -118,7 +118,7 @@ namespace Facilidata.FaciliHosp.Application.Services
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                return "Erro ao tentar ler resultado do documento enviado";
+                return $"Erro ao tentar ler resultado do documento enviado, erro: {e.Message}";
             }
         }
 
