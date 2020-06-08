@@ -72,7 +72,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
         public IActionResult Index()
         {
-            return View(_exameService.ObterExamesUsuarioLogado());
+            var exames = _exameService.ObterExamesUsuarioLogado();
+            return View(exames.OrderByDescending(exame => exame.CriadoEm).ToList());
         }
 
         public IActionResult Deletar(string id)
