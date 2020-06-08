@@ -103,7 +103,7 @@ namespace Facilidata.FaciliHosp.Application.Services
             try
             {
                 string directory = Directory.GetCurrentDirectory();
-                var engine = new TesseractEngine("./tessdata", "por", EngineMode.Default);
+                var engine = new TesseractEngine("./", "por", EngineMode.Default);
                 var pix = Pix.LoadFromFile(pathImage);
                 var page = engine.Process(pix, PageSegMode.Auto);
                 var meanConfidence = page.GetMeanConfidence();
