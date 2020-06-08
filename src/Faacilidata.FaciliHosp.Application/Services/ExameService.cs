@@ -103,7 +103,7 @@ namespace Facilidata.FaciliHosp.Application.Services
             try
             {
                 string directory = Directory.GetCurrentDirectory();
-                var engine = new TesseractEngine("./", "por", EngineMode.Default);
+                var engine = new TesseractEngine("./tessdata", "por", EngineMode.Default);
                 var pix = Pix.LoadFromFile(pathImage);
                 var page = engine.Process(pix, PageSegMode.Auto);
                 var meanConfidence = page.GetMeanConfidence();
@@ -150,16 +150,29 @@ namespace Facilidata.FaciliHosp.Application.Services
                     string pathImage = Path.Combine(Directory.GetCurrentDirectory(), "tmp");
                     string nameImage = $"tmp-img-{Guid.NewGuid()}_";
 
-                    //Save all PDF pages as page1.jpg, page2.jpg ... pageN.jpg
-                    f.ToImage(Path.Combine(Directory.GetCurrentDirectory(), "tmp"), nameImage);
+                    try
+                    {
+                        //Save all PDF pages as page1.jpg, page2.jpg ... pageN.jpg
+                        f.ToImage(Path.Combine(Directory.GetCurrentDirectory(), "tmp"), nameImage);
 
-                    string res = LerArquivoImagem(Path.Combine(pathImage, nameImage + "1.jpg"));
-                    f.ClosePdf();
+                  
+                        string res = LerArquivoImagem(Path.Combine(pathImage, nameImage + "1.jpg"));
+                        f.ClosePdf();
 
-                    File.Delete(pdfPath);
-                    File.Delete(Path.Combine(pathImage, nameImage + "1.jpg"));
+                        File.Delete(pdfPath);
+                        File.Delete(Path.Combine(pathImage, nameImage + "1.jpg"));
+                        return res;
+                    }
+                    catch(Exception e)
+                    {
 
-                    return res;
+                        File.Delete(pdfPath);
+                        File.Delete(Path.Combine(pathImage, nameImage + "1.jpg"));
+                        Debug.WriteLine(e.Message);
+                        return $"Erro ao tentar ler resultado do documento enviado, erro: {e.Message}";
+                    }
+
+               
                 }
 
                 return "";
