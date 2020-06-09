@@ -9,6 +9,7 @@ namespace Facilidata.FaciliHosp.Domain.Interfaces
         List<ExameComHospitaisUsuarios> ObterTodosSemAnexoComHospitalEUsuario();
         List<ExameComHospitaisUsuarios> ObterTodosSemAnexoComHospitalEUsuarioPorUsuarioId(string usuarioId);
         List<ExameSemAnexo> ObterTodosSemAnexoPorUsuarioId(string usuarioId);
+        List<TipoExame> ObterExamesTipos();
 
     }
 }

@@ -10,6 +10,7 @@ namespace Facilidata.FaciliHosp.Application.Interfaces
         bool Deletar(string id);
         EditarExameViewModel Editar(string id);
         bool Salvar(EditarExameViewModel viewModel);
-       List<ExameSemAnexo> ObterExamesUsuarioLogado();
+        List<ExameSemAnexo> ObterExamesUsuarioLogado();
+        List<TipoExame> ObterExamesTipos();
     }
 }

@@ -6,7 +6,6 @@
     var formatossExameSelectList = formatos.Select((formato, index) => new SelectListItem(formato, formato));
 
 }
-
 <div class="container">
     <partial name="_ErroAlert" />
     <br /><br />
@@ -26,7 +25,7 @@
 
         <div class="form-group">
             <label>Tipo</label>
-            <input asp-for="TipoOutro" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input asp-for="TipoOutro" class="form-control" id="TipoOutro" aria-describedby="emailHelp" list="tiposExame">
             <span asp-validation-for="TipoOutro" class="text-danger"></span>
         </div>
         <br />
@@ -80,7 +79,8 @@
 
     </form>
 </div>
-
+<datalist id="tiposExame">
+</datalist>
 <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
 <script>
 

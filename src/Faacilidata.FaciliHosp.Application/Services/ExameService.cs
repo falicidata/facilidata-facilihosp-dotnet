@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using Facilidata.FaciliHosp.Application.Interfaces;
 using Facilidata.FaciliHosp.Application.ViewModels;
 using Facilidata.FaciliHosp.Domain.Entidades;
@@ -248,6 +248,11 @@ namespace Facilidata.FaciliHosp.Application.Services
             _exameRepository.Atualizar(viewModel.Id, exameAtualizado);
             var atualizacaoResultado = _uow.Commit();
             return atualizacaoResultado;
+        }
+
+        public List<TipoExame> ObterExamesTipos()
+        {
+            return _exameRepository.ObterExamesTipos();
         }
     }
 }

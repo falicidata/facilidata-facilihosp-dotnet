@@ -45,7 +45,15 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
             }
         }
 
-
+        public List<TipoExame> ObterExamesTipos()
+        {
+            using (var conexão = _context.Database.GetDbConnection())
+            {
+                string query = $"select distinct TipoOutro from Exames where Deletado = 0 "; ;
+                var resultado = conexão.Query<TipoExame>(query).ToList();
+                return resultado;
+            }
+        }
  
 
     }

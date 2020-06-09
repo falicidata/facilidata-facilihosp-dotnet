@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using Facilidata.FaciliHosp.Application.Interfaces;
 using Facilidata.FaciliHosp.Application.ViewModels;
 using Facilidata.FaciliHosp.Domain.Entidades;
@@ -80,6 +80,12 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             _exameService.Deletar(id);
             return RedirectToAction("Index");
+        }
+
+        public IActionResult Tipos()
+        {
+            var tipos = _exameService.ObterExamesTipos();
+            return Json(tipos);
         }
     }
 
