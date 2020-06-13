@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@ViewData["Title"] - FaciliHosp</title>
-    <link rel="stylesheet" href="~/lib/semantic-ui/semantic.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="icon" type="image/png" href="~/assets/icons/fh.png" />
 </head>
@@ -12,9 +12,13 @@
 
     @if (User.Identity.IsAuthenticated)
     {
-<nav class="ui menu">
-    <a class="browse item active" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/icons/fh.png" style="width: 20%;"></a>
-    <div class="item">
+<nav class="navbar navbar-expand-md navbar-light bg-white">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/assets/icons/fh.png" style="width: 20%;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
         <ul class="navbar-nav flex-grow-1">
             <li class="nav-item">
                 <a class="nav-link text-info" asp-controller="Exame" asp-action="Index">Lista de Exames</a>
@@ -55,7 +59,7 @@ else
             </div>
         </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/semantic-ui/semantic.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
