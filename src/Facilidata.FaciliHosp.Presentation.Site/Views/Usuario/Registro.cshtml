@@ -12,79 +12,97 @@
 <link rel="stylesheet" type="text/css" href="~/css/cadastro_userstyle.css">
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-10 col-xl-9 mx-auto">
-            <div class="card card-signin flex-row my-5">
-                <div class="card-img-left d-none d-md-flex"></div>
-                <div class="card-body">
-                    <h3 class="card-title text-center">Bem vindo ao FaciliData</h3>
-                    <form class="form-signin">
-                        <partial name="_ErroAlert" />
-                        <div class="form-label-group">
-                            Nome Completo
-                            <input asp-for="Nome" id="inputemail" class="form-control" required>
-                            <span id="msgEmail"></span>
-                            <label for="inputemail"></label>
-                            <span asp-validation-for="Nome" class="text-danger" />
-                        </div>
-                        <div class="form-label-group">
-                            Data de Nascimento
-                            <input asp-for="DataNascimento" type="date" id="inputemail" class="form-control" required>
-                            <span id="msgEmail"></span>
-                            <label for="inputemail"></label>
-                            <span asp-validation-for="DataNascimento" class="text-danger" />
-                        </div>
-                        <div class="form-label-group">
-                            E-mail
-                            <input asp-for="Email" type="email" id="inputemail" class="form-control" required>
-                            <span id="msgEmail"></span>
-                            <label for="inputemail"></label>
-                            <span asp-validation-for="Email" class="text-danger" />
-                        </div>
-
-                        <div class="form-label-group">
-                            Insira seu CPF
-                            <input asp-for="CPF" type="number" class="form-control" name="CPF" id="inputCPF" required
-                                   maxlength="11">
-                            <span id="msgCPF"></span>
-                            <label for="inputdata"></label>
-                            <span asp-validation-for="Email" class="text-danger" />
-                        </div>
-
-                        <div class="form-label-group">
-                            Sexo:
-                            <select class="custom-select" asp-for="Sexo" asp-items="sexoContaSelectList"> </select>
-                        </div>
-                        <hr>
-                        <div class="form-label-group">
-                            Senha
-                            <input asp-for="Senha" type="password" id="inputpassword" class="form-control" placeholder="Senha"
-                                   required minlength="6">
-                            <span id="msgPassword"></span>
-                            <label for="inputpassword"></label>
-                            <span asp-validation-for="Email" class="text-danger" />
-                        </div>
-                        <div class="form-label-group">
-                            Confirme Senha
-                            <input asp-for="ConfirmacaoSenha" type="password" id="inputConfirmPassword" class="form-control"
-                                   placeholder="Confirme Senha" required>
-                            <span id="msgConfirmPassword"></span>
-                            <label for="inputConfirmPassword"></label>
-                            <span asp-validation-for="Email" class="text-danger" />
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-success btn-block text-uppercase" asp-controller="Usuario" asp-action="Registrar">
-                            Cadastrar
-                        </button>
-                        <a class="d-block text-center mt-2 small" asp-controller="Usuario" asp-action="Login">Logar</a>
-                        <hr class="my-4">
-                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit">
-                            <i class="fab fa-google mr-2"></i> Sign up with Google
-                        </button>
-                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit">
-                            <i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook
-                        </button>
-                    </form>
+    <div class="section">
+        <div class="card columns">
+            <div class="column">
+                <div class='card-content is-flex is-horizontal-center'>
+                    <figure class='image mt-6'>
+                        <img src="~/assets/registro.jpg" />
+                    </figure>
                 </div>
+            </div>
+            <div class="column">
+                <div class="media-content has-text-centered">
+                    <p class="title is-4">Bem Vindo ao Sistema FaciliHosp</p>
+                </div>
+                <form class="form-signin">
+                    <partial name="_ErroAlert" />
+                    <div class="card-content input-group-sm">
+                        <div class="field">
+                            <label class="label form-label-group">Nome Completo</label>
+                            <div class="control">
+                                <input class="input is-rounded form-control"
+                                       asp-for="Nome" type="text"
+                                       placeholder="Nome Completo" required />
+                                <span asp-validation-for="Nome" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">Data de Nascimento</label>
+                            <div class="control">
+                                <input class="input is-rounded form-control"
+                                       asp-for="DataNascimento" type="date"
+                                       required />
+                                <span asp-validation-for="DataNascimento" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">E-mail</label>
+                            <div class="control">
+                                <input asp-for="Email" type="email" id="inputemail"
+                                       class="input is-half is-rounded form-control" required>
+                                <span asp-validation-for="Email" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">Insira seu CPF</label>
+                            <div class="control">
+                                <input asp-for="CPF" type="number"
+                                       class="input is-rounded form-control"
+                                       name="CPF" id="inputCPF" required
+                                       maxlength="11">
+                                <span asp-validation-for="CPF" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">Sexo</label>
+                            <div class="control">
+                                <div class="select is-rounded form-control">
+                                    <select asp-for="Sexo" asp-items="sexoContaSelectList"> </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">Senha</label>
+                            <div class="control">
+                                <input asp-for="Senha" type="password" id="inputpassword"
+                                       class="input is-rounded form-control" placeholder="Senha"
+                                       required minlength="6">
+                                <span asp-validation-for="Senha" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">Confirme Senha</label>
+                            <div class="control">
+                                <input asp-for="ConfirmacaoSenha" type="password"
+                                       id="inputConfirmPassword" class="input is-rounded form-control"
+                                       placeholder="Confirme Senha" required>
+                                <span asp-validation-for="ConfirmacaoSenha" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field is-grouped is-grouped-centered">
+                            <button type="submit" class="button is-info is-rounded" asp-controller="Usuario" asp-action="Registrar">
+                                Cadastrar
+                            </button>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                            <button class="button is-info is-rounded" formnovalidate asp-controller="Usuario" asp-action="Login">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

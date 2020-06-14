@@ -6,95 +6,127 @@
     var formatossExameSelectList = formatos.Select((formato, index) => new SelectListItem(formato, formato));
 
 }
-<div class="container">
-    <partial name="_ErroAlert" />
-    <br /><br />
-    @if (string.IsNullOrEmpty(Model.Id))
-    {
-        <h1>Novo Exame</h1>
-    }
-    else
-    {<h1>Editar Exame</h1>}
-    <br />
-    <form method="post" enctype="multipart/form-data">
-        <input asp-for="Id" hidden />
-        <input asp-for="UsuarioId" hidden />
-        <input asp-for="Url" hidden />
-        <input asp-for="ContentType" hidden />
-        <input asp-for="NomeArquivo" hidden />
+    <link rel="stylesheet" type="text/css" href="~/css/cadastro_userstyle.css">
 
-        <div class="form-group">
-            <label>Tipo</label>
-            <input asp-for="TipoOutro" class="form-control" id="TipoOutro" aria-describedby="emailHelp" list="tiposExame">
-            <span asp-validation-for="TipoOutro" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="form-label-group">
-            Formato do Exame:
-            <select class="custom-select" asp-for="Formato" asp-items="formatossExameSelectList"> </select>
-        </div>
-        <div class="form-group">
-            <label>Hospital / Laboratório </label>
-            <input asp-for="Fornecedor" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Médico</label>
-            <input asp-for="Medico" class="form-control">
-        </div>
-        <br />
+    <div class="container">
+        <div class="section">
+            <div class="card columns">
+                <div class="column">
+                    <div class='card-content is-flex is-horizontal-center'>
+                        <figure class='image mt-6'>
+                            <img src="~/assets/exame.jpg" />
+                        </figure>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="media-content has-text-centered">
+                        @if (string.IsNullOrEmpty(Model.Id))
+                        {
+                            <p class="title is-4">Novo Exame</p>
+                        }
+                        else
+                        {
+                            <p class="title is-4">Editar Exame</p>
+                        }
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <partial name="_ErroAlert" />
+                        <div class="card-content input-group-sm">
+                            <input asp-for="Id" hidden />
+                            <input asp-for="UsuarioId" hidden />
+                            <input asp-for="Url" hidden />
+                            <input asp-for="ContentType" hidden />
+                            <input asp-for="NomeArquivo" hidden />
 
-        @if (!string.IsNullOrEmpty(Model.Id) && !string.IsNullOrEmpty(Model.Url) && Model.Formato == EFormatoExame.Laudo)
-        {
-            <div class="form-group">
-
-                <label>Resultado</label>
-                <textarea rows="10" asp-for="Resultado" class="form-control" disabled></textarea>
+                            <div class="field">
+                                <label class="label">Tipo</label>
+                                <input asp-for="TipoOutro" class="input is-rounded form-control" id="TipoOutro"
+                                       aria-describedby="emailHelp" list="tiposExame">
+                                <span asp-validation-for="TipoOutro" class="is-danger"></span>
+                            </div>
+                            <div class="field">
+                                <label class="label">Formato do Exame</label>
+                                <div class="select is-rounded form-control">
+                                    <select asp-for="Formato" asp-items="formatossExameSelectList"> </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Hospital / Laboratório</label>
+                                <input asp-for="Fornecedor" class="input is-rounded form-control">
+                            </div>
+                            <div class="field">
+                                <label class="label">Médico</label>
+                                <input asp-for="Medico" class="input is-rounded form-control">
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Id) && !string.IsNullOrEmpty(Model.Url) && Model.Formato == EFormatoExame.Laudo)
+                            {
+                                <div class="field">
+                                    <label class="label">Resultado</label>
+                                    <textarea class="textarea" rows="10" asp-for="Resultado" disabled></textarea>
+                                </div>
+                            }
+                            @if (string.IsNullOrEmpty(Model.Url))
+                            {
+                                <div class="field">
+                                    <label class="label">Upload</label>
+                                    <div class="file">
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" asp-for="Upload" accept="application/pdf,image/*">
+                                            <span class="file-cta">
+                                                <span class="file-icon">
+                                                    <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                    Selecione o Arquivo
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="field is-grouped is-grouped-centered">
+                                    <button class="button is-danger" type="submit" asp-action="RemoverAnexo">Excluir Anexo</button>
+                                    <div>
+                                    <div class="divider"></div>
+                                </div>
+                                    <a class="button is-warning" asp-action="DownloadAnexo" asp-route-id="@Model.Id">Download Anexo</a>
+                                </div>
+                            }
+                            <div class="field is-grouped is-grouped-centered">
+                                <a class="button is-warning" asp-controller="Exame" asp-action="Index">
+                                    Voltar
+                                </a>
+                                <div>
+                                    <div class="divider"></div>
+                                </div>
+                                <button type="submit" class="button is-primary" asp-action="Salvar">
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
+    </div>
+    <datalist id="tiposExame">
+    </datalist>
+    <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
+    <script>
+
+        function viewModel() {
+
+            this.salvarLoading = ko.observable(false);
+            this.deletarAnexoLoading = ko.observable(false);
+
+            this.salvar = function () {
+                this.salvarLoading(true)
+            }
+
         }
 
+        ko.applyBindings(new viewModel());
 
-        <br />
-
-        @if (string.IsNullOrEmpty(Model.Url))
-        {
-            <div class="form-group">
-                <label>Upload</label>
-                <input type="file" asp-for="Upload" class="form-control" accept="application/pdf,image/*">
-            </div>
-        }
-        else
-        {
-            <button class="btn btn-warning" type="submit" asp-action="RemoverAnexo">Excluir Anexo</button>
-            <a class="btn btn-warning" asp-action="DownloadAnexo" asp-route-id="@Model.Id">Download Anexo</a>
-        }
-        <br /><br />
-
-        <a class="btn btn-warning" asp-controller="Exame" asp-action="Index">
-            Voltar
-        </a>
-
-        <button type="submit" class="btn btn-primary" asp-action="Salvar">
-            Salvar
-        </button>
-
-    </form>
-</div>
-<datalist id="tiposExame">
-</datalist>
-<script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
-<script>
-
-    function viewModel() {
-
-        this.salvarLoading = ko.observable(false);
-        this.deletarAnexoLoading = ko.observable(false);
-
-        this.salvar = function () {
-            this.salvarLoading(true)
-        }
-
-    }
-
-    ko.applyBindings(new viewModel());
-
-</script>
+    </script>

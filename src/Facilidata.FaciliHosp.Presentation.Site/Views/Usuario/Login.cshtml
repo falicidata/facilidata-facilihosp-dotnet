@@ -4,35 +4,65 @@
     ViewData["Title"] = "Login";
 
 }
-
-<link rel="stylesheet" type="text/css" href="~/css/homestyle.css">
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-10 col-xl-9 mx-auto">
-            <div class="card card-signin flex-row my-5">
-                <div class="card-img-left d-none d-md-flex"></div>
-                <div class="card-body">
-                    <form class="form-signin">
-                        <partial name="_ErroAlert" />
-                        <div class="form-label-group">
-                            E-mail
-                            <input asp-for="Email" type="email" id="inputemail" class="form-control" placeholder="E-mail" required>
-                            <label for="inputemail"></label>
-                        </div>
-                        <div class="form-label-group">
-                            Senha
-                            <input asp-for="Senha" type="password" id="inputpassword" class="form-control" placeholder="Senha" required>
-                            <label for="inputpassword"></label>
-                        </div>
-                        <button type="submit" class="btn btn-lg btn-primary btn-block text-uppercase" asp-action="EnviarLogin">Logar</button>
-                        <a class="btn btn-lg btn-success btn-block text-uppercase" asp-action="Registro">Cadastre-se</a>
-                        <hr class="my-4">
-                        <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign up with Google</button>
-                        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign up with Facebook</button>
-                    </form>
-                </div>
+<div class="container">
+    <div class="section">
+        <div class="card is-horizontal columns">
+            <div class="card-image column">
+                <figure class="image is-4by3">
+                    <img src="~/assets/login.webp"/>
+                </figure>
             </div>
+            <form class="form-signin">
+                <div class="card-content column">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4">Login</p>
+                        </div>
+                    </div>
+                    <partial name="_ErroAlert" />
+                    <div class="content">
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <input class="input is-rounded form-control"
+                                   asp-for="Email" type="email" id="inputemail" 
+                                   placeholder="Email" required />
+                        </div>
+                        <div class="field">
+                            <label class="label">Senha</label>
+                            <input class="input is-rounded form-control"
+                                   asp-for="Senha" type="password" id="inputpassword" 
+                                   placeholder="Senha" required />
+                        </div>
+                        <div class="buttons">
+                            <button class="button is-info is-rounded is-fullwidth" asp-action="EnviarLogin">
+                                Login
+                            </button>
+                            <button class="button is-success is-rounded is-fullwidth is-outlined" asp-action="Registro">
+                                Cadastrar-se
+                            </button>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                            <button class="button is-danger is-rounded is-fullwidth">
+                                <span class="icon">
+                                    <i class="fab fa-google"></i>
+                                </span>
+                                <span>Login Google</span>
+                            </button>
+
+                            <button class="button is-link is-rounded is-fullwidth">
+                                <span class="icon">
+                                    <i class="fab fa-facebook"></i>
+                                </span>
+                                <span>Login Facebook</span>
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 

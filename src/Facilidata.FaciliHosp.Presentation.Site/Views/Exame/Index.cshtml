@@ -3,47 +3,45 @@
 @{
     ViewData["Title"] = "Exames";
 }
-<link href="~/css/tab.paciente_medstyle.css" rel="stylesheet" type="text/css">
 
 <div class="container">
     <br /><br />
-    <a class="btn btn-warning" asp-controller="Exame" asp-action="Editar">
+    <a class="button is-warning" asp-controller="Exame" asp-action="Editar">
         Adicionar Exame
     </a>
     <br /><br />
-    <table class="text-center">
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth has-text-centered">
         <thead>
-            <tr class="table100-head">
-                <th class="column2">Exame Realizado</th>
-                <th class="column3">Data do Exame</th>
-                <th class="column4">Hospital / Laboratorio</th>
-                <th class="column5">Anexo</th>
-                <th class="column5">Ações</th>
+            <tr>
+                <th>Exame Realizado</th>
+                <th>Data do Exame</th>
+                <th>Hospital / Laboratorio</th>
+                <th>Anexo</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var exame in Model)
             {
             <tr>
-                <td class="column2">@exame.TipoOutro</td>
-                <td class="column3">@exame.CriadoEm</td>
-                <td class="column4">@exame.Fornecedor</td>
+                <td>@exame.TipoOutro</td>
+                <td>@exame.CriadoEm</td>
+                <td>@exame.Fornecedor</td>
                 @if (string.IsNullOrEmpty(exame.Url))
                 {
-                    <td class="column5">
+                    <td>
                         <span>Sem anexo</span>
                     </td>
                 }
                 else
                 {
-
-                    <td class="column5">
-                        <a class="btn btn-info " asp-action="DownloadAnexo" asp-route-id="@exame.Id">Download</a>
+                    <td>
+                        <a class="button is-info" asp-action="DownloadAnexo" asp-route-id="@exame.Id">Download</a>
                     </td>
                 }
                 <td>
-                    <a class="btn btn-warning" asp-action="Editar" asp-route-id="@exame.Id">Editar</a>
-                    <a class="btn btn-danger" asp-action="Deletar" asp-route-id="@exame.Id">Deletar</a>
+                    <a class="button is-warning" asp-action="Editar" asp-route-id="@exame.Id">Editar</a>
+                    <a class="button is-danger" asp-action="Deletar" asp-route-id="@exame.Id">Deletar</a>
 
                 </td>
             </tr>
