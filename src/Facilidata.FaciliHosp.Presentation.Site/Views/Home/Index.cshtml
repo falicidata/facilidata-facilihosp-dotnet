@@ -10,25 +10,35 @@
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma-divider.css" />
+    <link rel="stylesheet" href="~/css/homestyle.css">
 </head>
 
 <body>
 
-    <section class="hero has-carousel is-fullheight is-fullwidth">
+    <section class="hero has-carousel is-fullheight">
         <div class="hero-carousel slider">
-            <div class="item-1">
-                <div class="has-background has-text-centered">
+            <div class="item-1 content">
+                <div class="has-background">
                     <img class="is-background" src="~/assets/home0.jpg" alt="" />
                 </div>
+                <div class="has-text-centered">
+                    <div class="title is-1 has-text-grey txt">Bem Vindo ao Sistema FaciliHosp</div>
+                </div>
             </div>
-            <div class="item-2">
+            <div class="item-2 content">
                 <div class="has-background">
                     <img class="is-background" src="~/assets/home1.jpg" alt="" />
                 </div>
+                <div class="has-text-centered">
+                    <div class="title is-3 has-text-grey txt">Armazene seus Exames</div>
+                </div>
             </div>
-            <div class="item-3">
+            <div class="item-3 content">
                 <div class="has-background">
                     <img class="is-background" src="~/assets/home2.jpg" alt="" />
+                </div>
+                <div class="ml-6">
+                    <div class="title is-3 has-text-link-dark txt">Compartilhe seus Resultados</div>
                 </div>
             </div>
         </div>
@@ -54,18 +64,16 @@
                 </div>
             </nav>
         </div>
-        <div class="hero-body"></div>
-        <div class="hero-foot"></div>
     </section>
     <script src="~/js/bulma-carousel.min.js"></script>
     <script>
         var carousels = bulmaCarousel.attach('.hero-carousel', {
             slidesToScroll: 1,
             slidesToShow: 1,
-            pagination: false,
+            pagination: true,
             effect: 'fade',
             loop: true,
-            duration: 500,
+            duration: 400,
             autoplay: true
         });
     </script>

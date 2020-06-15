@@ -7,60 +7,45 @@
 <div class="container">
     <div class="section">
         <div class="card is-horizontal columns">
-            <div class="card-image column">
-                <figure class="image is-4by3">
+            <div class="card-image column is-three-fifths">
+                <figure class="image">
                     <img src="~/assets/login.webp"/>
                 </figure>
             </div>
-            <form class="form-signin">
-                <div class="card-content column">
+            <div class="card-content mt-6 column is-dwo-fifths">
+                <form class="form-signin">
                     <div class="media">
                         <div class="media-content">
                             <p class="title is-4">Login</p>
                         </div>
                     </div>
+                    <br />
                     <partial name="_ErroAlert" />
                     <div class="content">
                         <div class="field">
                             <label class="label">Email</label>
-                            <input class="input is-rounded form-control"
-                                   asp-for="Email" type="email" id="inputemail" 
+                            <input class="input is-rounded is-fullwidth"
+                                   asp-for="Email" type="email" id="inputemail"
                                    placeholder="Email" required />
                         </div>
                         <div class="field">
                             <label class="label">Senha</label>
-                            <input class="input is-rounded form-control"
-                                   asp-for="Senha" type="password" id="inputpassword" 
+                            <input class="input is-rounded is-fullwidth"
+                                   asp-for="Senha" type="password" id="inputpassword"
                                    placeholder="Senha" required />
                         </div>
-                        <div class="buttons">
+                        <br />
+                        <div class="buttons is-grouped-centered">
                             <button class="button is-info is-rounded is-fullwidth" asp-action="EnviarLogin">
                                 Login
                             </button>
                             <button class="button is-success is-rounded is-fullwidth is-outlined" asp-action="Registro">
                                 Cadastrar-se
                             </button>
-                            <div>
-                                <div class="divider"></div>
-                            </div>
-                            <button class="button is-danger is-rounded is-fullwidth">
-                                <span class="icon">
-                                    <i class="fab fa-google"></i>
-                                </span>
-                                <span>Login Google</span>
-                            </button>
-
-                            <button class="button is-link is-rounded is-fullwidth">
-                                <span class="icon">
-                                    <i class="fab fa-facebook"></i>
-                                </span>
-                                <span>Login Facebook</span>
-                            </button>
-                            
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
