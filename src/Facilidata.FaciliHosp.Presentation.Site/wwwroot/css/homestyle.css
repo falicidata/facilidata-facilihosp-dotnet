@@ -11,6 +11,7 @@
 }
 .txt {
     margin-top: -450px;
+    text-shadow: 2px 2px 4px #000000;
 }
 .slider-navigation-previous{
     visibility: hidden;
