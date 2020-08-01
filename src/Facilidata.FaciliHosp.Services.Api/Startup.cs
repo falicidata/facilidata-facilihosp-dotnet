@@ -50,6 +50,8 @@ namespace Facilidata.FaciliHosp.Services.Api
             services.AddMvcConfiguration();
 
             services.AddControllers();
+
+            services.AddCors(opt => { opt.AddPolicy("All", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build()); });
          
             services.AddIdentity<Usuario, IdentityRole>(options =>
             {
@@ -77,6 +79,8 @@ namespace Facilidata.FaciliHosp.Services.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("All");
 
             app.UseRouting();
 

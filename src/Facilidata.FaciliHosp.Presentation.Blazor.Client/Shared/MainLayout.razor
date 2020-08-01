@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime;
+@inject NavigationManager NavigationManager;
+@* <div class="sidebar">
+        <NavMenu />
+    </div> *@
+
+<div class="main p10">
+
+    @*<MenuDefault Color="is-primary">
+        <MenuContentStart>
+            <MenuItem>Meus Exames</MenuItem>
+        </MenuContentStart>
+    </MenuDefault>*@
+
+    @Body
+</div>
+
+
+
+@code
+{
+    public void NavigateLogin()
+    {
+        NavigationManager.NavigateTo("login");
+    }
+
+
+}

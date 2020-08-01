@@ -1,0 +1,89 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime;
+@inject NavigationManager NavigationManager;
+
+<section class="hero is-medium has-carousel is-fullheight">
+    <div class="hero-carousel">
+        <div class='has-background is-active'>
+
+            <img class="is-background" src="https://wikiki.github.io/images/merry-christmas.jpg" alt="" />
+
+        </div>
+        <div class='has-background'>
+            <img class="is-background" src="https://wikiki.github.io/images/singer.jpg" alt="" />
+        </div>
+        <div class='has-background'>
+            <img class="is-background" src="https://wikiki.github.io/images/sushi.jpg" alt="" />
+        </div>
+        <div class='has-background'>
+            <img class="is-background" src="https://wikiki.github.io/images/life.jpg" alt="" />
+        </div>
+    </div>
+    <div class="hero-head">
+
+
+        <nav class="navbar pt-5 pr-5 pl-5  ">
+            <div class="container ">
+                <div class="navbar-brand">
+                    <figure class="image is-64x64">
+                        <img src="assets/logo128x128.png">
+                    </figure>
+
+                    @*<a class="navbar-item">
+                            <img src="assets/logo128x128.png" alt="Logo" height="200">
+                        </a>*@
+                    <span class="navbar-burger burger" style="color:white" data-target="navbarMenuHeroA">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-end">
+
+                        <span class="navbar-item">
+                            <a class="label is-medium button is-info" @onclick="NavigateLogin">
+
+                                <span>Login</span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <div class="hero-body has-text-centered">
+        <h1 class="title has-text-white">Bem vindo ao FaciliHosp</h1>
+    </div>
+
+</section>
+
+
+@code{
+
+
+    public void NavigateLogin()
+    {
+        NavigationManager.NavigateTo("login");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("inicializeBulmaCarousel");
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+
+}
+
+
+<style>
+    .slider-navigation-previous {
+        visibility: hidden
+    }
+
+    .slider-navigation-next {
+        visibility: hidden
+    }
+</style>

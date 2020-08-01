@@ -1,0 +1,103 @@
+﻿@page "/login"
+@inject Facilidata.FaciliHosp.Presentation.Blazor.Client.Services.WsService WsService;
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MemoryCache;
+<MenuDefault Color="is-primary" LogoutButton="false">
+
+
+</MenuDefault>
+
+<div class="container">
+    <div class="section">
+        <div class="card is-horizontal columns">
+            <div class="card-image column is-three-fifths">
+                <figure class="image is-4by3">
+                    <img src="https://cdn.pixabay.com/photo/2018/09/27/14/14/analysis-3707159_960_720.jpg"
+                         alt="this used to be photo" />
+                </figure>
+            </div>
+            <div class="card-content column is-two-fifths">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4">Login</p>
+                    </div>
+                </div>
+
+       
+                    <div class="content px-5">
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <input class="input is-rounded" @bind="Email"
+                                   type="text"
+                                   placeholder="Rounded input" />
+                        </div>
+                        <div class="field">
+                            <label class="label">Senha</label>
+                            <input class="input is-rounded" @bind="Senha"
+                                   type="password"
+                                   placeholder="Rounded input" />
+                        </div>
+                        <div class="buttons">
+                            <a class="button is-info is-rounded is-fullwidth" @onclick="SendLogin">
+                                Login
+                            </a>
+
+                            <button class="button is-success is-rounded is-fullwidth is-outlined">
+                                Cadastrar-se
+                            </button>
+
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                            <button class="button is-danger is-rounded is-fullwidth">
+                                <span class="icon">
+                                    <i class="fab fa-google"></i>
+                                </span>
+                                <span>Login Google</span>
+                            </button>
+
+                            <button class="button is-link is-rounded is-fullwidth">
+                                <span class="icon">
+                                    <i class="fab fa-facebook"></i>
+                                </span>
+                                <span>Login Facebook</span>
+                            </button>
+              
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        Notifications = new List<string>();
+        base.OnInitialized();
+    }
+
+    public List<string> Notifications { get; set; }
+    public string Email { get; set; }
+    public string Senha { get; set; }
+
+    public bool Validate { get; set; } = true;
+
+    public async Task SendLogin()
+    {
+        await WsService.GetToken(Email, Senha);
+        var tokenContainerRes = MemoryCache.TryGetValue("TokenContainer", out object tokenResponse);
+        Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(tokenResponse));
+
+    }
+
+}
+
+
+
+
+<style>
+    .body {
+        height: 100%;
+    }
+</style>

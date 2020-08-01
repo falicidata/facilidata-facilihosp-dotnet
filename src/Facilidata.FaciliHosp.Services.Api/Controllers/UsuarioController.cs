@@ -3,6 +3,7 @@ using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Facilidata.FaciliHosp.Services.Api.Configurations.JWT;
+using Facilidata.FaciliHosp.Services.Api.Models;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -41,11 +42,19 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
                  .ForEach(erro => AdicionarErroModelState(erro.Description, "IdentityResult"));
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("/api/teste")]
+        public IActionResult Teste()
+        {
+            return Ok("Teste");
+        }
+
 
         [AllowAnonymous]
         [HttpPost]
         [Route("/api/token")]
-        public async Task<IActionResult> Post([FromBody]LoginUsuarioViewModel viewModel)
+        public async Task<IActionResult> Post([FromBody] LoginUsuarioViewModel viewModel)
         {
             var loginResultado = await _usuarioService.Login(viewModel);
             if (!loginResultado)
@@ -83,14 +92,13 @@ namespace Facilidata.FaciliHosp.Services.Api.Controllers
 
             var token = handler.WriteToken(securityToken);
 
-            return Resposta(new
-            {
-                email = usuario.Email,
-                usuarioId = usuario.Id,
-                created = dtCreation.ToString("yyyy-MM-dd HH:mm:ss"),
-                expiration = dtExpiration.ToString("yyyy- MM-dd HH:mm:ss"),
-                accessToken = token,
-            });
+            return Resposta(new TokenResponse(
+                usuario.Email,
+                usuario.Id,
+                dtCreation.ToString("yyyy-MM-dd HH:mm:ss"),
+                dtExpiration.ToString("yyyy- MM-dd HH:mm:ss"),
+                token)
+           );
         }
 
 

@@ -1,0 +1,28 @@
+﻿
+<a class="@NavBarItemClass" @onclick="()=>Click.InvokeAsync(null)">
+
+    @if (Strong)
+    {
+        <strong> @ChildContent</strong>
+    }
+    else
+    {
+        @ChildContent
+    }
+</a>
+
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public bool Strong { get; set; } = true;
+    [Parameter]
+    public bool Active { get; set; }
+    [Parameter]
+    public EventCallback Click { get; set; }
+
+    protected string NavBarItemClass { get { return "navbar-item "; } }
+
+}

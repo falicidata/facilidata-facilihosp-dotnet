@@ -1,0 +1,62 @@
+﻿@inject NavigationManager  NavigationManager;
+
+<nav class="@NavBarClass" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item">
+            <img src="/assets/logo128x128.png" height="200">
+        </a>
+
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+
+        <div class="navbar-start">
+
+            <MenuItem Click="NaviteToHome">Home</MenuItem>
+
+            @MenuContentStart
+        </div>
+
+        <div class="navbar-end">
+            @MenuContentEnd
+            @if (LogoutButton)
+            {
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary is-inverted">
+                            <strong>Sair</strong>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</nav>
+
+@code {
+    [Parameter]
+    public RenderFragment MenuContentStart { get; set; }
+    [Parameter]
+    public RenderFragment MenuContentEnd { get; set; }
+    [Parameter]
+    public string Color { get; set; }
+    [Parameter]
+    public bool LogoutButton { get; set; } = true;
+
+    public string NavBarClass
+    {
+        get
+        {
+
+            return $"navbar {Color}";
+        }
+    }
+
+
+    public void NaviteToHome() => NavigationManager.NavigateTo("/");
+}

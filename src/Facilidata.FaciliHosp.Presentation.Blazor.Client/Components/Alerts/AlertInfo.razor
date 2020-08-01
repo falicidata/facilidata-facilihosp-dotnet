@@ -1,0 +1,41 @@
+﻿
+@if (Notifications != null && Notifications.Any())
+{
+    <div class="@ClassMessage">
+        <i class="close icon" @onclick="() => { NotificationsChanged.InvokeAsync(new List<string>());}"></i>
+        <div class="content">
+            <div class="header">
+                Atenção!
+            </div>
+
+            @foreach (var notification in Notifications)
+            {
+                <p>@notification</p>
+            }
+
+        </div>
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public List<string> Notifications { get; set; }
+    [Parameter]
+    public EventCallback<List<string>> NotificationsChanged { get; set; }
+
+    public string Type { get; set; } = "error";
+    public string ClassMessage
+    {
+        get
+        {
+
+            return $"ui icon message {Type}";
+
+        }
+    }
+
+
+}
+
+
