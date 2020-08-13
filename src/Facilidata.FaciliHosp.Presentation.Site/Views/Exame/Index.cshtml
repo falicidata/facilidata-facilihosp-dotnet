@@ -4,47 +4,106 @@
     ViewData["Title"] = "Exames";
 }
 
-<div class="container">
+<div class="container pa-5">
+
+    <br /><br />
+    <div class="is-size-3">
+        <span class="icon"><i class="fas fa-file-medical-alt"></i></span>
+        <span>Lista de Exames</span>
+    </div>
     <br /><br />
     <a class="button is-success" asp-controller="Exame" asp-action="Editar">
-        Adicionar Exame
+        <span class="icon">
+            <i class="fas fa-plus"></i>
+        </span>
+        <span>
+            Adicionar Exame
+        </span>
     </a>
+
+
     <br /><br />
+    <div class="tabs">
+        <ul>
+            <li class="is-active">
+                <a>
+                    <span class="icon is-small"><i class="fas fa-file-medical" aria-hidden="true"></i></span>
+                    <span>Exames</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Exame" asp-action="Compartilhados">
+                    <span class="icon is-small"><i class="fas fa-share-square" aria-hidden="true"></i></span>
+                    <span>Compartilhados</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="Exame" asp-action="CompartilhadosComUsuario">
+                    <span class="icon is-small"><i class="far fa-share-square" aria-hidden="true"></i></span>
+                    <span>Compartilhados Comigo</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
     <table class="table is-striped is-narrow is-hoverable is-fullwidth has-text-centered">
         <thead>
             <tr>
                 <th>Exame Realizado</th>
                 <th>Data do Exame</th>
                 <th>Hospital / Laboratorio</th>
-                <th>Anexo</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var exame in Model)
             {
-            <tr>
-                <td>@exame.TipoOutro</td>
-                <td>@exame.CriadoEm</td>
-                <td>@exame.Fornecedor</td>
-                @if (string.IsNullOrEmpty(exame.Url))
-                {
+                <tr>
+                    <td>@exame.TipoOutro</td>
+                    <td>@exame.CriadoEm</td>
+                    <td>@exame.Fornecedor</td>
+                  
                     <td>
-                        <span>Sem anexo</span>
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        <a class="button is-info" asp-action="DownloadAnexo" asp-route-id="@exame.Id">Download</a>
-                    </td>
-                }
-                <td>
-                    <a class="button is-success" asp-action="Editar" asp-route-id="@exame.Id">Editar</a>
-                    <a class="button is-danger" asp-action="Deletar" asp-route-id="@exame.Id">Deletar</a>
 
-                </td>
-            </tr>
+                        <a class="button is-warning" asp-action="Editar" asp-route-id="@exame.Id" data-tooltip="Editar">
+                            <span class="icon">
+                                <i class="fas fa-pencil-alt"></i>
+                            </span>
+                        </a>
+                        @if (!string.IsNullOrEmpty(exame.Url))
+                        {
+                            <a class="button is-info" asp-action="DownloadAnexo" asp-route-id="@exame.Id" data-tooltip="Download Anexo">
+                                <span class="icon">
+                                    <i class="fas fa-file-download"></i>
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="button is-info" disabled data-tooltip="Sem Anexo">
+                                <span class="icon">
+                                    <i class="fas fa-file-download"></i>
+                                </span>
+                            </a>
+                        }
+                        <a class="button is-success" asp-action="Retorno" asp-route-id="@exame.Id" data-tooltip="Adicionar Retorno">
+                            <span class="icon">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </a>
+                        <a class="button is-info" asp-action="Compartilhar" asp-route-id="@exame.Id" data-tooltip="Compartilhar Exame">
+                            <span class="icon">
+                                <i class="fas fa-share"></i>
+                            </span>
+                        </a>
+                        <a class="button is-danger" asp-action="Deletar" asp-route-id="@exame.Id" data-tooltip="Deletar Exame">
+                            <span class="icon">
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                        </a>
+
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

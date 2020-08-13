@@ -32,6 +32,7 @@ namespace Facilidata.FaciliHosp.Infra.IoC
             services.AddScoped<IExameTipoRepository, ExameTipoRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IExameCompRepository, ExameCompRepository>();
 
             // Identity
             services.AddDbContext<ContextIdentity>();

@@ -7,6 +7,8 @@ using Facilidata.FaciliHosp.Infra.Identity.Models;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Services
@@ -27,6 +29,10 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
 
 
 
+        public List<Usuario> ObterTodos()
+        {
+            return _userManager.Users.ToList();
+        }
 
         public async Task<IdentityResult> Registro(RegistroViewModel viewModel)
         {

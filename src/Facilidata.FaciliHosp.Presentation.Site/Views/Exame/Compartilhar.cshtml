@@ -1,0 +1,66 @@
+﻿@model ExameCompViewModel
+
+@{
+    ViewData["Title"] = "Exame";
+    var periodos = Enum.GetNames(typeof(EPeriodoComp)).ToList();
+    var periodoSelectList = periodos.Select((periodo, index) => new SelectListItem(periodo, periodo));
+}
+
+<div class="container">
+    <div class="section">
+        <div class="card columns">
+            <div class="column">
+                <div class='card-content is-flex is-horizontal-center'>
+                    <figure class='image mt-6'>
+                        <img src="~/assets/exame.jpg" />
+                    </figure>
+                </div>
+            </div>
+            <div class="column">
+                <div class="media-content has-text-centered">
+
+
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <partial name="_ErroAlert" />
+                    <div class="card-content input-group-sm">
+                        <input asp-for="ExameId" hidden />
+                        <input asp-for="Key" hidden />
+                        <input asp-for="Url" hidden />
+
+                        <div class="field">
+                            <label class="label">Periodo</label>
+                            <div class="select is-rounded form-control">
+                                <select asp-for="Periodo" asp-items="periodoSelectList"> </select>
+                            </div>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-centered">
+                            <a class="button is-warning" href="javascript:history.go(-1)">
+                                Voltar
+                            </a>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                        </div>
+                        <div class="field is-grouped is-grouped-centered">
+                            <button type="submit" class="button is-warning" asp-controller="Exame" asp-action="CompartilharQrCode" asp-route-exameId="@Model.ExameId" asp-route-periodo="@Model.Periodo">
+                                Confirmar
+                            </button>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<datalist id="tiposExame">
+</datalist>
+
+<script>
+
+
+</script>

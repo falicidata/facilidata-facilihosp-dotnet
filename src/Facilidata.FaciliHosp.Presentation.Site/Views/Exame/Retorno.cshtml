@@ -1,0 +1,78 @@
+﻿@model RetornoViewModel
+
+@{
+    ViewData["Title"] = "Retorno";
+    var avaliacoes = Enum.GetNames(typeof(EExameResultadoAvaliacao)).ToList();
+    var avaliacoesSelectList = avaliacoes.Select((avaliacao, index) => new SelectListItem(avaliacao, avaliacao));
+
+
+}
+
+<div class="container">
+    <div class="section">
+        <div class="card columns">
+            <div class="column">
+                <div class='card-content is-flex is-horizontal-center'>
+                    <figure class='image mt-6'>
+                        <img src="~/assets/exame.jpg" />
+                    </figure>
+                </div>
+            </div>
+            <div class="column">
+                <div class="media-content has-text-centered">
+                    <p class="title is-4">Resultado Retorno</p>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <partial name="_ErroAlert" />
+                    <div class="card-content input-group-sm">
+                        <input asp-for="ExameId" hidden />
+                        <input asp-for="RetornoUsuario" hidden />
+
+                        <div class="field">
+                            <label class="label">Avaliação</label>
+                            <div class="select is-rounded form-control">
+                                <select asp-for="ResultadoAvaliacao" asp-items="avaliacoesSelectList"> </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Retorno</label>
+                            <textarea class="textarea" rows="10" asp-for="Retorno"></textarea>
+                        </div>
+
+                        <div class="field is-grouped is-grouped-centered">
+                            <a class="button is-warning"  href="javascript:history.go(-1)">
+                                Voltar
+                            </a>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                            <button type="submit" class="button is-primary" asp-controller="Exame" asp-action="SalvarRetorno">
+                                Salvar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<datalist id="tiposExame">
+</datalist>
+<script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
+<script>
+
+    function viewModel() {
+
+        this.salvarLoading = ko.observable(false);
+        this.deletarAnexoLoading = ko.observable(false);
+
+        this.salvar = function () {
+            this.salvarLoading(true)
+        }
+
+    }
+
+    ko.applyBindings(new viewModel());
+
+</script>

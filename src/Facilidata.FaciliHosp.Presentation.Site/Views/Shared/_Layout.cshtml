@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma.min.css">
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma-divider.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@creativebulma/bulma-tooltip@@1.2.0/dist/bulma-tooltip.min.css" />
+    
     <link rel="stylesheet" type="text/css" href="~/css/util.css">
 
 </head>
@@ -27,21 +29,26 @@
             </div>
             @if (User.Identity.IsAuthenticated)
             {
-                <div class="navbar-menu" id="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item" asp-controller="Exame" asp-action="Index">
-                            Lista de Exames
-                        </a>
-                    </div>
+        <div class="navbar-menu" id="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" asp-controller="Exame" asp-action="Index">
+                    <span class="icon"><i class="fas fa-file-medical-alt"></i></span>
+                    <span>
+                        Lista de Exames
+                    </span>
+                  
+                </a>
+            </div>
 
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <a class="button is-info" asp-controller="Usuario" asp-action="Logout">
-                                Logout
-                            </a>
-                        </div>
-                    </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a class="button is-info" asp-controller="Usuario" asp-action="Logout">
+                        Logout
+                    </a>
                 </div>
+            </div>
+        </div>
 
             }
             else
@@ -62,6 +69,7 @@
         @RenderBody()
     </main>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
     <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
     <script defer src="~/js/all.js"></script>
     <script src="~/js/bulma.js"></script>

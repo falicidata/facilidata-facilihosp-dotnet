@@ -17,10 +17,13 @@ namespace Facilidata.FaciliHosp.Application.ViewModels
 
         [Required]
         public EFormatoExame Formato { get; set; }
+        public EExameResultadoAvaliacao ResultadoAvaliacao { get; set; } = EExameResultadoAvaliacao.Nenhum;
 
         [Required]
         public string Fornecedor { get; set; }
         public string Resultado { get; set; }
+        public string Retorno { get; set; }
+        public string RetornoUsuario{ get; set; }
         public string Url { get; set; }
         public string ContentType { get; set; }
         public string NomeArquivo { get; set; }

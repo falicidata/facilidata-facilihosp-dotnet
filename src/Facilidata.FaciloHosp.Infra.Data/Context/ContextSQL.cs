@@ -26,12 +26,23 @@ namespace Facilidata.FaciloHosp.Infra.Data.Context
 
         public DbSet<Exame> Exames { get; set; }
         public DbSet<ExameTipo> ExameTipos { get; set; }
+        public DbSet<ExameComp> ExameComps{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ExameMap());
+            modelBuilder.ApplyConfiguration(new ExameCompMap());
 
+
+            ConfigureSoftDelete(modelBuilder);
             base.OnModelCreating(modelBuilder);
+        }
+
+        private void ConfigureSoftDelete(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Exame>().HasQueryFilter(e => !e.Deletado);
+            modelBuilder.Entity<ExameTipo>().HasQueryFilter(e => !e.Deletado);
+            modelBuilder.Entity<ExameComp>().HasQueryFilter(e => !e.Deletado);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

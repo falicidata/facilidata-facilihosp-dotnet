@@ -1,0 +1,110 @@
+﻿@model EditarExameViewModel
+
+@{
+    ViewData["Title"] = "Exame";
+    var formatos = Enum.GetNames(typeof(EFormatoExame)).ToList();
+    var formatossExameSelectList = formatos.Select((formato, index) => new SelectListItem(formato, formato));
+
+}
+
+<div class="container">
+    <div class="section">
+        <div class="card columns">
+            <div class="column">
+                <div class='card-content is-flex is-horizontal-center'>
+                    <figure class='image mt-6'>
+                        <img src="~/assets/exame.jpg" />
+                    </figure>
+                </div>
+            </div>
+            <div class="column">
+                <div class="media-content has-text-centered">
+
+                    <p class="title is-4">Visualizar Exame</p>
+
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <partial name="_ErroAlert" />
+                    <div class="card-content input-group-sm">
+                        <input asp-for="Id" hidden />
+                        <input asp-for="UsuarioId" hidden />
+                        <input asp-for="Url" hidden />
+                        <input asp-for="ContentType" hidden />
+                        <input asp-for="NomeArquivo" hidden />
+
+                        <div class="field">
+                            <label class="label">Tipo</label>
+                            <input asp-for="TipoOutro" class="input is-rounded form-control" id="TipoOutro"
+                                   aria-describedby="emailHelp" list="tiposExame" readonly>
+                            <span asp-validation-for="TipoOutro" class="is-danger"></span>
+                        </div>
+                        <div class="field">
+                            <label class="label">Formato do Exame</label>
+                            <div class="select is-rounded form-control">
+                                <select asp-for="Formato" asp-items="formatossExameSelectList" disabled> </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Hospital / Laboratório</label>
+                            <input asp-for="Fornecedor" class="input is-rounded form-control" readonly>
+                        </div>
+                        <div class="field">
+                            <label class="label">Médico</label>
+                            <input asp-for="Medico" class="input is-rounded form-control" readonly>
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model.Id) && !string.IsNullOrEmpty(Model.Url) && Model.Formato == EFormatoExame.Laudo)
+                        {
+                            <div class="field">
+                                <label class="label">Resultado</label>
+                                <textarea class="textarea" rows="10" asp-for="Resultado" readonly></textarea>
+                            </div>
+                        }
+
+                        <div class="field">
+                            <label class="label">Retorno</label>
+                            <textarea class="textarea" rows="5" asp-for="Retorno" readonly></textarea>
+                            @if (!string.IsNullOrEmpty(@Model.RetornoUsuario))
+                            {
+                                <label class="label">Retorno por @Model.RetornoUsuario</label>
+                            }
+                        </div>
+
+                        <div class="field is-grouped is-grouped-centered">
+                            <div class="buttons">
+                                <a class="button is-warning" asp-controller="Exame" asp-action="Retorno" asp-route-id="@Model.Id">
+                                    Adicionar Retorno
+                                </a>
+                                <a class="button is-warning" href="javascript:history.go(-1)">
+                                    Voltar
+                                </a>
+                            </div>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<datalist id="tiposExame">
+</datalist>
+<script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
+<script>
+
+    function viewModel() {
+
+        this.salvarLoading = ko.observable(false);
+        this.deletarAnexoLoading = ko.observable(false);
+
+        this.salvar = function () {
+            this.salvarLoading(true)
+        }
+
+    }
+
+    ko.applyBindings(new viewModel());
+
+</script>

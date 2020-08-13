@@ -1,4 +1,5 @@
 ﻿using Facilidata.FaciliHosp.Domain.Entidades;
+using Facilidata.FaciliHosp.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -25,8 +26,8 @@ namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
                 .HasMaxLength(251);
 
             builder.Property(exame => exame.Medico)
-             .HasColumnType("varchar(50)")
-             .HasMaxLength(50);
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50);
 
             builder.Property(exame => exame.Resultado)
                 .HasMaxLength(5000)
@@ -54,6 +55,21 @@ namespace Facilidata.FaciloHosp.Infra.Data.MapsEntidades
                 .HasMaxLength(50);
 
             builder.Property(exame => exame.NomeArquivo)
+                .HasColumnType("varchar(100)")
+                .HasMaxLength(100);
+
+            builder.Property(exame => exame.ResultadoAvaliacao)
+             .HasConversion<string>()
+             .HasDefaultValue(EExameResultadoAvaliacao.Nenhum)
+                 .HasColumnType("varchar(10)")
+                 .HasMaxLength(10);
+
+            builder.Property(exame => exame.Retorno)
+                .HasColumnType("varchar(5000)")
+                .HasMaxLength(5000);
+
+
+            builder.Property(exame => exame.RetornoUsuario)
                 .HasColumnType("varchar(100)")
                 .HasMaxLength(100);
 

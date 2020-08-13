@@ -1,0 +1,83 @@
+﻿@model ExameCompViewModel
+
+@{
+    ViewData["Title"] = "Compartilhar";
+    var periodos = Enum.GetNames(typeof(EPeriodoComp)).ToList();
+    var periodoSelectList = periodos.Select((periodo, index) => new SelectListItem(periodo, periodo));
+
+}
+
+<div class="container">
+    <div class="section">
+        <div class="card columns">
+            <div class="column">
+                <div class='card-content is-flex is-horizontal-center'>
+                    <figure class='image mt-6'>
+                        <img src="~/assets/exame.jpg" />
+                    </figure>
+                </div>
+            </div>
+            <div class="column">
+                <div class="media-content has-text-centered">
+
+
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    <partial name="_ErroAlert" />
+                    <div class="card-content input-group-sm">
+                        <input asp-for="ExameId" hidden />
+                        <input asp-for="Key" hidden />
+
+                        <div class="field">
+                            <label class="label">Periodo</label>
+                            <div class="select is-rounded form-control">
+                                <select asp-for="Periodo" asp-items="periodoSelectList" disabled> </select>
+                            </div>
+                        </div>
+
+                        <div id="qr"></div>
+
+                        <div class="field">
+                            <label class="label">Link</label>
+                            <input asp-for="Url"  class="input is-rounded form-control" readonly />
+                        </div>
+
+                        <div class="field is-grouped is-grouped-centered">
+                            <a class="button is-warning" href="javascript:history.go(-1)">
+                                Voltar
+                            </a>
+                            <div>
+                                <div class="divider"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<datalist id="tiposExame">
+</datalist>
+<script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js' asp-append-version="true"></script>
+
+<script>
+
+    draw_qrcode('@Model.Key')
+
+    function draw_qrcode(text, typeNumber, errorCorrectionLevel) {
+        let img = create_qrcode(text, typeNumber, errorCorrectionLevel);
+        img = img.replace('width="82"', 'width="150"');
+        img = img.replace('height="82"', 'height="150"')
+        console.log(img);
+        let qrEl = document.getElementById('qr');
+        qrEl.innerHTML += img;
+    };
+
+    function create_qrcode(text, typeNumber, errorCorrectionLevel, mode, mb) {
+        var qr = qrcode(typeNumber || 4, errorCorrectionLevel || 'M');
+        qr.addData(text, mode);
+        qr.make();
+        return qr.createImgTag();
+    };
+</script>

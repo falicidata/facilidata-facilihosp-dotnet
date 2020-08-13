@@ -10,6 +10,8 @@ namespace Facilidata.FaciliHosp.Domain.Models
         public string Formato { get; set; }
         public string Fornecedor { get; set; }
         public string UsuarioId { get; set; }
+        public string RetornoUsuario { get; set; }
+        public string Retorno{ get; set; }
         public DateTime? CriadoEm { get; set; }
     }
 }

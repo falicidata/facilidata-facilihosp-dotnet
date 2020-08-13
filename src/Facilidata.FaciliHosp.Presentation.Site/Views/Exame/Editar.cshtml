@@ -64,6 +64,12 @@
                                     <textarea class="textarea" rows="10" asp-for="Resultado" disabled></textarea>
                                 </div>
                             }
+
+                        <div class="field">
+                            <label class="label">Retorno</label>
+                            <textarea class="textarea" rows="5" asp-for="Retorno" disabled></textarea>
+                            <label class="label">Retorno por @Model.RetornoUsuario</label>
+                        </div>
                             @if (string.IsNullOrEmpty(Model.Url))
                             {
                                 <div class="field">
@@ -88,8 +94,8 @@
                                 <div class="field is-grouped is-grouped-centered">
                                     <button class="button is-danger" type="submit" asp-action="RemoverAnexo">Excluir Anexo</button>
                                     <div>
-                                    <div class="divider"></div>
-                                </div>
+                                        <div class="divider"></div>
+                                    </div>
                                     <a class="button is-warning" asp-action="DownloadAnexo" asp-route-id="@Model.Id">Download Anexo</a>
                                 </div>
                             }

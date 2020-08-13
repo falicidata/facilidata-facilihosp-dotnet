@@ -4,14 +4,16 @@ using Facilidata.FaciloHosp.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Facilidata.FaciloHosp.Infra.Data.Migrations
 {
     [DbContext(typeof(ContextSQL))]
-    partial class ContextSQLModelSnapshot : ModelSnapshot
+    [Migration("20200802003224_exameComp")]
+    partial class exameComp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,10 +86,6 @@ namespace Facilidata.FaciloHosp.Infra.Data.Migrations
                     b.Property<string>("Retorno")
                         .HasColumnType("varchar(5000)")
                         .HasMaxLength(5000);
-
-                    b.Property<string>("RetornoUsuario")
-                        .HasColumnType("varchar(100)")
-                        .HasMaxLength(100);
 
                     b.Property<string>("TipoId")
                         .HasColumnType("nvarchar(450)");
