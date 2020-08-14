@@ -54,6 +54,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
+        public IActionResult Planos() => View("Planos");
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
