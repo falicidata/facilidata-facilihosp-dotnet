@@ -96,12 +96,12 @@
                                 <i class="fas fa-share"></i>
                             </span>
                         </a>
-                        <a class="button is-danger" asp-action="Deletar" asp-route-id="@exame.Id" data-tooltip="Deletar Exame">
+                        <a class="button is-danger" asp-action="Deletar" asp-route-id="@exame.Id" 
+                                onclick="return confirm('Deseja deletar o exame @exame.TipoOutro ')" data-tooltip="Deletar Exame">
                             <span class="icon">
                                 <i class="fas fa-trash-alt"></i>
                             </span>
                         </a>
-
                     </td>
                 </tr>
             }
