@@ -32,10 +32,11 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
 
-
+ 
+        
 
             // Identity
-        
+
             services.AddIdentity<Usuario, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -48,7 +49,9 @@ namespace Facilidata.FaciliHosp.Presentation.Site
                 .AddEntityFrameworkStores<ContextIdentity>()
                 .AddClaimsPrincipalFactory<UsuarioClaimsPrincipalFactory>();
 
-            services.AddAuthentication();
+            services.AddMvcConfiguration();
+            services.AddAuthenticationConfiguration(Configuration);
+
 
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
@@ -61,6 +64,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             bool exists =  Directory.Exists(pathTmp);
             if(!exists)
                 Directory.CreateDirectory(Path.Combine(currentPath,"tmp"));
+
+            services.AddSwaggerConfiguration();
 
         }
 
@@ -75,6 +80,9 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseSwaggerConfiguration();
+
             app.UseStaticFiles();
 
             app.UseRouting();

@@ -8,9 +8,12 @@ using Microsoft.Extensions.Logging;
 using Facilidata.FaciliHosp.Presentation.Site.Models;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
+
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

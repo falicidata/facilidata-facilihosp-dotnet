@@ -7,6 +7,8 @@ using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciloHosp.Infra.Data.Context;
 using iTextSharp.text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +20,7 @@ using System.Threading.Tasks;
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
 
+    [Authorize]
     public class ExameController : Controller
     {
         private readonly IExameService _exameService;

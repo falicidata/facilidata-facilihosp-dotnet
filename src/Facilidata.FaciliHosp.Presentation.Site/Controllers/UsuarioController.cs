@@ -1,11 +1,13 @@
 ﻿using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
+    [AllowAnonymous]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioService _usuarioService;
