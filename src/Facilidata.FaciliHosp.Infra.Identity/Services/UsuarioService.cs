@@ -64,7 +64,14 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
         public async Task Logout()
         {
             await _signInManager.SignOutAsync();
-
         }
+
+        public Usuario ObterPorId()
+        {
+            return null;
+            //return _userManager.Users.Where(x => x.Id = );
+        }
+
+
     }
 }

@@ -5,9 +5,9 @@ namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
 {
     public  class LoginUsuarioViewModel
     {
-        [Required, EmailAddress]
+        [Required(ErrorMessage = "Email Obrigatório"), EmailAddress]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Senha Obrigatória")]
         public string Senha { get; set; }
    
         public ETipoUsuario? Tipo { get; set; }

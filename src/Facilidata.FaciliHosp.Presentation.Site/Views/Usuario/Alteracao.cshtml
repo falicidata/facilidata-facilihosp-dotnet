@@ -2,7 +2,7 @@
 @model RegistroViewModel
 
 @{
-    ViewData["Title"] = "Registro";
+    ViewData["Title"] = "Alteracao";
     var sexoConta = Enum.GetNames(typeof(ESexoConta)).ToList();
     var sexoContaSelectList = sexoConta.Select((sexo, index) => new SelectListItem(sexo, sexo));
 
@@ -21,7 +21,7 @@
             </div>
             <div class="column">
                 <div class="media-content has-text-centered">
-                    <p class="title is-4">Bem Vindo ao Sistema FaciliHosp</p>
+                    <p class="title is-4">Alteração Cadastral</p>
                 </div>
                 <form class="form-signin">
                     <partial name="_ErroAlert" />
@@ -58,7 +58,7 @@
                                 <input asp-for="CPF"
                                        class="input is-rounded form-control"
                                        name="CPF" id="inputCPF" required
-                                       type="text" maxlength="14">
+                                       maxlength="14">
                                 <span asp-validation-for="CPF" class="is-danger" />
                             </div>
                         </div>
@@ -90,13 +90,7 @@
                         </div>
                         <div class="field is-grouped is-grouped-centered">
                             <button type="submit" class="button is-info is-rounded" asp-controller="Usuario" asp-action="Registrar">
-                                Cadastrar
-                            </button>
-                            <div>
-                                <div class="divider"></div>
-                            </div>
-                            <button class="button is-info is-rounded" formnovalidate asp-controller="Usuario" asp-action="Login">
-                                Entrar
+                                Alterar Dados
                             </button>
                         </div>
                     </div>

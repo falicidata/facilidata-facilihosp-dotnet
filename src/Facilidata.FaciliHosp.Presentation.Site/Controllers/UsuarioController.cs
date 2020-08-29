@@ -28,7 +28,14 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (!ModelState.IsValid) return View("Registro", viewModel);
             var res = await _usuarioService.Registro(viewModel);
-            if (res.Succeeded) return RedirectToAction("Login");
+            if (res.Succeeded)
+            {
+                return RedirectToAction("Login");
+                //var login = new LoginUsuarioViewModel();
+                //login.Email = viewModel.Email;
+                //login.Senha = viewModel.Senha;
+                //await EnviarLogin(login);
+            }
             return View("Registro");
         }
 
@@ -58,6 +65,12 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
                 ModelState.AddModelError("Login", "Email ou Senha incorretos");
                 return View("Login");
             }
+        }
+
+        [Route("/alteracao")]
+        public IActionResult Alteracao()
+        {
+            return View();
         }
     }
 }

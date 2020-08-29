@@ -5,20 +5,20 @@ namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
 {
     public class RegistroViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Nome Obrigatório")]
         public string Nome { get; set; }
-        [Required, EmailAddress]
+        [Required(ErrorMessage = "Email Obrigatório"), EmailAddress]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Senha Obrigatória")]
         public string Senha { get; set; }
-        [Required, Compare("Senha", ErrorMessage = "As senhas precisam ser iguais")]
+        [Required(ErrorMessage = "Confirmação de Senha Obrigatória"), Compare("Senha", ErrorMessage = "As senhas precisam ser iguais")]
         public string ConfirmacaoSenha { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Data de Nascimento Obrigatória")]
         public DateTime? DataNascimento { get; set; }
         public string CRM { get; set; }
-        [Required]
+        [Required(ErrorMessage = "CPF Obrigatório")]
         public string CPF { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Sexo Obrigatório")]
         public string Sexo { get; set; }
     }
 }

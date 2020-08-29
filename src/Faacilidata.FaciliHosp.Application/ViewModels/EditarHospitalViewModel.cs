@@ -6,7 +6,7 @@ namespace Facilidata.FaciliHosp.Application.ViewModels
     {
         public string Id { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Nome Obrigatório")]
         public string Nome { get; set; }
         public string Endereco { get; set; }
         public string Cep { get; set; }

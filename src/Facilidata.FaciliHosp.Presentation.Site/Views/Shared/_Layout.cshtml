@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="~/lib/bulma-0.9.0/css/bulma-divider.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@creativebulma/bulma-tooltip@@1.2.0/dist/bulma-tooltip.min.css" />
-    
     <link rel="stylesheet" type="text/css" href="~/css/util.css">
 
 </head>
 <body>
-    <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
         <div class="container">
             <div class="navbar-brand">
                 <a class="navbar-item" asp-area="" asp-controller="Home" asp-action="Index">
@@ -29,26 +28,47 @@
             </div>
             @if (User.Identity.IsAuthenticated)
             {
-        <div class="navbar-menu" id="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" asp-controller="Exame" asp-action="Index">
-                    <span class="icon"><i class="fas fa-file-medical-alt"></i></span>
-                    <span>
-                        Lista de Exames
-                    </span>
-                  
-                </a>
-            </div>
+                <div class="navbar-menu" id="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item" asp-controller="Exame" asp-action="Index">
+                            <span class="icon"><i class="fas fa-file-medical-alt"></i></span>
+                            <span>
+                                Lista de Exames
+                            </span>
+                        </a>
+                    </div>
 
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <a class="button is-info" asp-controller="Usuario" asp-action="Logout">
-                        Sair
-                    </a>
+                    <div class="navbar-end">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                <span class="icon"><i class="fas fa-user"></i></span>
+                                <span>
+                                    Bem Vindo!
+                                </span>
+                            </a>
+                            <div class="navbar-dropdown is-boxed">
+                                <a class="navbar-item" asp-controller="Usuario" asp-action="Alteracao">
+                                    <span class="icon"><i class="fas fa-user-plus"></i></span>
+                                    <span>
+                                        Alterar Dados
+                                    </span>
+                                </a>
+                                <a class="navbar-item" asp-controller="Home" asp-action="Planos">
+                                    <span class="icon"><i class="fas fa-sort"></i></span>
+                                    <span>
+                                        Alterar Plano
+                                    </span>
+                                </a>
+                                <a class="navbar-item is-info" asp-controller="Usuario" asp-action="Logout">
+                                    <span class="icon"><i class="fas fa-sign-out"></i></span>
+                                    <span>
+                                        Sair
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
             }
             else
@@ -73,6 +93,7 @@
     <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
     <script defer src="~/js/all.js"></script>
     <script src="~/js/bulma.js"></script>
+    <script src="~/lib/jquery-mask-plugin/src/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

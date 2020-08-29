@@ -11,15 +11,15 @@ namespace Facilidata.FaciliHosp.Application.ViewModels
         public string Medico { get; set; }
         public string TipoId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Descrição Obrigatório")]
         public string TipoOutro { get; set; }
         public string FornecedorId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Formato Obrigatório")]
         public EFormatoExame Formato { get; set; }
         public EExameResultadoAvaliacao ResultadoAvaliacao { get; set; } = EExameResultadoAvaliacao.Nenhum;
 
-        [Required]
+        [Required(ErrorMessage = "Fornecedor Obrigatório")]
         public string Fornecedor { get; set; }
         public string Resultado { get; set; }
         public string Retorno { get; set; }
