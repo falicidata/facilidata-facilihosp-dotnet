@@ -10,7 +10,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Models
 
         }
 
-        public Usuario(string email, string contaId)
+        public Usuario(string email,string contaId)
         {
             Email = email;
             UserName = email;

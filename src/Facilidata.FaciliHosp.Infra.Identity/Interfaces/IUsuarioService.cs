@@ -12,7 +12,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Interfaces
         Task<IdentityResult> Registro(RegistroViewModel viewModel);
         Task<bool> Login(LoginUsuarioViewModel viewModel);
         Task Logout();
-        Usuario ObterPorId();
-
+        AlteracaoViewModel ObterPorId();
+        Task<bool> Salvar(AlteracaoViewModel viewModel);
     }
 }

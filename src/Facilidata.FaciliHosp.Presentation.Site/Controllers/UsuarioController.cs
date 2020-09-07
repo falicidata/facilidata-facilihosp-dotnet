@@ -1,4 +1,5 @@
-﻿using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
+﻿using Facilidata.FaciliHosp.Domain.Interfaces;
+using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,13 +29,16 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (!ModelState.IsValid) return View("Registro", viewModel);
             var res = await _usuarioService.Registro(viewModel);
-            if (res.Succeeded)
+            if (res != null && res.Succeeded)
             {
-                return RedirectToAction("Login");
-                //var login = new LoginUsuarioViewModel();
-                //login.Email = viewModel.Email;
-                //login.Senha = viewModel.Senha;
-                //await EnviarLogin(login);
+                var loginUsuarioViewModel = new LoginUsuarioViewModel();
+                loginUsuarioViewModel.Email = viewModel.Email;
+                loginUsuarioViewModel.Senha = viewModel.Senha;
+                var user = await _usuarioService.Login(loginUsuarioViewModel);
+                if (user == true)
+                {
+                    return RedirectToAction("IndexUsuario", "Home");
+                }
             }
             return View("Registro");
         }
@@ -45,7 +49,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
-        [Route("/logout")]
+        [Route("/api/Usuario/logout")]
         public async Task<IActionResult> Logout()
         {
             await _usuarioService.Logout();
@@ -70,7 +74,22 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         [Route("/alteracao")]
         public IActionResult Alteracao()
         {
-            return View();
+            var viewModel = _usuarioService.ObterPorId();
+            return View(viewModel);
         }
+
+        public async Task<IActionResult> Salvar(AlteracaoViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return View("Alteracao", viewModel);
+            var res = await _usuarioService.Salvar(viewModel);
+            if (res)
+            {
+                return RedirectToAction("IndexUsuario", "Home");
+            }
+            return View("Alteracao");
+        }
+
+
+
     }
 }

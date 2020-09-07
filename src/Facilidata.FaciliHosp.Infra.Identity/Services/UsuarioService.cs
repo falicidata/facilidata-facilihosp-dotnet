@@ -1,4 +1,5 @@
-﻿using Facilidata.FaciliHosp.Domain.Interfaces;
+﻿using AutoMapper;
+using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Facilidata.FaciliHosp.Infra.Identity.Entidades;
 using Facilidata.FaciliHosp.Infra.Identity.Enums;
@@ -19,12 +20,18 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
         private readonly SignInManager<Usuario> _signInManager;
         private readonly IContaRepository _contaRepository;
         private readonly IUnitOfWork<ContextIdentity> _uow;
-        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,  IUnitOfWork<ContextIdentity> uow, IContaRepository contaRepository)
+        private readonly IUsuarioAspNet _usuarioAspNet;
+        protected readonly IMapper _mapper;
+
+        public UsuarioService(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, IMapper mapper,
+            IUnitOfWork<ContextIdentity> uow, IContaRepository contaRepository, IUsuarioAspNet usuarioAspNet)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _uow = uow;
             _contaRepository = contaRepository;
+            _usuarioAspNet = usuarioAspNet;
+            _mapper = mapper;
         }
 
 
@@ -36,7 +43,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
 
         public async Task<IdentityResult> Registro(RegistroViewModel viewModel)
         {
-            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo),viewModel.DataNascimento,viewModel.CRM);
+            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo),viewModel.DataNascimento,viewModel.CPF);
             var usuario = new Usuario(viewModel.Email, conta.Id);
 
             _contaRepository.Inserir(conta);
@@ -66,10 +73,35 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             await _signInManager.SignOutAsync();
         }
 
-        public Usuario ObterPorId()
+        public AlteracaoViewModel ObterPorId()
         {
-            return null;
-            //return _userManager.Users.Where(x => x.Id = );
+            string usuarioId = _usuarioAspNet.GetUsuarioId();
+
+            var conta = _contaRepository.Pesquisar(x => x.Usuario.Id == usuarioId).FirstOrDefault();
+            if (conta == null) return null;
+            var viewModel = _mapper.Map<AlteracaoViewModel>(conta);
+            viewModel.Email = _usuarioAspNet.GetUserName();
+            viewModel.IdUsuario = _usuarioAspNet.GetUsuarioId();
+            return viewModel;
+        }
+
+        public async Task<bool> Salvar(AlteracaoViewModel viewModel)
+        {
+            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo), viewModel.DataNascimento, viewModel.CPF);
+            conta.Id = viewModel.Id;
+            var usuario = await _userManager.FindByIdAsync(viewModel.IdUsuario);
+
+            _contaRepository.Atualizar(viewModel.Id, conta);
+            var resultadoCommit = _uow.Commit();
+
+            if (resultadoCommit == false) return resultadoCommit;     
+
+            if (!String.IsNullOrEmpty(viewModel.Senha))
+            {
+                var resultadoIdentity = await _userManager.ChangePasswordAsync(usuario, viewModel.SenhaAntiga, viewModel.Senha);
+                return resultadoIdentity.Succeeded;
+            }
+            return true;
         }
 
 

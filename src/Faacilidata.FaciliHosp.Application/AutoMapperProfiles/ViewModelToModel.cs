@@ -14,6 +14,8 @@ namespace Facilidata.FaciliHosp.Application.AutoMapperProfiles
             this.CreateMap<EditarExameViewModel, Exame>().ReverseMap();
             this.CreateMap<RegistroViewModel, Conta>().ReverseMap();
             this.CreateMap<RegistroViewModel, Conta>().ReverseMap();
+            this.CreateMap<AlteracaoViewModel, Conta>();
+            this.CreateMap<AlteracaoViewModel, Conta>().ReverseMap();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@using Facilidata.FaciliHosp.Infra.Identity.Enums
-@model RegistroViewModel
+@model AlteracaoViewModel
 
 @{
     ViewData["Title"] = "Alteracao";
@@ -25,6 +25,9 @@
                 </div>
                 <form class="form-signin">
                     <partial name="_ErroAlert" />
+                    <input asp-for="Email" hidden />
+                    <input asp-for="Id" hidden />
+                    <input asp-for="IdUsuario" hidden />
                     <div class="card-content input-group-sm">
                         <div class="field">
                             <label class="label form-label-group">Nome Completo</label>
@@ -42,14 +45,6 @@
                                        asp-for="DataNascimento" type="date"
                                        required />
                                 <span asp-validation-for="DataNascimento" class="is-danger" />
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label form-label-group">E-mail</label>
-                            <div class="control">
-                                <input asp-for="Email" type="email" id="inputemail"
-                                       class="input is-half is-rounded form-control" required>
-                                <span asp-validation-for="Email" class="is-danger" />
                             </div>
                         </div>
                         <div class="field">
@@ -71,11 +66,20 @@
                             </div>
                         </div>
                         <div class="field">
-                            <label class="label form-label-group">Senha</label>
+                            <label class="label form-label-group">Senha Antiga</label>
+                            <div class="control">
+                                <input asp-for="SenhaAntiga" type="password" id="inputpassword"
+                                       class="input is-rounded form-control" placeholder="Senha"
+                                       minlength="6">
+                                <span asp-validation-for="SenhaAntiga" class="is-danger" />
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label form-label-group">Nova Senha</label>
                             <div class="control">
                                 <input asp-for="Senha" type="password" id="inputpassword"
                                        class="input is-rounded form-control" placeholder="Senha"
-                                       required minlength="6">
+                                       minlength="6">
                                 <span asp-validation-for="Senha" class="is-danger" />
                             </div>
                         </div>
@@ -84,12 +88,12 @@
                             <div class="control">
                                 <input asp-for="ConfirmacaoSenha" type="password"
                                        id="inputConfirmPassword" class="input is-rounded form-control"
-                                       placeholder="Confirme Senha" required>
+                                       placeholder="Confirme Senha">
                                 <span asp-validation-for="ConfirmacaoSenha" class="is-danger" />
                             </div>
                         </div>
                         <div class="field is-grouped is-grouped-centered">
-                            <button type="submit" class="button is-info is-rounded" asp-controller="Usuario" asp-action="Registrar">
+                            <button type="submit" class="button is-info is-rounded" asp-controller="Usuario" asp-action="Salvar">
                                 Alterar Dados
                             </button>
                         </div>

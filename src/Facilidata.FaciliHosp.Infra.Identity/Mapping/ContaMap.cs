@@ -20,9 +20,9 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Mapping
                         .IsRequired();
 
 
-            builder.Property(conta => conta.Crm)
-                        .HasColumnType("varchar(10)")
-                        .HasMaxLength(10);
+            builder.Property(conta => conta.Cpf)
+                        .HasColumnType("varchar(15)")
+                        .HasMaxLength(15);
         }
     }
 }

@@ -8,16 +8,16 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Entidades
     public class Conta : Entidade
     {
         protected Conta() { }
-        public Conta(string nome, ESexoConta sexo, DateTime? dataNascimento,string crm = null)
+        public Conta(string nome, ESexoConta sexo, DateTime? dataNascimento,string cpf)
         {
             Nome = nome;
-            Crm = crm;
+            Cpf = cpf;
             DataNascimento = dataNascimento;
             Sexo = sexo;
         }
 
         public string Nome { get; set; }
-        public string Crm { get; set; }
+        public string Cpf { get; set; }
         public DateTime? DataNascimento { get; set; }
         public ESexoConta Sexo { get; set; }
 
