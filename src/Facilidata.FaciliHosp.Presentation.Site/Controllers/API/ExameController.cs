@@ -29,7 +29,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers.API
         }
 
         [HttpGet("anexo-download")]
-        public IActionResult DownloadAnexo(string id)
+        public IActionResult DownloadAnexoApi(string id)
         {
             var exame = _exameRepository.ObterPorId(id);
             if (string.IsNullOrEmpty(exame.Url)) return null;

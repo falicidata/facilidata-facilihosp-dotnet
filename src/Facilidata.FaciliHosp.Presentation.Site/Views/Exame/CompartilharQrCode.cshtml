@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Compartilhar";
     var periodos = Enum.GetNames(typeof(EPeriodoComp)).ToList();
-    var periodoSelectList = periodos.Select((periodo, index) => new SelectListItem(periodo, periodo));
+    var periodoSelectList = periodos.Select((periodo, index) => new SelectListItem("1 " + periodo, periodo));
 
 }
 

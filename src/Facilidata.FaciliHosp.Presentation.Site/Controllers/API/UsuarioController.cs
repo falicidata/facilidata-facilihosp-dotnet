@@ -106,7 +106,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers.API
         }
 
         [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> LogoutApi()
         {
             await _usuarioService.Logout();
             return Resposta();

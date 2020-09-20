@@ -57,7 +57,6 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
-        [Route("/api/Usuario/logout")]
         public async Task<IActionResult> Logout()
         {
             await _usuarioService.Logout();

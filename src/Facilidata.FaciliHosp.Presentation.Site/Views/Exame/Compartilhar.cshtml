@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Exame";
     var periodos = Enum.GetNames(typeof(EPeriodoComp)).ToList();
-    var periodoSelectList = periodos.Select((periodo, index) => new SelectListItem(periodo, periodo));
+    var periodoSelectList = periodos.Select((periodo, index) => new SelectListItem("1 " + periodo, periodo));
 }
 
 <div class="container">
@@ -42,14 +42,9 @@
                             <div>
                                 <div class="divider"></div>
                             </div>
-                        </div>
-                        <div class="field is-grouped is-grouped-centered">
                             <button type="submit" class="button is-warning" asp-controller="Exame" asp-action="CompartilharQrCode" asp-route-exameId="@Model.ExameId" asp-route-periodo="@Model.Periodo">
                                 Confirmar
                             </button>
-                            <div>
-                                <div class="divider"></div>
-                            </div>
                         </div>
                     </div>
                 </form>
