@@ -7,6 +7,16 @@
 
 }
 
+    <div id="divLoading" style="margin: 0px; padding: 0px; position: fixed; right: 0px;
+        top: 0px; width: 100%; height: 100%; background-color: #666666; z-index: 30001;
+        opacity: .8; filter: alpha(opacity=70);display:none">
+        <p style="position: absolute; top: 30%; left: 45%; color: White;">
+            Salvando...
+            <br />
+            <img src="~/assets/ajax-loader.gif">
+        </p>
+    </div>
+
     <div class="container">
         <div class="section">
             <div class="card columns">
@@ -65,11 +75,11 @@
                                 </div>
                             }
 
-                        <div class="field">
-                            <label class="label">Retorno</label>
-                            <textarea class="textarea" rows="5" asp-for="Retorno" disabled></textarea>
-                            <label class="label">Retorno por @Model.RetornoUsuario</label>
-                        </div>
+                            <div class="field">
+                                <label class="label">Retorno</label>
+                                <textarea class="textarea" rows="5" asp-for="Retorno" disabled></textarea>
+                                <label class="label">Retorno por @Model.RetornoUsuario</label>
+                            </div>
                             @if (string.IsNullOrEmpty(Model.Url))
                             {
                                 <div class="field">
@@ -106,7 +116,7 @@
                                 <div>
                                     <div class="divider"></div>
                                 </div>
-                                <button type="submit" class="button is-primary" asp-action="Salvar">
+                                <button type="submit" onclick="salvarExame()" class="button is-primary" asp-action="Salvar">
                                     Salvar
                                 </button>
                             </div>
@@ -120,6 +130,16 @@
     </datalist>
     <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
     <script>
+
+        function salvarExame() {
+            var url = '@Url.Action("PostMethod", "Home")';
+            $("#divLoading").show();
+            $.post(url, null,
+            function (data) {
+                $("#PID")[0].innerHTML = data;
+                $("#divLoading").hide();
+            });
+        }
 
         function viewModel() {
 
