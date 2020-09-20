@@ -18,17 +18,20 @@ namespace Facilidata.FaciloHosp.Infra.Data.Repositories
 
         public List<ExameComp> ObterTodosPorUsuarioCompartilhado()
         {
-            string usuarioId = _usuarioAspNet.GetUsuarioId();
-            return this._dbSet.Include(e => e.Exame)
-                        .Where(ec => ec.UsuarioId == usuarioId && ec.ExpiraEm >= DateTime.Now && ec.Exame != null)
+            var comp = _dbSet.Include(e => e.Exame)
+                        .Where(ec => ec.UsuarioId == _usuarioAspNet.GetUsuarioId() && ec.Exame != null)
                         .ToList();
+
+            return comp.Where(e => e.ExpiraEm >= DateTime.Now).ToList();
         }
 
         public List<ExameComp> ObterTodosPorUsuarioLogado()
         {
             string usuarioId = _usuarioAspNet.GetUsuarioId();
-            return this._dbSet.Include(e => e.Exame)
-                        .Where(ec => ec.Exame.UsuarioId == usuarioId && ec.ExpiraEm >= DateTime.Now && ec.Exame != null).ToList();
+            var comp = _dbSet.Include(e => e.Exame)
+                        .Where(ec => ec.Exame.UsuarioId == usuarioId  && ec.Exame != null).ToList();
+
+            return comp.Where(ec => ec.ExpiraEm >= DateTime.Now).ToList();
         }
 
         public ExameComp ObterPorKey(string key)

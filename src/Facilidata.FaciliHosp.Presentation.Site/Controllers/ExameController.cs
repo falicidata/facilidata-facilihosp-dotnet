@@ -96,7 +96,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             string key = Guid.NewGuid().ToString();
             string port = !HttpContext.Request.Host.Port.HasValue ? "" : $":{HttpContext.Request.Host.Port}";
-            string host = $"{HttpContext.Request.Host.Host}{port}";
+            string http = HttpContext.Request.IsHttps ? "https://" : "http://";
+            string host = $"{http}{HttpContext.Request.Host.Host}{port}";
             string path = $"{host}/exame/compartilhado";
             var viewModel = new ExameCompViewModel() { ExameId = id, Key = key, Url = path, Periodo = Domain.Enums.EPeriodoComp.Hora };
             return View(viewModel);
@@ -107,7 +108,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
             var key = _exameService.GerarCodigoComp(exameId, periodo);
             string port = !HttpContext.Request.Host.Port.HasValue ? "" : $":{HttpContext.Request.Host.Port}";
-            string host = $"{HttpContext.Request.Host.Host}{port}";
+            string http = HttpContext.Request.IsHttps ? "https://" : "http://";
+            string host = $"{http}{HttpContext.Request.Host.Host}{port}";
             string path = $"{host}/exame/compartilhado/{key}";
             return View(new ExameCompViewModel { ExameId = exameId, Periodo = periodo, Key = key, Url = path });
         }

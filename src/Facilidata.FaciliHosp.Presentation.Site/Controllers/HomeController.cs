@@ -37,6 +37,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
+             
                 return View("IndexUsuario");
             }
             else
@@ -48,6 +49,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 
         public IActionResult IndexUsuario()
         {
+            string userName = _usuarioAspNet.GetUserName();
+            ViewData["UserName"] = userName;
             return View();
 
         }

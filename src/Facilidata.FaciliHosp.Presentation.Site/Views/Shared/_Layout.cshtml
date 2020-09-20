@@ -43,7 +43,7 @@
                             <a class="navbar-link">
                                 <span class="icon"><i class="fas fa-user"></i></span>
                                 <span>
-                                    Bem Vindo!
+                                    Bem Vindo @User.Claims.FirstOrDefault(c => c.Type == "UserName")?.Value!
                                 </span>
                             </a>
                             <div class="navbar-dropdown is-boxed">
@@ -60,7 +60,8 @@
                                     </span>
                                 </a>
                                 <a class="navbar-item is-info" asp-controller="Usuario" asp-action="Logout">
-                                    <span class="icon"><i class="fas fa-sign-out"></i></span>
+                                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+
                                     <span>
                                         Sair
                                     </span>

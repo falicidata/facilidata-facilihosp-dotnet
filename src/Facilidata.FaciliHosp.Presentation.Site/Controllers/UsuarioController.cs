@@ -4,6 +4,7 @@ using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
@@ -29,6 +30,12 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             if (!ModelState.IsValid) return View("Registro", viewModel);
             var res = await _usuarioService.Registro(viewModel);
+            if (!res.Succeeded)
+            {
+                res.Errors.ToList().ForEach(e => ModelState.AddModelError("Identity", e.Description));
+                return View("Registro");
+            }
+
             if (res != null && res.Succeeded)
             {
                 var loginUsuarioViewModel = new LoginUsuarioViewModel();
@@ -40,6 +47,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
                     return RedirectToAction("IndexUsuario", "Home");
                 }
             }
+
             return View("Registro");
         }
 

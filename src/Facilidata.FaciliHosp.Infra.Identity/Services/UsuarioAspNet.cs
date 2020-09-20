@@ -17,7 +17,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
 
         public string GetUserName()
         {
-            return _accessor.HttpContext?.User?.Identity?.Name;
+            return  _accessor.HttpContext?.User?.Claims?.FirstOrDefault(claim => claim.Type == "UserName")?.Value;
         }
 
         public bool IsAuthenticated()
