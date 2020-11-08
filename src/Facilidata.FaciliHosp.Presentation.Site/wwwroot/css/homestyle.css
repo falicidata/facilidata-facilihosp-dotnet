@@ -1,21 +1,23 @@
+.txt {
+    margin-top: -30%;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 .content {
-    position: absolute; /*it can be fixed too*/
+    position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     margin: auto;
-    /*this to solve "the content will not be cut when the window is smaller than the content": */
-    max-width: 100%;
-    max-height: 100%;
+
 }
-.txt {
-    margin-top: -450px;
-    text-shadow: 2px 2px 4px #000000;
-}
-.slider-navigation-previous{
+
+.slider-navigation-previous {
     visibility: hidden;
 }
+
 .slider-navigation-next {
     visibility: hidden;
 }
+
