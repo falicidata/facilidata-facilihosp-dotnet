@@ -83,8 +83,8 @@
                             @if (string.IsNullOrEmpty(Model.Url))
                             {
                                 <div class="field">
-                                    <label class="label">Upload</label>
-                                    <div class="file">
+                                    <label class="label">Enviar Anexo</label>
+                                    <div class="file" id="file-js">
                                         <label class="file-label">
                                             <input class="file-input" type="file" asp-for="Upload" accept="application/pdf,image/*">
                                             <span class="file-cta">
@@ -94,6 +94,9 @@
                                                 <span class="file-label">
                                                     Selecione o Arquivo
                                                 </span>
+                                            </span>
+                                            <span class="file-name">
+                                                    Nenhum Arquivo Selecionado
                                             </span>
                                         </label>
                                     </div>
@@ -130,6 +133,14 @@
     </datalist>
     <script type='text/javascript' src='~/lib/knockout/knockout-min.js' asp-append-version="true"></script>
     <script>
+
+        const fileInput = document.querySelector('#file-js input[type=file]');
+        fileInput.onchange = () => {
+            if (fileInput.files.length > 0) {
+                const fileName = document.querySelector('#file-js .file-name');
+                fileName.textContent = fileInput.files[0].name;
+            }
+        }
 
         function salvarExame() {
             var url = '@Url.Action("PostMethod", "Home")';

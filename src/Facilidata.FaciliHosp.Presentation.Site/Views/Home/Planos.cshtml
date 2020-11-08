@@ -1,5 +1,7 @@
-﻿@page
+﻿@model PlanoViewModel
+
 @{
+    ViewData["Title"] = "Planos";
 }
 
 <section class="hero is-primary">
@@ -14,42 +16,49 @@
 </section>
 
 <div class="pricing-table">
-    <div class="pricing-plan">
-        <div class="plan-header">Plano Básico</div>
-        <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">R$</span>05</span>/mês</div>
-        <div class="plan-items">
-            <div class="plan-item">250MB de Armazenamento</div>
-            <div class="plan-item">500 Exames de Sangue</div>
-            <div class="plan-item">03 Exames de Imagem</div>
-        </div>
-        <div class="plan-footer">
-            <button class="button is-fullwidth">Escolher</button>
-        </div>
-    </div>
 
-    <div class="pricing-plan is-active">
-        <div class="plan-header">Plano Intermediário</div>
-        <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">R$</span>10</span>/mês</div>
-        <div class="plan-items">
-            <div class="plan-item">500MB de Armazenamento</div>
-            <div class="plan-item">1000 Exames de Sangue</div>
-            <div class="plan-item">06 Exames de Imagem</div>
+    @foreach (var plano in Model.Planos)
+    {
+        <div class="pricing-plan 
+            @if (plano.Id == Model.PlanoAtual)
+            {
+                @Html.Raw(" is-active");
+            }
+            else
+            {
+                @Html.Raw(" is-info");
+            }
+            ">
+            <div class="plan-header">@plano.Descricao</div>
+            <div class="plan-price">
+                <span class="plan-price-amount">
+                    <span class="plan-price-currency">R$</span>
+                    @plano.Valor.ToString("00")
+                </span>/mês
+            </div>
+            <div class="plan-items">
+                @if (plano.Armazenamento < 1000)
+                {
+                    <div class="plan-item">@plano.Armazenamento MB de Armazenamento</div>
+                }
+                else
+                {
+                    <div class="plan-item">@((plano.Armazenamento/1000).ToString("00")) GB de Armazenamento</div>
+                }
+                <div class="plan-item">@plano.QuantidadeExameSangue.ToString("00") Exames de Sangue</div>
+                <div class="plan-item">@plano.QuantidadeExameImagem.ToString("00") Exames de Imagem</div>
+            </div>
+            <div class="plan-footer">
+                @if (plano.Id == Model.PlanoAtual)
+                {
+                    <a class="button is-fullwidth" disabled>Plano Atual</a>
+                }
+                else
+                {
+                    <a class="button is-fullwidth" asp-action="AlterarPlano" asp-route-id="@plano.Id"
+                       onclick="return confirm('Deseja alterar para o @plano.Descricao?')">Escolher</a>
+                }
+            </div>
         </div>
-        <div class="plan-footer">
-            <button class="button is-fullwidth" disabled="disabled">Selecionado</button>
-        </div>
-    </div>
-
-    <div class="pricing-plan">
-        <div class="plan-header">Plano Completo</div>
-        <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">R$</span>20</span>/mês</div>
-        <div class="plan-items">
-            <div class="plan-item">1GB de Armazenamento</div>
-            <div class="plan-item">2000 Exames de Sangue</div>
-            <div class="plan-item">12 Exames de Imagem</div>
-        </div>
-        <div class="plan-footer">
-            <button class="button is-fullwidth">Escolher</button>
-        </div>
-    </div>
+    }
 </div>

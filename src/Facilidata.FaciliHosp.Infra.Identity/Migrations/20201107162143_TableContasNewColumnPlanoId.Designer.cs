@@ -4,14 +4,16 @@ using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
 {
     [DbContext(typeof(ContextIdentity))]
-    partial class ContextIdentityModelSnapshot : ModelSnapshot
+    [Migration("20201107162143_TableContasNewColumnPlanoId")]
+    partial class TableContasNewColumnPlanoId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

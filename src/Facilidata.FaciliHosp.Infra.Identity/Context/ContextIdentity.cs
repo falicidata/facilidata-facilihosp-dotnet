@@ -18,6 +18,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         private readonly IUsuarioAspNet _usuarioAspNet;
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Conta> Contas { get; set; }
+        public DbSet<Plano> Planos { get; set; }
 
 
         public ContextIdentity()
@@ -33,7 +34,8 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Context
         {
             builder.ApplyConfiguration(new ContaMap());
             builder.ApplyConfiguration(new UsuarioMap());
-            
+            builder.ApplyConfiguration(new PlanoMap());
+
             base.OnModelCreating(builder);
         }
 

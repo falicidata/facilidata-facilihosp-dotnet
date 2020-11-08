@@ -19,5 +19,6 @@ namespace Facilidata.FaciliHosp.Infra.Identity.ViewModels
         public string CPF { get; set; }
         [Required(ErrorMessage = "Sexo Obrigatório")]
         public string Sexo { get; set; }
+        public string PlanoId { get; set; }
     }
 }

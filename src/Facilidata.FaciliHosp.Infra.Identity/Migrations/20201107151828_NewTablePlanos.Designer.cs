@@ -4,14 +4,16 @@ using Facilidata.FaciliHosp.Infra.Identity.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
 {
     [DbContext(typeof(ContextIdentity))]
-    partial class ContextIdentityModelSnapshot : ModelSnapshot
+    [Migration("20201107151828_NewTablePlanos")]
+    partial class NewTablePlanos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,17 +58,12 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PlanoId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Sexo")
                         .IsRequired()
                         .HasColumnType("varchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlanoId");
 
                     b.ToTable("Contas");
                 });
@@ -334,14 +331,6 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Migrations
                         .HasFilter("[ContaId] IS NOT NULL");
 
                     b.HasDiscriminator().HasValue("Usuario");
-                });
-
-            modelBuilder.Entity("Facilidata.FaciliHosp.Infra.Identity.Entidades.Conta", b =>
-                {
-                    b.HasOne("Facilidata.FaciliHosp.Infra.Identity.Entidades.Plano", "Plano")
-                        .WithMany("Contas")
-                        .HasForeignKey("PlanoId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

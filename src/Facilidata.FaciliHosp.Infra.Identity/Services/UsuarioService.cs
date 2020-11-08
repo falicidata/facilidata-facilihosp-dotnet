@@ -67,7 +67,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             var result =  ValidaRegistro(viewModel);
             if (!result.Succeeded) return result;
 
-            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo),viewModel.DataNascimento,viewModel.CPF);
+            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo),viewModel.DataNascimento,viewModel.CPF, viewModel.PlanoId);
             var usuario = new Usuario(viewModel.Email, conta.Id);
 
             _contaRepository.Inserir(conta);
@@ -112,7 +112,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
 
         public async Task<bool> Salvar(AlteracaoViewModel viewModel)
         {
-            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo), viewModel.DataNascimento, viewModel.CPF);
+            var conta = new Conta(viewModel.Nome, Enum.Parse<ESexoConta>(viewModel.Sexo), viewModel.DataNascimento, viewModel.CPF, viewModel.PlanoId);
             conta.Id = viewModel.Id;
             var usuario = await _userManager.FindByIdAsync(viewModel.IdUsuario);
 
@@ -129,6 +129,21 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Services
             return true;
         }
 
+        public void AlterarPlano(string idPlano)
+        {
+            string usuarioId = _usuarioAspNet.GetUsuarioId();
+            var conta = _contaRepository.Pesquisar(x => x.Usuario.Id == usuarioId).FirstOrDefault();
+            conta.PlanoId = idPlano;
+            _contaRepository.Atualizar(conta.Id, conta);
+            _uow.Commit();
+        }
+
+        public string ObterPlano()
+        {
+            string usuarioId = _usuarioAspNet.GetUsuarioId();
+            var conta = _contaRepository.Pesquisar(x => x.Usuario.Id == usuarioId).FirstOrDefault();
+            return conta.PlanoId;
+        }
 
     }
 }

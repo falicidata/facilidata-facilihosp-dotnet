@@ -14,5 +14,7 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Interfaces
         Task Logout();
         AlteracaoViewModel ObterPorId();
         Task<bool> Salvar(AlteracaoViewModel viewModel);
+        void AlterarPlano(string idPlano);
+        string ObterPlano();
     }
 }

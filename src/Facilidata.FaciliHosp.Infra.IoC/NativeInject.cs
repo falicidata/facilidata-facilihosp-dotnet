@@ -32,6 +32,7 @@ namespace Facilidata.FaciliHosp.Infra.IoC
             services.AddScoped<IExameTipoRepository, ExameTipoRepository>();
             services.AddScoped<IExameRepository, ExameRepository>();
             services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<IPlanoRepository, PlanoRepository>();
             services.AddScoped<IExameCompRepository, ExameCompRepository>();
 
             // Identity
@@ -39,6 +40,7 @@ namespace Facilidata.FaciliHosp.Infra.IoC
             services.AddScoped<IUsuarioAspNet, UsuarioAspNet>();
             services.AddScoped<IUnitOfWork<ContextIdentity>, UnitOfWorkIdentity>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IPlanoService, PlanoService>();
 
             // Services
             services.AddScoped<IExameService, ExameService>();

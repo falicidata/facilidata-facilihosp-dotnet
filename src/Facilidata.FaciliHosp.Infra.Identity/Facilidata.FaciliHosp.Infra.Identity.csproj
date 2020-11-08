@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201107151305_NewTablePlanos.cs" />
+    <Compile Remove="Migrations\20201107151305_NewTablePlanos.Designer.cs" />
+    <Compile Remove="Migrations\20201107151633_NewTablePlanos.cs" />
+    <Compile Remove="Migrations\20201107151633_NewTablePlanos.Designer.cs" />
+    <Compile Remove="Migrations\20201107161959_TableContasNewColumnPlanoId.cs" />
+    <Compile Remove="Migrations\20201107161959_TableContasNewColumnPlanoId.Designer.cs" />
+    <Compile Remove="Migrations\20201107162103_TableContasNewColumnPlanoId.cs" />
+    <Compile Remove="Migrations\20201107162103_TableContasNewColumnPlanoId.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="appsettings.json" />
   </ItemGroup>
 

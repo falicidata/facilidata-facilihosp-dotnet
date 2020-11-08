@@ -1,6 +1,7 @@
 ﻿using Facilidata.FaciliHosp.Infra.Identity.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Facilidata.FaciliHosp.Infra.Identity.Mapping
 {
@@ -9,6 +10,11 @@ namespace Facilidata.FaciliHosp.Infra.Identity.Mapping
         public void Configure(EntityTypeBuilder<Conta> builder)
         {
             builder.ToTable("Contas");
+
+            builder.HasOne(conta => conta.Plano)
+                .WithMany(plano => plano.Contas)
+                .HasForeignKey(conta => conta.PlanoId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.Property(conta => conta.Sexo)
                 .HasConversion<string>()

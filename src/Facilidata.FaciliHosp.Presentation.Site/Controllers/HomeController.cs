@@ -9,6 +9,7 @@ using Facilidata.FaciliHosp.Presentation.Site.Models;
 using Facilidata.FaciliHosp.Domain.Interfaces;
 using Facilidata.FaciliHosp.Infra.Identity.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Facilidata.FaciliHosp.Infra.Identity.ViewModels;
 
 namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
 {
@@ -19,13 +20,16 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUsuarioAspNet _usuarioAspNet;
         private readonly IUsuarioService _usuarioService;
+        private readonly IPlanoService _planoService;
 
 
-        public HomeController(ILogger<HomeController> logger, IUsuarioAspNet usuarioAspNet, IUsuarioService usuarioService)
+        public HomeController(ILogger<HomeController> logger, IUsuarioAspNet usuarioAspNet, 
+            IUsuarioService usuarioService, IPlanoService planoService)
         {
             _logger = logger;
             _usuarioAspNet = usuarioAspNet;
             _usuarioService = usuarioService;
+            _planoService = planoService;
         }
 
         public IActionResult ComingSoon()
@@ -60,7 +64,24 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
-        public IActionResult Planos() => View("Planos");
+        public IActionResult Planos()
+        {
+            var planos = _planoService.ObterPlanos();
+            var planoAtual = _usuarioService.ObterPlano();
+            var planosView = new PlanoViewModel()
+            {
+                PlanoAtual = planoAtual,
+                Planos = planos
+            };
+            return View("Planos", planosView);
+        }
+
+        public IActionResult AlterarPlano(string id)
+        {
+            _usuarioService.AlterarPlano(id);
+            ViewData["Message"] = "Plano Alterado com Sucesso!";
+            return View("IndexUsuario");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
