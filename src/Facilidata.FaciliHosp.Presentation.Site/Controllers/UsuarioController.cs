@@ -25,7 +25,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return View();
         }
 
- 
+
         public async Task<IActionResult> Registrar(RegistroViewModel viewModel)
         {
             if (!ModelState.IsValid) return View("Registro", viewModel);
@@ -52,8 +52,10 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         }
 
         [Route("/login")]
-        public IActionResult Login()
+        public IActionResult Login(string ReturnUrl = null)
         {
+
+            ViewData["ReturnUrl"] = ReturnUrl;
             return View();
         }
 
@@ -63,12 +65,18 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
             return RedirectToAction("Login");
         }
 
-        public async Task<IActionResult> EnviarLogin(LoginUsuarioViewModel viewModel)
+        [HttpPost]
+        public async Task<IActionResult> EnviarLogin(LoginUsuarioViewModel viewModel, string returnUrl = null)
         {
-            if (!ModelState.IsValid) return View("Login",viewModel);
+            if (!ModelState.IsValid) return View("Login", viewModel);
             var res = await _usuarioService.Login(viewModel);
             if (res == true)
             {
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
+
                 return RedirectToAction("IndexUsuario", "Home");
             }
             else

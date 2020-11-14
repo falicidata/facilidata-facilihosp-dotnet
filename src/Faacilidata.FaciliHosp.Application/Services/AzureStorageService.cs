@@ -79,11 +79,11 @@ namespace Facilidata.FaciliHosp.Application.Services
             }
         }
 
-        public byte[] DownloadToBytes(string path)
+        public byte[] DownloadToBytes(string path, string usuarioId = null)
         {
             try
             {
-                var container = _blobServiceClient.GetBlobContainerClient(UsuarioId);
+                var container = _blobServiceClient.GetBlobContainerClient(usuarioId ?? UsuarioId);
                 string nomeArquivoBlob = Path.GetFileName(path);
                 var blobClient = container.GetBlobClient(nomeArquivoBlob);
                 var response = blobClient.Download();

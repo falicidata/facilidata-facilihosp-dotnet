@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Login";
-
 }
 <div class="container">
     <div class="section">
@@ -36,7 +35,7 @@
                         </div>
                         <br />
                         <div class="buttons is-grouped-centered">
-                            <button class="button is-info is-rounded is-fullwidth" asp-action="EnviarLogin">
+                            <button class="button is-info is-rounded is-fullwidth" formmethod="post" asp-action="EnviarLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" >
                                 Entrar
                             </button>
                             <button class="button is-success is-rounded is-fullwidth is-outlined" asp-action="Registro">

@@ -80,16 +80,22 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
 
             var res = _exameService.RemoverCompartilhado(id);
-            return View("Compartilhados",_exameService.ObterCompartilhados());
+            return View("Compartilhados", _exameService.ObterCompartilhados());
         }
 
         public IActionResult Compartilhado(string id)
         {
-            var exameComp = _exameCompRepository.ObterPorKey(id);
-            var res = _exameService.CompartilharExame(id);
-            var viewModel = _exameService.Editar(exameComp.ExameId);
-            if (res) return View("Editar", viewModel);
-            return RedirectToAction("Index", new { });
+            if (this.User.Identity.IsAuthenticated)
+            {
+                var exameComp = _exameCompRepository.ObterPorKey(id);
+                var res = _exameService.CompartilharExame(id);
+                if (res) return RedirectToAction("VisualizarCompartilhado", new { id = exameComp.ExameId });
+                return RedirectToAction("Index", new { });
+            }
+            else
+            {
+                return RedirectToAction("Login", "Usuario");
+            }
         }
 
         public IActionResult Compartilhar(string id)
@@ -133,7 +139,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Controllers
         {
             var exame = _exameRepository.ObterPorId(id);
             if (string.IsNullOrEmpty(exame.Url)) return null;
-            var arraybyte = _azureStorageService.DownloadToBytes(exame.Url);
+            var arraybyte = _azureStorageService.DownloadToBytes(exame.Url, exame.UsuarioId);
             if (arraybyte == null) return null;
             return File(arraybyte, exame.ContentType, exame.NomeArquivo);
         }

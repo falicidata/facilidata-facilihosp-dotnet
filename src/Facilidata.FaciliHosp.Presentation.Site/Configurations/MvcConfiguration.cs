@@ -22,10 +22,10 @@ namespace Facilidata.FaciliHosp.Presentation.Site.Configurations
 
                 //options.Filters.Add(new AuthorizeFilter(filtroCookie));
                 //options.Filters.Add(new AuthorizeFilter(filtroJwt));
-         
 
             }).AddNewtonsoftJson(
-                options => {
+                options =>
+                {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 }
             );

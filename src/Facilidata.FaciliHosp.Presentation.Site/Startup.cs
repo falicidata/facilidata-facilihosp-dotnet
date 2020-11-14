@@ -5,7 +5,9 @@ using Facilidata.FaciliHosp.Infra.IoC;
 using Facilidata.FaciliHosp.Presentation.Site.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +21,7 @@ namespace Facilidata.FaciliHosp.Presentation.Site
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            
+
         }
 
         public IConfiguration Configuration { get; }
@@ -32,8 +34,8 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             // Infra Data
             string connectionString = Configuration.GetConnectionString("Default");
 
- 
-        
+
+
 
             // Identity
 
@@ -52,6 +54,10 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             services.AddMvcConfiguration();
             services.AddAuthenticationConfiguration(Configuration);
 
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = "/Login";
+            });
 
             // Injeção de Depedencia
             NativeInject.InjectDependecies(services);
@@ -61,9 +67,9 @@ namespace Facilidata.FaciliHosp.Presentation.Site
             // Cria pasta temporaria se não existir
             string currentPath = Directory.GetCurrentDirectory();
             string pathTmp = Path.Combine(currentPath, "tmp");
-            bool exists =  Directory.Exists(pathTmp);
-            if(!exists)
-                Directory.CreateDirectory(Path.Combine(currentPath,"tmp"));
+            bool exists = Directory.Exists(pathTmp);
+            if (!exists)
+                Directory.CreateDirectory(Path.Combine(currentPath, "tmp"));
 
             services.AddSwaggerConfiguration();
 
